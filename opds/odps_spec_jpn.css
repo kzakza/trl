@@ -1,0 +1,304 @@
+/* …タブレット、デスクトップここから.. */
+@media screen and (min-device-width: 481px) {
+
+div#main{
+    margin:10px 30px;
+	}
+	
+h1{
+    font-size:150%;
+	
+	}
+h2{
+    font-size:160%;
+	}
+h3{
+    font-size:130%;
+    margin-top:3em;
+	}
+h4{
+    font-size:120%;
+    margin-top:3em;
+	}
+h5{
+    font-size:110%;
+    margin-top:3em;
+	}
+h6{
+    font-size:100%;
+    margin-top:3em;
+	}
+h3  span.original_title,h4  span.original_title,h5  span.original_title,h6  span.original_title, dt span.original_title{
+    margin-left:0.4em;
+    color:#333333;
+    font-size:0.7em;
+    font-style:italic;
+    font-weight:normal;	
+}
+dt span.original_title{
+    display:block;
+}
+li{
+	line-height:1.5em;
+	}
+
+p{
+	line-height:1.5em;
+	}
+	
+div#about_translation h3{
+    font-size:130%;
+    margin-top:2em;
+} 
+div#toc ul li span.original_title{
+    margin-left:0.7em;
+    font-size:0.8em;
+    font-style:italic;
+    font-weight:normal;	
+}
+
+blockquote{
+    padding:5px 30px;
+    border-top:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+    margin-bottom:3em;
+	}
+
+pre{
+    border: 1px solid silver;
+    padding:15px;
+    color: #110000;
+    margin-bottom:3em;
+    font-size:0.85em;
+	}
+
+
+div#about_translation h2{
+    margin-top:1em;
+    font-size:110%;
+	}
+}
+
+/* …タブレット、デスクトップここまで.. */
+
+/* …モバイルここから.. */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+
+div#main{
+    margin:	1em;
+    font-size:0.9em
+	}
+
+
+h1{
+    font-size:100%;
+	}
+h2{
+    font-size:100%;
+    margin-top:1em;
+	}
+h3{
+    font-size:100%;
+    margin-top:1em;
+	}
+h4{
+    font-size:100%;
+	}
+h5{
+    font-size:100%;
+	}
+h3  span.original_title,h4  span.original_title,h5  span.original_title,h6  span.original_title, dt span.original_title{
+    margin-left:0.4em;
+    color:#333333;
+    font-size:0.8em;
+    font-style:italic;
+    font-weight:normal;
+   display:block;
+}
+dt span.original_title{
+    display:block;
+}
+div#toc ul li span.original_title{
+    display:none;
+}
+
+blockquote{
+    margin:0;
+    padding:1em;
+    border-top:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+	}
+blockquote ul{
+    padding:0em 0em 0em 0.5em;
+    margin:0em 0em 0em 0.5em;
+	}
+pre{
+    border: 1px solid silver;
+    padding:15px;
+    font-size:0.8em;
+    color: #110000;
+	}
+div#about_translation h2{
+    margin-top:1em;
+    font-size:100%;
+	}
+
+ul{
+    padding:0;
+    margin:0;
+	}
+ul ul{
+    padding:0em;
+    margin:0em;
+	}
+li{
+	padding:0em 0em 0em 0em;
+	margin:0em 0em 0em 0em;
+	}
+dd{
+	margin-left:0em;
+}
+div#toc li{
+	list-style: none;
+	}
+
+div#References tt{
+	font-weight: bold;
+}
+
+}
+/* …モバイルここまで. */
+
+/* …プリントここから.. */
+@media print {
+div#main{
+	margin:10px 30px;
+	}
+h1{
+	font-size:150%;
+	font-family: "Century Gothic", Arial, sans-serif;
+	}
+h2{
+	font-size:130%;
+	margin-top:3em;
+	font-family: "Century Gothic", Arial, sans-serif;
+	}
+h3{
+	font-size:120%;
+	margin-top:2em;
+	font-family: "Century Gothic", Arial, sans-serif;
+	}
+h4{
+	font-size:110%;
+	font-family: "Century Gothic", Arial, sans-serif;
+	}
+h5{
+	font-size:100%;
+	font-family: "Century Gothic", Arial, sans-serif;
+	}
+.original_title{
+	margin-left:0.5em;
+	color:#333333;
+	font-size:0.8em;
+	font-style:italic;
+	font-weight:normal;
+	
+}
+blockquote{
+	padding:5px 20px;
+	font-size:0.9em;
+	background-color:#cccccc;
+	border-top:1px double #666666;
+	border-bottom:1px double #666666;
+	}
+
+pre{
+	padding:15px;
+	border-width:1px;
+	border-style:dashed;
+	}
+
+p{
+	text-indent:1em;
+	}
+dt{
+	font-weight: bold;
+
+	}
+dd{
+	margin-bottom:1em;
+	}
+
+div#about_translation h2{
+	margin-top:1em;
+	font-size:110%;
+	}
+span.RFC2119 {
+	font-weight: bold;
+	}
+span.need_check {
+	color:#FF0000;
+	}
+
+div.page_break{
+	page-break-before:always;
+	}
+
+span#bloc_ex{
+	background-color:#cccccc
+	border-top:1px double #666666;
+	border-bottom:1px double #666666;
+	}
+
+}
+/* …プリントここまで. */
+
+/* …以下、共通.. */
+a{color:rgb(0,75,145);
+}
+p{
+	text-indent:1em;
+}
+dt{
+	font-weight: bold;
+	margin-bottom:0.3em;
+	}
+pre{
+    background-color:#F9F9F9;
+    overflow: auto;
+}
+dd{
+	margin-bottom:1.5em;
+	margin-left:1em;
+}
+div#about_translation{
+	border-top:1px solid;
+	border-bottom:1px solid;
+	font-size:0.8em;
+	}	
+
+span.RFC2119 {
+	font-weight: bold;
+}
+
+span.need_check {
+	color:#FF0000;
+}
+	
+div#toc li{
+	list-style: none;
+	}
+
+div#References li{
+}
+div#References tt{
+	font-weight: bold;
+}
+li{margin-bottom:0.3em;}
+
+blockquote,span#bloc_ex{
+	font-size:0.9em;
+	background:gainsboro;
+	}

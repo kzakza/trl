@@ -1,0 +1,1878 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="jp">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta name="viewport" content="width=device-width; initial-scale=1,minimum-scale=1, user-scalable=yes" />
+<meta name="format-detection" content="telephone=no">
+	<title>OPDS Catalog 1.0 日本語訳[Open Publication Distribution System (OPDS) カタログフォーマット ver.1.0]</title>
+<!--[if lt IE 9]>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"  href="odps_spec_jpn.css">
+
+</head>
+
+<body>
+
+    <div id="main">
+    
+	<div id="container">
+
+	<h1>Open Publication Distribution System (OPDS) カタログフォーマット ver.1.0 仕様書（日本語訳）</h1>
+
+		<div id="content">
+		<div id ="about_translation" >
+	<h3>この文書（日本語訳を指す）をご覧になる上ので注意事項（必ずお読みください）</span></h3>
+
+		<ul>
+			<li>この文書は、<a href="http://opds-spec.org/specs/opds-catalog-1-0-20100830">2010年8月30日付の &#8220;OPDS Catalog 1.0&#8221;</a>を<a href="http://wp.kzakza.com/">kzakza</a>がOPDSの仕様を理解するために個人的に日本語に翻訳したものです。公式な日本語訳ではございません。</li>
+			<li>Open Publication Distribution System (OPDS) ver.1.0の公式な仕様は<a href="http://opds-spec.org/specs/opds-catalog-1-0-20100830">2010年8月30日付の &#8220;OPDS Catalog 1.0&#8221;</a>です。必ずこちらをご参照ください。</li>
+			<li>この文書には翻訳上の間違い、あるいは不適切な表現が含まれている可能性があります。翻訳の正確性、その内容について一切保証をするものではありません。ご覧になる際はご自身の責任において利用してください。当方は、この文書によって利用者が被るいかなる損害の責任を負いません。</li>
+
+		</ul>
+	<h3>この文書（日本語訳を指す）の基本情報</h3>
+		<ul>
+			<li>原文: <a href="http://opds-spec.org/specs/opds-catalog-1-0-20100830">OPDS Catalog 1.0</a> (Published: 30 August 2010)</li>
+			<li>日本語訳公開日:2011-05-08</li>
+
+			<li>最終更新日:2012-03-18</li>
+			<li>翻訳者: <a href="http://www.kzakza.com/" rel ="author">kzakza</a></li>
+			<li>ライセンス: <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike</a>（原文に準拠）</li>
+		</ul>
+	<h3>この文書（日本語訳を指す）の翻訳上の注意事項</h3>
+
+		<ul>
+			<li>この文書は参考までに、本文書の原文であり、公式の仕様である英語版の本文を併記しています（<span id ="bloc_ex">　　　</span>のボックスで囲った部分）。</li>
+			<li>なるべく原文に忠実に訳したつもりですが、一部、直訳ではなく、意訳した箇所もあり、原文と表現が異なるところもありますのでご注意ください。</li>
+			<li>「<a href="#Terminology">用語（Terminology）</a>」など、日本語に訳したものだけでは正確に原文の意図する内容を伝えることができないと訳者が判断した箇所については、括弧でくくる形で該当する箇所の原文も併記しています。</li>
+			<li>上述の併記する原文のうち、「<a href="#Terminology">用語（Terminology）</a>」は、原文で複数形で表記された用語も全て単数形に統一してあります。</li>
+
+		</ul>
+		
+            </div>
+
+<h2>OPDS Catalog 1.0</h2>
+
+<div class="section">
+<h3>この文書のステータス <span class="original_title" lang="en">Status of this Document</span></h3>
+<blockquote lang="en">
+	<p>This document specifies version 1.0 of the OPDS Catalog specification.</p>
+	<p>Published: 30 August 2010</p>
+
+	<dl>
+	<dt>This version</dt>
+	<dd><a href="http://opds-spec.org/specs/opds-catalog-1-0-20100830">http://opds-spec.org/specs/opds-catalog-1-0-20100830</a></dd>
+	<dt>Latest version</dt>
+	<dd><a href="http://opds-spec.org/specs/opds-catalog-1-0">http://opds-spec.org/specs/opds-catalog-1-0</a></dd>
+	<dt>Previous version</dt>
+
+	<dd><a href="http://opds-spec.org/specs/opds-catalog-0-9">http://opds-spec.org/specs/opds-catalog-0-9</a></dd>
+</dl>
+</blockquote>
+
+<p>このドキュメントはOpen Publication Distribution System (OPDS) カタログのversion 1.0の仕様を規定するものである。</p>
+<p>公開: 2010年8月30日</p>
+	<dl>
+	<dt>このバージョン</dt>
+	<dd><a href="http://opds-spec.org/specs/opds-catalog-1-0-20100830">http://opds-spec.org/specs/opds-catalog-1-0-20100830</a></dd>
+
+	<dt>最新のバージョン</dt>
+	<dd><a href="http://opds-spec.org/specs/opds-catalog-1-0">http://opds-spec.org/specs/opds-catalog-1-0</a></dd>
+	<dt>前のバージョン</dt>
+	<dd><a href="http://opds-spec.org/specs/opds-catalog-0-9">http://opds-spec.org/specs/opds-catalog-0-9</a></dd>
+	</dl>
+</div>
+
+<div class="section">
+<h3>許諾 <span class="original_title" lang="en">License</span></h3>
+<blockquote lang="en">
+<p>This document is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike</a>.</p>
+</blockquote>
+<p>このドキュメントは <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike</a>の下で使用を許諾されているものである。</p>
+</p></div>
+<div id="Abstract">
+<h3>概要 <span class="original_title" lang="en">Abstract</span></h3>
+
+<blockquote lang="en">
+<p>The Open Publication Distribution System (OPDS) Catalog format is a syndication format for electronic publications based on Atom and HTTP. OPDS Catalogs enable the aggregation, distribution, discovery, and acquisition of electronic publications. OPDS Catalogs use existing or emergent open standards and conventions, with a priority on simplicity.</p>
+</p>
+</blockquote>
+<p>Open Publication Distribution System（OPDS）カタログフォーマットは AtomとHTTPをベースとする電子出版物のための配信フォーマットである。OPDSカタログ（OPDS Catalog）によって電子出版物の集約（aggregation）、配信（distribution）、発見（discovery）、 取得（acquisition）が可能となる。OPDSカタログ（OPDS Catalog）は簡潔さを優先させるため、既存の、または新生のオープンスタンダード及び規定を使用する。</p>
+</p>
+</div>
+
+<div id="toc">
+<h3>目次 <span class="original_title" lang="en">Table of Contents</span></h3>
+
+<ul>
+<li>
+        <a href="#Introduction">1. イントロダクション <span class="original_title" lang="en">Introduction</span></a>
+
+      </li>
+<li>
+        <a href="#Notational_Conventions">2. 表記規約 <span class="original_title" lang="en">Notational Conventions</span></a>
+      </li>
+<li>
+        <a href="#XML-Related_Conventions">3. XMLと関係のある規約 <span class="original_title" lang="en">XML-Related Conventions</span></a>
+
+      </li>
+<ul>
+<li>
+
+          <a href="#Referring_to_Information_Items">3.1. 情報項目の参照 <span class="original_title" lang="en">Referring to Information Items</span></a>
+        </li>
+</ul>
+<li>
+        <a href="#RELAX_NG_Schema">4. RELAX NG Schema <span class="original_title" lang="en">RELAX NG Schema</a>
+      </li>
+<li>
+
+        <a href="#Terminology">5. 用語 <span class="original_title" lang="en">Terminology</span></a>
+
+      </li>
+<li>
+        <a href="#Document_Types">6. ドキュメントタイプ <span class="original_title" lang="en">Document Types</span></a>
+      </li>
+<ul>
+<li>
+          <a href="#Document_Extensibility">6.1. ドキュメントの拡張性 <span class="original_title" lang="en">Document Extensibility</span></a>
+        </li>
+
+</ul>
+
+<li>
+        <a href="#OPDS_Catalog_Feed_Documents">7. OPDSカタログフィードドキュメント <span class="original_title" lang="en">OPDS Catalog Feed Documents</span></a>
+      </li>
+<ul>
+<li>
+          <a href="#OPDS_Catalog_Root">7.1. OPDSカタログルート <span class="original_title" lang="en">OPDS Catalog Root</span></a>
+        </li>
+<li>
+          <a href="#Navigation_Feeds">7.2. ナビゲーションフィード <span class="original_title" lang="en">Navigation Feeds</span></a>
+
+        </li>
+<li>
+          <a href="#Acquisition_Feeds">7.3. 取得フィード <span class="original_title" lang="en">Acquisition Feeds</span></a>
+        </li>
+<li>
+          <a href="#OPDS_Catalog_Relations">7.4. OPDSカタログリレーション <span class="original_title" lang="en">OPDS Catalog Relations</span></a>
+        </li>
+<ul>
+<li>
+
+            <a href="#Sorting_Relations">7.4.1. ソーティングリレーション <span class="original_title" lang="en">Sorting Relations</span></a>
+
+          </li>
+<li>
+            <a href="#Popular_Relation">7.4.2. Popular Relation[sic]</a>
+          </li>
+<li>
+            <a href="#Relations_for_Previously_Acquired_Content">7.4.3. 以前に取得されたコンテンツのリレーション <span class="original_title" lang="en">Relations for Previously Acquired Content</span></a>
+          </li>
+
+<li>
+            <a href="#Crawlable_Feed_Relation">7.4.4. クローリングできるフィードのリレーション <span class="original_title" lang="en">Crawlable Feed Relation</span></a>
+
+          </li>
+</ul>
+<li>
+          <a href="#Search">7.5. 検索 <span class="original_title" lang="en">Search</span></a>
+        </li>
+<li>
+          <a href="#Feed_Examples">7.6. フィードの例 <span class="original_title" lang="en">Feed Examples</span></a>
+
+        </li>
+<li>
+          <a href="#Element_Definitions7_7">7.7. 要素定義 <span class="original_title" lang="en">Element Definitions</span></a>
+
+        </li>
+<ul>
+<li>
+            <a href="#The_atom_feed_Element">7.7.1. &#8220;atom:feed&#8221; 要素 <span class="original_title" lang="en">The &#8220;atom:feed&#8221;  Element</span></a>
+
+          </li>
+</ul>
+</ul>
+<li>
+        <a href="#OPDS_Catalog_Entry_Documents">8. OPDSカタログエントリドキュメント <span class="original_title" lang="en">OPDS Catalog Entry Documents</span></a>
+
+      </li>
+<ul>
+<li>
+          <a href="#Relationship_Between_Atom_and_Dublin_Core_Metadata">8.1. AtomとDublin Core Metadataとの関係 <span class="original_title" lang="en">Relationship Between Atom and Dublin Core Metadata</span></a>
+        </li>
+
+<li>
+          <a href="#Partial_and_Complete_Catalog_Entries">8.2. 部分的なカタログエントリと完全なカタログエントリ <span class="original_title" lang="en">Partial and Complete Catalog Entries</span></a>
+        </li>
+<li>
+          <a href="#Summary_and_Content">8.3. 要約とコンテンツ <span class="original_title" lang="en">Summary and Content</span></a>
+
+        </li>
+<li>
+          <a href="#Entry_Relations">8.4. エントリリレーション <span class="original_title" lang="en">Entry Relations</span></a>
+
+        </li>
+<ul>
+<li>
+            <a href="#Acquisition_Relations">8.4.1. 取得リレーション <span class="original_title" lang="en">Acquisition Relations</span></a>
+          </li>
+<li>
+            <a href="#Artwork_Relations">8.4.2. アートワークリレーション <span class="original_title" lang="en">Artwork Relations</span></a>
+
+          </li>
+</ul>
+
+<li>
+          <a href="#Entry_Examples">8.5. エントリの例 <span class="original_title" lang="en">Entry Examples</span></a>
+        </li>
+<li>
+          <a href="#Element_Definitions8_6">8.6. 要素定義 <span class="original_title" lang="en">Element Definitions</span></a>
+        </li>
+<ul>
+<li>
+
+            <a href="#The_atom_entry_Element">8.6.1. &#8220;atom:entry&#8221;要素 <span class="original_title" lang="en">The &#8220;atom:entry&#8221; Element</span></a>
+
+          </li>
+<li>
+            <a href="#The_atom_link_Element">8.6.2. &#8220;atom:link&#8221;要素 <span class="original_title" lang="en">The &#8220;atom:link&#8221; Element</span></a>
+          </li>
+
+<li>
+            <a href="#The_opds_price_Element">8.6.3. &#8220;opds:price&#8221;要素 <span class="original_title" lang="en">The &#8220;opds:price&#8221; Element</span></a>
+
+          </li>
+
+<ul><li><a href="#The_opds_price_Element">8.6.3.1 &#8220;currencycode&#8221;属性 <span class="original_title" lang="en">The &#8220;currencycode&#8221; Attribute</span></a>
+          </li></ul>
+ </ul>
+        </ul>
+
+<li>
+        <a href="#Acquiring_Publications">9. 出版物の取得 <span class="original_title" lang="en">Acquiring Publications</span></a>
+
+      </li>
+<ul>
+<li>
+          <a href="#Acquisition_Examples">9.1. 取得の例 <span class="original_title" lang="en">Acquisition Examples</span></a>
+        </li>
+</ul>
+<li>
+        <a href="#Feed_Handling">10. フィードの処理 <span class="original_title" lang="en">Feed Handling</span></a>
+
+      </li>
+<ul>
+
+<li>
+          <a href="#Listing_Acquisition_Feeds">10.1. 取得フィードの一覧 <span class="original_title" lang="en">Listing Acquisition Feeds</span></a>
+        </li>
+<li>
+          <a href="#Complete_Acquisition_Feeds">10.2. 完全な取得フィード <span class="original_title" lang="en">Complete Acquisition Feeds</span></a>
+        </li>
+</ul>
+
+<li>
+        <a href="#Aggregating_OPDS_Catalogs">11. OPDSカタログの集約 <span class="original_title" lang="en">Aggregating OPDS Catalogs</span></a>
+
+      </li>
+<li>
+        <a href="#Discovering_OPDS_Catalogs">12. OPDSカタログの検出 <span class="original_title" lang="en">Discovering OPDS Catalogs</span></a>
+      </li>
+<li>
+        <a href="#Securing_OPDS_Catalogs">13. OPDSカタログの保護 <span class="original_title" lang="en">Securing OPDS Catalogs</span></a>
+
+      </li>
+<li>
+        <a href="#Bandwidth_and_Processing_Considerations">14. 帯域幅と処理についての考慮事項 <span class="original_title" lang="en">Bandwidth and Processing Considerations</span></a>
+
+      </li>
+<li>
+        <a href="#Security_Considerations">15. セキュリティについての考慮事項 <span class="original_title" lang="en">Security Considerations</span></a>
+      </li>
+<ul>
+<li>
+
+          <a href="#Linked_Resources">15.1. リンクされたリソース <span class="original_title" lang="en">Linked Resources</span></a>
+        </li>
+<li>
+          <a href="#URIs_and_IRIs">15.2. URIとIRI <span class="original_title" lang="en">URIs and IRIs</span></a>
+
+        </li>
+<li>
+          <a href="#Code_Injection_and_Cross_Site_Scripting">15.3. コードインジェクションとクロスサイトスクリプティング <span class="original_title" lang="en">Code Injection and Cross Site Scripting</span></a>
+        </li>
+
+</ul>
+<li>
+        <a href="#The_Atom_Format_Type_Parameter">16. AtomフォーマットTypeパラメータ <span class="original_title" lang="en">The Atom Format Type Parameter</span></a>
+      </li>
+<li>
+        <a href="#The_OPDS_Catalog_Profile_Parameter">17. OPDSカタログProfileパラメータ <span class="original_title" lang="en">The OPDS Catalog Profile Parameter</span></a>
+
+      </li>
+<li>
+        <a href="#References">18. リファレンス <span class="original_title" lang="en">References</span></a>
+
+      </li>
+<ul>
+<li>
+          <a href="#Normative_References">18.1. 引用規定 <span class="original_title" lang="en">Normative References</span></a>
+        </li>
+<li>
+          <a href="#Informative_References">18.2. 参考文献 <span class="original_title" lang="en">Informative References</span></a>
+
+        </li>
+</ul>
+
+<li>
+        <a href="#Appendix_A._Contributors">付録A.貢献者 <span class="original_title" lang="en">Contributors</span></a>
+      </li>
+<li>
+        <a href="#Appendix_B._RELAX_NG_Compact_Schema">付録B RELAX NG Compact Schema <span class="original_title" lang="en">RELAX NG Compact Schema</span></a>
+      </li>
+</ul></div>
+
+
+<div id="Introduction">
+
+<h3>1. イントロダクション <span class="original_title" lang="en">Introduction</span></h3>
+<blockquote lang="en">
+<p>The Open Publication Distribution System (OPDS) Catalog format is a syndication format for electronic publications based on Atom [RFC4287] and HTTP [RFC2616]. OPDS Catalogs enable available electronic publications to be:</p>
+<ul>
+<li>discovered, using optional search or a range of optional browsing techniques</li>
+<li>acquired, using direct downloads, lending, or vending</li>
+</ul>
+<p>An OPDS Catalog is a set of one or more Atom Feeds, which are themselves listings of Atom Entries. The Atom Feeds that make up all OPDS Catalogs can be divided into two groups: Navigation Feeds, which create a hierarchy for browsing, and Acquisition Feeds, which list available electronic publications. Each Atom Entry in an Acquisition Feed includes basic metadata about the publication, the publication&#8217;s format, and how the publication can be acquired.  These included Atom Entries may be minimal subsets of the complete metadata, with a link to a more extensive, standalone representation URI (see the Section Listing Acquisition Feeds for more).</p>
+<p>OPDS Catalogs may be aggregated and combined into larger OPDS Catalogs.</p>
+</blockquote>
+
+<p>Open Publication Distribution System（OPDS）Catalogフォーマットは Atom <tt><a href="#References">[RFC4287]</a></tt> と HTTP <tt><a href="#References">[RFC2616]</a></tt>をベースとする電子出版物のための配信フォーマットである。OPDSカタログ（OPDS Catalog）により利用可能な電子出版物について以下のことが可能となる。</p>
+<ul>
+<li>任意の検索や様々な任意のブラウジング技術の使用によって発見されること。</li>
+<li>直接ダウンロード、貸出、販売によって取得されること。</li>
+</ul>
+<p>1つのOPDSカタログ（OPDS Catalog）は1つ以上のAtomフィードのセットである。AtomフィードはAtomエントリの一覧である。全てのOPDSカタログ（OPDS Catalog）を構成するAtomフィードは次の2つのグループに分けることができる。ブラウジングのために階層をつくるナビゲーションフィード（Navigation Feed）と利用可能な電子出版物を一覧する取得フィード（Acquisition Feed）である。取得フィード（Acquisition Feed）にあるそれぞれのAtomエントリにはその出版物の基本的なメタデータ、その出版物のフォーマット、そして、その出版物の入手方法が含まれている。Atomエントリを含むこれらのフィードはさらに完全なメタデータの最小限のサブセットかもしれない。それはより広範で独立したものを表現するURIへのリンクを持つ（より詳細については「<a href="#Listing_Acquisition_Feeds">取得フィードの一覧（Listing Acquisition Feeds）</a>」セクションを参照すること）。</p>
+
+<p>OPDSカタログ（OPDS Catalog）は集約され、より大きなOPDSカタログ（OPDS Catalog）に統合されるかもしれない。</p>
+</p></div>
+
+
+
+<div id="Notational_Conventions">
+<h3>2. 表記規約 <span class="original_title" lang="en">Notational Conventions</span></h3>
+<blockquote lang="en">
+<p>The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <tt><a href="#References">[RFC2119]</a></tt>.</p></blockquote>
+
+
+<p>このドキュメントに出てくる<span class="RFC2119">&#8220;MUST&#8221;</span>、<span class="RFC2119">&#8220;MUST NOT&#8221;</span>、<span class="RFC2119">&#8220;REQUIRED&#8221;</span>、<span class="RFC2119">&#8220;SHALL&#8221;</span>、<span class="RFC2119">&#8220;SHALL NOT&#8221;</span>、<span class="RFC2119">&#8220;SHOULD&#8221;</span>、<span class="RFC2119">&#8220;SHOULD NOT&#8221;</span>、<span class="RFC2119">&#8220;RECOMMENDED&#8221;</span>、<span class="RFC2119">&#8220;MAY&#8221;</span>、そして、<span class="RFC2119">&#8220;OPTIONAL&#8221;</span>は<tt><a href="#References">[RFC2119]</a></tt> で規定されている通りに解釈されることとする。.</p>
+
+
+</p></div>
+
+
+<div id="XML-Related_Conventions">
+<h3>3. XMLと関係のある規約 <span class="original_title" lang="en">XML-Related Conventions</span></h3>
+<div id="Referring_to_Information_Items">
+<h4>3.1. 情報項目の参照 <span class="original_title" lang="en">Referring to Information Items</span></h4>
+<blockquote lang="en">
+<p>The OPDS Catalog format is specified in terms of the XML Information Set <tt><a href="#References">[REC-xml-infoset]</a></tt>, serialized as XML 1.0 <tt><a href="#References">[REC-xml]</a></tt>.</p>
+
+<p>The Infoset terms &#8220;Element Information Item&#8221; and &#8220;Attribute Information Item&#8221; are shortened to &#8220;element&#8221; and &#8220;attribute&#8221; respectively. Therefore, when this specification uses the term &#8220;element&#8221;, it is referring to an Element Information Item, and when it uses the term &#8220;attribute&#8221;, it is referring to an Attribute Information Item.</p></blockquote>
+
+
+<p>OPDSカタログ（OPDS Catalog）フォーマットはXML 1.0 <tt><a href="#References">[REC-xml]</a></tt>としてシリアライズされたXML Information Set<tt><a href="#References">[REC-xml-infoset]</a></tt>の観点から規定されている。</p>
+<p>そのXML Information Setの用語である「要素情報項目（Element Information Items）」と「属性情報項目 （Attribute Information Items）」はそれぞれ「要素」と「属性」とに短く表記する。そのため、本仕様では「要素」が使用された時は「要素情報項目（Element Information Items）」を指し、「属性」が使用された時は属性情報項目 （Attribute Information Items）」を指す。</p>
+
+
+</p></div>
+</p></div>
+<div id="RELAX_NG_Schema">
+<h3>4. RELAX NG Schema <span class="original_title" lang="en">RELAX NG Schema</span></h3>
+
+<blockquote lang="en">
+<p>Some sections of this specification are illustrated with fragments of a non-normative RELAX NG Compact schema <tt><a href="#References">[RNC]</a></tt>. However, the text of this specification provides the definition of conformance. Complete schemas appear in Appendix B.</p>
+</blockquote>
+
+
+<p>本仕様のいくつかのセクションでは規定ではない（non-normative）のRELAX NG Compact schema<tt><a href="#References">[RNC]</a></tt>の一部分を使用して解説されている。しかし、適合基準の定義は本仕様の本文で提供されるものである。完全なスキーマは<a href="#Appendix_B._RELAX_NG_Compact_Schema">付録B</a>にある。</p></div>
+
+
+<div id="Terminology">
+
+<h3>5. 用語 <span class="original_title" lang="en">Terminology</span></h3>
+<blockquote lang="en">
+<p>The following terminology is used by this specification:</p>
+
+<dl>
+<dt>Acquisition Feed</dt>
+
+<dd>An Atom Feed whose Atom Entries are exclusively OPDS Catalog Entries.</dd>
+<dt>Acquisition Link</dt>
+<dd>An atom:link element with a relation that begins with &#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8221; and refers to the Resource which holds the content of the described Publication or the Resource through which it may be acquired for any OPDS Catalog Entry. See the Sections Acquisition Relations and Acquiring Publications. They are serialized as OPDS Catalog Feed Documents.</dd>
+
+<dt>Complete Catalog Entry</dt>
+<dd>An OPDS Catalog Entry that includes all known metadata about the described Publication and is referenced by a Partial Catalog Entry.</dd>
+<dt>IRI</dt>
+<dd>An Internationalized Resource Identifier as defined in <tt><a href="#References">[RFC3987]</a></tt>.</dd>
+
+<dt>Navigation Feed</dt>
+<dd>An Atom Feed whose Atom Entries are not OPDS Catalog Entries but instead links to other Navigation Feeds, Acquisition Feeds, or other Resources to establish a hierarchical, browsable presentation of the OPDS Catalog.</dd>
+<dt>OPDS Catalog</dt>
+
+<dd>All of the Atom Feeds (Acquisition and Navigation) and Entries (Partial and Complete) following this specification published together to describe a consolidated group of available Publications.</dd>
+<dt>OPDS Catalog Entry</dt>
+<dd>An Atom Entry that provides a representation of an available Publication and includes an Acquisition Link. They are serialized as OPDS Catalog Entry Documents.</dd>
+<dt>OPDS Catalog Entry Document</dt>
+<dd>The formal name for the XML documents that are a refinement of an &#8220;atom:entry&#8221; from the Atom Syndication Format <tt><a href="#References">[RFC4287]</a></tt> that this specification defines.</dd>
+
+<dt>OPDS Catalog Feed Document</dt>
+<dd>The formal name for XML documents that are a refinement of an &#8220;atom:feed&#8221; from the Atom Syndication Format <tt><a href="#References">[RFC4287]</a></tt> that this specification defines.</dd>
+<dt>OPDS Catalog Root</dt>
+<dd>The Atom Feed that represents either the complete OPDS Catalog (a single Acquisition Feed) or the Atom Feed that starts a set of Navigation Feeds. External links to the OPDS Catalog SHOULD reference the OPDS Catalog Root Resource.</dd>
+<dt>Partial Catalog Entry</dt>
+<dd>An OPDS Catalog Entry that includes the minimal required metadata about the described Publication but no other metadata and links to the Complete Catalog Entry.</dd>
+
+<dt>Publication</dt>
+<dd>An electronic document, typically available as a single file. OPDS Catalogs are agnostic about the particular format of Publications.</dd>
+<dt>relation (or &#8220;relation of&#8221;)</dt>
+<dd>Refers to the &#8220;rel&#8221; attribute value of an atom:link element.</dd>
+<dt>Representation</dt>
+<dd>An entity included with a request or response as defined in <tt><a href="#References">[RFC2616]</a></tt>.</dd>
+
+<dt>Resource</dt>
+<dd>A network-accessible data object or service identified by an IRI, as defined in <tt><a href="#References">[RFC2616]</a></tt>. See <tt><a href="#References">[REC-webarch]</a></tt> for further discussion on Resources.</dd>
+<dt>URI</dt>
+<dd>A Uniform Resource Identifier as defined in <tt><a href="#References">[RFC3986]</a></tt>. In this specification, the phrase &#8220;the URI of a document&#8221; is shorthand for &#8220;a URI which, when dereferenced, is expected to produce that document as a representation&#8221;.</dd>
+
+
+</dl>
+</blockquote>
+
+<p>以下の用語は本仕様で使用されるものである。</p>
+
+<dt>取得フィード <span class="original_title" lang="en">Acquisition Feed</span></dt>
+
+<dd>そのAtomエントリが専らOPDSカタログエントリ（OPDS Catalog Entry）であるAtomフィード。</dd>
+<dt>取得リンク <span class="original_title" lang="en">Acquisition Link</span></dt>
+<dd> &#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8221;で始まるリレーションをもつatom:link要素。そして、それは記述された出版物（Publication）のコンテンツを持つリソース（Resource）またはリソース（Resource）を通じて取得されるかもしれないOPDSカタログエントリ（OPDS Catalog Entry）が表すリソース（Resource）を参照する。詳細は「<a href="#Acquisition_Relations">取得リレーション（Acquisition Relations）</a>」セクションと「<a href="#Acquiring_Publications">出版物の取得（Acquiring Publications）</a>」セクションを参照すること。それらはOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）としてシリアライズされている。</dd>
+
+
+<dt>完全なカタログエントリ <span class="original_title" lang="en">Complete Catalog Entry</span></dt>
+<dd>記述されている出版物（Publication）について知られている全てのメタデータを格納するOPDSカタログエントリ（OPDS Catalog Entry）。部分的なカタログエントリ（Partial Catalog Entry）によって参照される。</dd>
+<dt>IRI <span class="original_title" lang="en">IRI</span></dt>
+<dd><tt><a href="#References">[RFC3987]</a></tt>で定義されているInternationalized Resource Identifier（IRI）。</dd>
+
+<dt>ナビゲーションフィード <span class="original_title" lang="en">Navigation Feed</span></dt>
+<dd>そのAtomエントリがOPDSカタログエントリ（OPDS Catalog Entry）ではなく、他のナビゲーションフィード（Navigation Feed）、取得フィード（Acquisition Feed）、またはその他のリソース（Resource）へのリンクであるAtomフィード。OPDSカタログ（OPDS Catalog ）の階層的でブラウジングできるプレゼンテーションを構築するためのものである。</dd>
+
+<dt>OPDSカタログ <span class="original_title" lang="en">OPDS Catalog</span></dt>
+<dd>利用可能な出版物（Publication）の統合された集団を記述するためにいっしょに本仕様に従って発行された全てのAtomフィード（取得フィード&lt;Acquisition Feed&gt;とナビゲーションフィード&lt;Navigation Feed&gt;）と全てのAtomエントリ（部分的なカタログエントリ&lt;Partial Catalog Entry&gt;と完全なカタログエントリ&lt;Complete Catalog Entry&gt;）。</dd>
+
+<dt>OPDSカタログエントリ <span class="original_title" lang="en">OPDS Catalog Entry</span></dt>
+<dd>利用可能な出版物（Publication）の表現を提供するAtomエントリで、取得リンク（Acquisition Link）を格納する。それらはOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）によってシリアライズされる。</dd>
+
+<dt>OPDSカタログエントリドキュメント <span class="original_title" lang="en">OPDS Catalog Entry Document</span></dt>
+<dd>本仕様で定義するAtom配信フォーマット（Atom Syndication Format）<tt><a href="#References">[RFC4287]</a></tt>の&#8220;atom:entry&#8221;の改良版であるXMLドキュメントとしての正式名。</dd>
+
+<dt>OPDSカタログフィードドキュメント <span class="original_title" lang="en">OPDS Catalog Feed Document</span></dt>
+<dd>本仕様で定義するAtom配信フォーマット（Atom Syndication Format）<tt><a href="#References">[RFC4287]</a></tt>の&#8220;atom:feed&#8221;の改良版であるXMLドキュメントとしての正式名。</dd>
+
+<dt>OPDSカタログルート <span class="original_title" lang="en">OPDS Catalog Root</span></dt>
+<dd>完全なOPDSカタログ（たった1つの取得フィード&lt;Acquisition Feed&gt;）または一連のナビゲーションフィード（Navigation Feed）の起点となるAtomフィードを表現するAtomフィード。外部からOPDSカタログ（OPDS Catalog）へのリンクはOPDSカタログルートリソース（OPDS Catalog Root Resource）を参照するべきである<span class="RFC2119">（SHOULD）</span>。</dd>
+
+<dt>部分的なカタログエントリ <span class="original_title" lang="en">Partial Catalog Entry）</dt>
+<dd>記述されている出版物（Publication）について要求される最小限のメタデータを格納するOPDSカタログエントリ（OPDS Catalog Entry）。そして、完全なカタログエントリ（Complete Catalog Entry）にリンクする。</dd>
+
+<dt>出版物 <span class="original_title" lang="en">Publication</span></dt>
+<dd>一般的に1つのファイルとして利用できる電子的なドキュメント。OPDSカタログ（OPDS Catalog）は出版物（Publication）の特定のフォーマットについては不可知論者（agnostic）である（訳者注: つまり、出版物（Publication）のファイルフォーマットは特に限定されないということであろうと思う）。</dd>
+
+<dt>リレーション（または「～のリレーション」）<span class="original_title" lang="en">relation (or “relation of”)</span></dt>
+<dd>atom:link要素のrel属性の値を参照する。</dd>
+
+<dt>表現 <span class="original_title" lang="en">RepresentationI</span</dt>
+<dd><tt><a href="#References">[RFC2616]</a></tt>で定義されているように、リクエストまたはレスポンスに付属しているエンティティ。</dd>
+
+<dt>リソース <span class="original_title" lang="en">Resource</span></dt>
+<dd><tt><a href="#References">[RFC2616]</a></tt>で定義されるようにネットワーク上でアクセスできるデータオブジェクトまたはIRIによって識別されたサービス。リソース（Resource）についてのさらなる議論については<tt><a href="#References">[REC-webarch]</a></tt>を参照すること。</dd>
+<dt>URI <span class="original_title" lang="en">URI</span></dt>
+<dd><tt><a href="#References">[RFC3986]</a></tt>で定義されているUniform Resource Identifier（URI）。本仕様では、「URIが参照する先のものにアクセスするした時にそのドキュメントを生成すると期待されるそのドキュメントの表現としてのURI（a URI which, when dereferenced, is expected to produce that document as a representation）」を「ドキュメントのURI（the URI of a document）」と短く表記する。</dd>
+
+</dl>
+
+</div>
+
+
+
+
+<div id="Document_Types">
+<h3>6. ドキュメントタイプ <span class="original_title" lang="en">Document Types</span></h3>
+<blockquote lang="en">
+<p>This specification defines two kinds of documents &#8212; OPDS Catalog Feed Documents and OPDS Catalog Entry Documents.</p>
+<p>An OPDS Catalog Feed Document is a refinement of an &#8220;atom:feed&#8221; from the Atom Syndication Format <tt><a href="#References">[RFC4287]</a></tt>.</p>
+
+<p>An OPDS Catalog Entry Document is a refinement of an &#8220;atom:entry&#8221; from the Atom Syndication Format <tt><a href="#References">[RFC4287]</a></tt>.</p>
+
+<p>The namespace name <tt><a href="#References">[REC-xml-names]</a></tt> for elements defined in this specification and used in OPDS Catalog Feed Documents and OPDS Catalog Entry Documents is:</p>
+<p><a href="http://opds-spec.org/2010/catalog">http://opds-spec.org/2010/catalog</a></p>
+<p>OPDS Catalog Feed Documents and OPDS Catalog Entry Documents MUST be &#8220;namespace-well-formed&#8221; as specified in Section 7 of <tt><a href="#References">[REC-xml-names]</a></tt>.</p>
+
+<p>This specification uses the prefix &#8220;opds:&#8221; for the namespace name. The prefix &#8220;atom:&#8221; is used for &#8220;<a href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom</a> &#8220;, the namespace name of the Atom Syndication Format <tt><a href="#References">[RFC4287]</a></tt>. The prefix &#8220;dc:&#8221; is used for&#8221;<a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a>&#8220;, the namespace name of Dublin Core Metadata Initiative (DCMI) Metadata Terms <tt><a href="#References">[DCTERMS]</a></tt>. These namespace prefixes are not semantically significant.</p>
+
+<p>Producers of OPDS Catalogs SHOULD produce OPDS Catalog Feed Documents and OPDS Catalog Entry Documents that are conformant to both Atom and the OPDS Catalog RELAX NG schemas.</p>
+</blockquote>
+
+
+<p>本仕様はOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）とOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）の2種類のドキュメントを定義する。</p>
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）はAtom配信フォーマット（Atom Syndication Format）<tt><a href="#References">[RFC4287]</a></tt>により定義された&#8220;atom:feed&#8221;の改良版である。</p>
+
+<p>OPDSカタログエントリドキュメント（OPDS Catalog Entry Document）はAtom配信フォーマット（Atom Syndication Format）<tt><a href="#References">[RFC4287]</a></tt>により定義された&#8220;atom:entry&#8221;の改良版である。</p>
+
+<p>本仕様で定義され、OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）とOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）で使用される要素のための名前空間名<tt><a href="#References">[REC-xml-names]</a></tt>は以下の通りである。</p>
+<p><a href="http://opds-spec.org/2010/catalog">http://opds-spec.org/2010/catalog</a></p>
+
+
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）とOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）は<tt><a href="#References">[REC-xml-names]</a></tt>のセクション7で規定された通りに「名前空間は充分に形作られて（namespace-well-formed）」いなければならない<span class="RFC2119">（MUST）</span>。</p>
+
+<p>本仕様ではその名前空間名のために接頭辞&#8220;opds:&#8221;を使用する。接頭辞&#8220;atom:&#8221;はAtom配信フォーマット（Atom Syndication Format）<tt><a href="#References">[RFC4287]</a></tt>の名前空間名である&#8220;<a href="http://www.w3.org/2005/Atom">http://www.w3.org/2005/Atom</a> &#8220;で使用する。接頭辞&#8220;dc:&#8221;はDublin Core Metadata Initiative (DCMI) Metadata Terms <tt><a href="#References">[DCTERMS]</a></tt>の名前空間名である&#8221;<a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a>&#8220;で使用する。これらの名前空間の接頭辞は意味論的に意味があるものではない。</p>
+
+<p>OPDSカタログ（OPDS Catalog）の製作者はAtomとOPDSカタログ（OPDS Catalog）のRELAX NG schemaに準拠したOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）とOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）を製作するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<div id="Document_Extensibility">
+<h4>6.1. ドキュメントの拡張性 <span class="original_title" lang="en">Document Extensibility</span></h4>
+<blockquote lang="en">
+<p>Unrecognized markup in any Atom Feed or Atom Entry in an OPDS Catalog is considered &#8220;foreign markup&#8221; as defined in Section 6 of the Atom Syndication Format <tt><a href="#References">[RFC4287]</a></tt>. Foreign markup can be used anywhere within an OPDS Catalog unless it is explicitly forbidden. Processors that encounter foreign markup MUST NOT stop processing and MUST NOT signal an error. Clients SHOULD preserve foreign markup when transmitting or aggregating such documents.</p>
+
+<p>The namespace name &#8220;<a href="http://opds-spec.org/2010/catalog">http://opds-spec.org/2010/catalog</a>&#8221; is reserved for forward-compatible revisions of the OPDS Catalog format. This does not exclude the addition of elements and attributes that might not be recognized by processors conformant to this specification.  Such unrecognized markup from the &#8220;<a href="http://opds-spec.org/2010/catalog">http://opds-spec.org/2010/catalog</a>&#8221; namespace MUST be treated as foreign markup.</p>
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）にあるAtomフィードやAtomエントリで認識されないマークアップはAtom配信フォーマット（Atom Syndication Format）<tt><a href="#References">[RFC4287]</a></tt>のセクション6で定義されている通り、「外部マークアップ（foreign markup）」と見なされる。外部マークアップ（foreign markup）は明確に禁止されていない限り、OPDSカタログ（OPDS Catalog）のどこでも使用することができる。外部マークアップに対した製作者は処理をとめてならない<span class="RFC2119">（MUST NOT）</span>し、エラーのサインをだしてはならない<span class="RFC2119">（MUST NOT）</span>。クライアントはそのようなドキュメントを送信（transmitting）または集約（aggregating）する時に外部マークアップを保存するべきである<span class="RFC2119">（SHOULD）</span>。
+
+
+
+<p>名前空間名&#8220;<a href="http://opds-spec.org/2010/catalog">http://opds-spec.org/2010/catalog</a>&#8221;はOPDSカタログ（OPDS Catalog）フォーマットの前方互換（forward-compatible）の改訂ためにとっておくこととする。これは製作者によって本仕様に準拠する認識されないかもしれない要素と属性の追加を排除するものではない。そのような &#8220;<a href="http://opds-spec.org/2010/catalog">http://opds-spec.org/2010/catalog</a>&#8221;の名前空間で認識されないマークアップは外部マークアップ（foreign markup）として扱われなければならない<span class="RFC2119">（MUST）</span>。</p>
+</div>
+</p></div>
+
+
+<div id="OPDS_Catalog_Feed_Documents">
+<h3>7. OPDSカタログフィードドキュメント <span class="original_title" lang="en">OPDS Catalog Feed Documents</span></h3>
+<blockquote lang="en">
+<p>OPDS Catalog Feed Documents are Atom <tt><a href="#References">[RFC4287]</a></tt> Feeds. They serve two purposes:</p>
+
+<ul>
+<li>To create a browsable hierarchy of other OPDS Catalog Feed Documents and other Resources. These OPDS Catalog Feed Documents are referred to as Navigation Feeds.</li>
+<li>To collect a set of OPDS Catalog Entries. These OPDS Catalog Feed Documents are referred to as Acquisition Feeds.</li>
+</ul>
+<p>While Navigation Feeds do provide a suggested hierarchy from the OPDS Catalog publisher, OPDS Catalog Feed Documents MAY contain other relations that allow for other methods of consumption and display. See the Section OPDS Catalog Relations for more detail.</p>
+
+<p>Every OPDS Catalog Feed Document MUST either be an Acquisition Feed or a Navigation Feed. An Acquisition Feed can be identified by the presence of Acquisition Links in each Atom Entry.</p>
+</blockquote>
+
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）はAtom <tt><a href="#References">[RFC4287]</a></tt>フィードである。このフィードは以下の二つの目的に役立つ。</p>
+
+<ul>
+<li>他のOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）やその他のリソース（Resource）のブラウジングできる階層を作ること。これらのOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）はナビゲーションフィード（Navigation Feed）と呼ばれる。</li>
+<li>一連のOPDSカタログエントリ（OPDS Catalog Entry）をまとめること。これらのOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）は取得フィード（Acquisition Feed）と呼ばれる。</li>
+</ul>
+<p>ナビゲーションフィード（Navigation Feed）はOPDSカタログ（OPDS Catalog）出版者が推奨する階層（的カタログ）を提供するものだが、OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）は、その他の消費や表示の方法を認める他のリレーションを含めてよい<span class="RFC2119">（MAY）</span>。詳細は「<a href="#OPDS_Catalog_Relations">OPDSカタログリレーション（OPDS Catalog Relations）</a>」セクションを参照すること。</p>
+
+<p>全てのOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）は取得フィード（Acquisition Feed）またはナビゲーションフィード（Navigation Feed）でなければならない<span class="RFC2119">（MUST）</span>。取得フィード（Acquisition Feed）はそれぞれのAtomエントリにある取得リンク（Acquisition Link）の存在によって識別することができる。</p>
+
+
+<div id="OPDS_Catalog_Root">
+<h4>7.1. OPDSカタログルート <span class="original_title" lang="en">OPDS Catalog Root</span></h4>
+<blockquote lang="en">
+<p>The OPDS Catalog Root is the top-level OPDS Catalog Feed Document. It is either a single Acquisition Feed in the simple case or the start of a set of Navigation Feeds. Every OPDS Catalog MUST have one and only one OPDS Catalog Root.</p>
+<p>External links to the OPDS Catalog Resource SHOULD use the IRI of the OPDS Catalog Root.</p>
+<p>Each OPDS Catalog Feed Document SHOULD contain an atom:link element with a link relation of &#8220;start&#8221;, which references the OPDS Catalog Root Resource.</p>
+</blockquote>
+<p>OPDSカタログルート（OPDS Catalog Root）は最上位のOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）である。単純な場合のただ1つの取得フィード（Acquisition Feed）であるか、一連のナビゲーションフィード（Navigation Feed）のセットの起点である。全てのOPDSカタログ（OPDS Catalog）は1つの、そして、唯一のOPDSカタログルート（OPDS Catalog Root）を持たなくてはならない<span class="RFC2119">（MUST）</span>。</p>
+
+<p>OPDSカタログリソース（OPDS Catalog Resource）への外部からのリンクはOPDSカタログルート（OPDS Catalog Root）のIRIを使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+<p>それぞれのOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）は&#8220;start&#8221;のリンクリレーションを持つatom:link要素を含むべきである<span class="RFC2119">（SHOULD）</span>。&#8220;start&#8221;のリレーションはOPDSカタログルートリソース（OPDS Catalog Root Resource）を参照する。</p>
+</p></div>
+<div id="Navigation_Feeds">
+<h4>7.2. ナビゲーションフィード <span class="original_title" lang="en">Navigation Feeds</span></h4>
+<blockquote lang="en">
+
+<p>A Navigation Feed is an OPDS Catalog Feed Document whose Atom Entries serve to create a suggested hierarchy for presentation and browsing. A Navigation Feed MUST NOT contain OPDS Catalog Entries but instead contains Atom Entries that link to other Navigation or Acquisition Feeds or other Resources. Each Atom Entry&#8217;s &#8220;atom:content&#8221; element SHOULD include a brief description of the linked Resource.</p>
+<p>Links to Navigation Feeds SHOULD use the &#8220;type&#8221; attribute &#8220;application/atom+xml;profile=opds-catalog&#8221;. OPDS Catalog providers SHOULD choose the best relation for each Navigation Feed based on the relations in the section OPDS Catalog Relations. The relation &#8220;subsection&#8221; SHOULD be used if no other relation is more appropriate.</p>
+
+</blockquote>
+<p>ナビゲーションフィード（Navigation Feed）はOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）であり、そのAtomエントリはプレゼンテーションとブラウジングのために（出版者が）推奨する階層をつくることに利用される。ナビゲーションフィード（Navigation Feed）はOPDSカタログエントリ（OPDS Catalog Entry）を含んではならない<span class="RFC2119">（MUST NOT）</span>。しかし、代わりにその他のナビゲーションフィード（Navigation Feed）か取得フィード（Acquisition Feed）、またはその他のリソース（Resource）を関連づけるAtomエントリを含む。それぞれのAtomエントリの&#8220;atom:content&#8221;要素は関連づけられたリソース（Resource）の簡単な説明を含むべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<p>ナビゲーションフィード（Navigation Feed）へのリンクには&#8220;type&#8221;属性&#8220;application/atom+xml;profile=opds-catalog&#8221;を使用するべきである<span class="RFC2119">（SHOULD）</span>。
+
+OPDSカタログ（OPDS Catalog）プロバイダはそれぞれナビゲーションフィード（Navigation Feed）のために「<a href="#OPDS_Catalog_Relations">OPDSカタログリレーション（OPDS Catalog Relations）</a>」セクションで述べられているリレーションに基づいて最も適したリレーションを選択するべきである<span class="RFC2119">（SHOULD）</span>。
+
+もし他により適切な<span="need_check">リレーション</span>がない場合はリレーション&#8220;subsection&#8221;を使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+</div>
+
+<div id="Acquisition_Feeds">
+<h4>7.3. 取得フィード <span class="original_title" lang="en">Acquisition Feeds</span></h4>
+<blockquote lang="en">
+<p>An Acquisition Feed is an OPDS Catalog Feed Document that collects OPDS Catalog Entries into a single, ordered set. The simplest complete OPDS Catalog would be a single Acquisition Feed listing all of the available OPDS Catalog Entries from that provider. In more complex OPDS Catalogs, Acquisition Feeds are used to present and organize sets of related OPDS Catalog Entries for browsing and discovery by clients and aggregators.</p>
+<p>Links to Acquisition Feeds SHOULD use the &#8220;type&#8221; attribute &#8220;application/atom+xml;profile=opds-catalog&#8221;.</p>
+<p>For further details on limiting the size of Acquisition Feeds through pagination, Partial Catalog Entries, and compression, see the Section Listing Acquisition Feeds.</p>
+
+</blockquote>
+
+<p>取得フィード（Acquisition Feed）はOPDSカタログエントリ（OPDS Catalog Entry）をただ1つの順序づけられたセットにまとめるためのOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）である。
+もっとも単純で完全なOPDSカタログ（OPDS Catalog）はただ1つのそのプロバイダの利用できる全てのOPDSカタログエントリ（OPDS Catalog Entry）を一覧にした取得フィード（Acquisition Feed）である。さらに複雑なOPDSカタログ（OPDS Catalog）では、クライアントとアグリゲータがブラウジングと検出に関係するOPDSカタログエントリ（OPDS Catalog Entry）のセットを提示し、組織化するために取得フィード（Acquisition Feed）を使用する。</p>
+
+<p> 取得フィード（Acquisition Feed）へのリンクは &#8220;type&#8221;属性&#8220;application/atom+xml;profile=opds-catalog&#8221;を使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+<p>ページネーション、部分的なカタログエントリ（Partial Catalog Entry）、圧縮を通じて取得フィード（Acquisition Feed）のサイズを制限することについてのさらなる詳細については「<a href="#Listing_Acquisition_Feeds">取得フィードの一覧（Listing Acquisition Feeds）</a>」セクションを参照すること。</p>
+
+</p></div>
+
+
+<div id="OPDS_Catalog_Relations">
+<h4>7.4. OPDSカタログリレーション <span class="original_title" lang="en">OPDS Catalog Relations</span></h4>
+<blockquote lang="en">
+<p>OPDS Catalog Feed Documents SHOULD include links to other available Acquisition and Navigation Feeds and other related Resources to encourage independent navigation.</p>
+<p>These relations MAY be used by clients to provide additional or alternative navigation, both in a Navigation Feed or an Acquisition Feed.</p>
+<p>The following relations are derived from <tt><a href="#References">[DRAFT-Web-Linking]</a></tt>, with some clarification:</p>
+<ul>
+
+<li>&#8220;start&#8221;: The OPDS Catalog Root.</li>
+<li>&#8220;subsection&#8221;: A Navigation Feed not better described by a more specific relation.</li>
+</ul>
+<p>When creating an OPDS Catalog with Navigation and Acquisition Feeds, OPDS Catalog providers are encouraged to use the relations defined in this specification and <tt><a href="#References">[DRAFT-Web-Linking]</a></tt>. If no appropriate relation is found, the Feeds SHOULD use a descriptive &#8220;atom:title&#8221; element and the &#8220;atom:link&#8221;s SHOULD use a descriptive &#8220;title&#8221; attribute.</p>
+
+</blockquote>
+
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）は独立したナビゲーションを促進するために他の利用できる取得フィード（Acquisition Feed）、ナビゲーションフィード（Navigation Feed）、そして他の関係あるリソース（Resource）へのリンクを含むべきである<span class="RFC2119">（SHOULD）</span>。</p>
+<p>これらのリレーションはナビゲーションフィード（Navigation Feed）または取得フィード（Acquisition Feed）において、さらなる、または代替となるナビゲーションを提供するためにクライアントによって使用されてもよい<span class="RFC2119">（MAY）</span>。</p>
+<p>説明を付した以下のリレーションは<tt><a href="#References">[DRAFT-Web-Linking]</a></tt>に由来する。</p>
+<ul>
+<li>&#8220;start&#8221;: OPDSカタログルート（OPDS Catalog Root）。</li>
+
+<li>&#8220;subsection&#8221;: より明確なリレーションによってよりよく説明できないナビゲーションフィード（Navigation Feed）。</li>
+</ul>
+<p>ナビゲーションフィード（Navigation Feed）と取得フィード（Acquisition Feed）を持つOPDSカタログ（OPDS Catalog）を作成する際に、OPDSカタログプロバイダは本仕様と<tt><a href="#References">[DRAFT-Web-Linking]</a></tt>で定義されたリレーションを使用することが奨励される。もし適当なリレーションがない場合には、そのフィードは記述的な&#8220;atom:title&#8221;要素を使用するべきであり<span class="RFC2119">（SHOULD）</span>、&#8220;atom:link&#8221;には記述的な &#8220;title&#8221;属性を使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+
+<div id="Sorting_Relations">
+<h5>7.4.1. ソーティングリレーション <span class="original_title" lang="en">Sorting Relations</span></h5>
+
+<blockquote lang="en">
+<p>This specification defines two new relations, which begin with &#8220;<a href="http://opds-spec.org/sort">http://opds-spec.org/sort</a>&#8220;, to describe how an Acquisition Feed is sorted. These relations SHOULD be used when creating Navigation Feeds and the OPDS Catalog Root, if applicable.</p>
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/sort/new">http://opds-spec.org/sort/new</a>&#8220;: An Acquisition Feed with newly released OPDS Catalog Entries. These Acquisition Feeds typically contain a subset of the OPDS Catalog Entries in an OPDS Catalog based on the publication date of the Publication.</li>
+<li>&#8220;<a href="http://opds-spec.org/sort/popular">http://opds-spec.org/sort/popular</a>&#8220;: An Acquisition Feed with popular OPDS Catalog Entries. These Acquisition Feeds typically contain a subset of the OPDS Catalog Entries in an OPDS Catalog based on a numerical ranking criteria.</li>
+
+</ul>
+<p>Acquisition Feeds using the &#8220;<a href="http://opds-spec.org/sort/new">http://opds-spec.org/sort/new</a>&#8221; relation SHOULD be ordered with the most recent items first. Acquisition Feeds using the &#8220;<a href="http://opds-spec.org/sort/popular">http://opds-spec.org/sort/popular</a>&#8221; relation SHOULD be ordered with the most popular items first.</p>
+</blockquote>
+
+<p>本仕様は取得フィード（Acquisition Feed）がどのようにソートされるかを記述するために&#8220;<a href="http://opds-spec.org/sort">http://opds-spec.org/sort</a>&#8220;で始まる 2つの新しいリレーションを定義する。これらのリレーションはナビゲーションフィード（Navigation Feed）とOPDSカタログルート（OPDS Catalog Root）を作成する時に適用できるならば使用されるべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/sort/new">http://opds-spec.org/sort/new</a>&#8220;: 新しく公開されたOPDSカタログエントリ（OPDS Catalog Entry）を含む取得フィード（Acquisition Feed）。これらの取得フィード（Acquisition Feed）には一般的に出版物（Publication）の出版日に基づいてOPDSカタログエントリ（OPDS Catalog Entry）のサブセットがOPDSカタログ（OPDS Catalog）の中に入っている。</li>
+
+<li>&#8220;<a href="http://opds-spec.org/sort/popular">http://opds-spec.org/sort/popular</a>&#8220;: 人気のあるOPDSカタログエントリ（OPDS Catalog Entry）を含む取得フィード（Acquisition Feed）。これらの取得フィード（Acquisition Feed）には一般的に数的序列基準に基づいてOPDSカタログエントリ（OPDS Catalog Entry）のサブセットがOPDSカタログ（OPDS Catalog）の中に入っている。</li></ul>
+
+
+<p> &#8220;<a href="http://opds-spec.org/sort/new">http://opds-spec.org/sort/new</a>&#8221;リレーションを使用する取得フィード（Acquisition Feed）は最も新しいアイテムが最初にくるよう並べられているべきである<span class="RFC2119">（SHOULD）</span>。&#8220;<a href="http://opds-spec.org/sort/popular">http://opds-spec.org/sort/popular</a>&#8221;リレーションを使用する取得フィード（Acquisition Feed）はもっとも人気のあるアイテムが最初に並べられているべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+</p></div>
+
+<div id="Popular_Relation">
+<h5>7.4.2. Popular Relation[sic]</h5>
+（原文の7.4.2の見出し名は&#8220;Popular Relation&#8220;であるが、前後の本文と<a href="http://code.google.com/p/openpub/wiki/CatalogSpecDraft">OPDS1.1のDraft版</a>から判断するとここの見出し名は&#8220;Featured Relation&#8220;の間違いではないかと思われる。）
+<blockquote lang="en">
+<p>This specification also defines a relation to describe an Acquisition Feed of featured items. This relation SHOULD be used when creating Navigation Feeds and the OPDS Catalog Root, if applicable.</p>
+<ul>
+
+<li>&#8220;<a href="http://opds-spec.org/featured">http://opds-spec.org/featured</a>&#8220;: An Acquisition Feed with featured OPDS Catalog Entries. These Acquisition Feeds typically contain a subset of the OPDS Catalog Entries in an OPDS Catalog that have been selected for promotion by the OPDS Catalog provider. No order is implied.</li>
+</ul>
+</blockquote>
+
+<p>本仕様の注目アイテムの取得フィード（Acquisition Feed）の記述するためのリレーションについても定義する。このリレーションはナビゲーションフィード（Navigation Feed）とOPDSカタログルート（OPDS Catalog Root）を作成する時に適用できるならば使用されるべきである<span class="RFC2119">（SHOULD）</span>。</p>
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/featured">http://opds-spec.org/featured</a>&#8220;: 注目のOPDSカタログエントリ（OPDS Catalog Entry）を含む取得フィード（Acquisition Feed）。これらの取得フィード（Acquisition Feed）にはOPDSカタログ（OPDS Catalog）プロバイダによってプロモーションのために選ばれたOPDSカタログエントリ（OPDS Catalog Entry）のサブセットがOPDSカタログ（OPDS Catalog）の中に入っている。各エントリ間の排列の順序は意味を持たない。</li>
+</ul>
+
+</div>
+
+
+
+<div id="Relations_for_Previously_Acquired_Content">
+<h5>7.4.3.以前に取得されたコンテンツのリレーション <span class="original_title" lang="en">Relations for Previously Acquired Content</span></h5>
+<blockquote lang="en">
+<p>An OPDS catalog MAY track content that was previously acquired by the user. This specification defines two new relations to identify Acquisition Feeds listing such resources:</p>
+<ul>
+
+<li>&#8220;<a href="http://opds-spec.org/shelf">http://opds-spec.org/shelf</a>&#8220;: A Resource that includes a user&#8217;s existing set of Acquired Content, which MAY be represented as an OPDS Catalog.</li>
+<li>&#8220;<a href="http://opds-spec.org/subscriptions">http://opds-spec.org/subscriptions</a>&#8220;: A Resource that includes a user&#8217;s set of subscriptions, which MAY be represented as an OPDS Catalog.</li>
+
+</ul>
+<p>An OPDS client MAY use these links to automatically sync content to the user&#8217;s local shelf or check for periodical content updates.</p>
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）は以前にユーザーにより取得されたコンテンツを追跡してよい<span class="RFC2119">（MAY）</span>。本仕様はそのようなリソースを一覧にする取得フィード（Acquisition Feed）を識別するための以下の2つのリレーションについて定義する。</p>
+<ul>
+
+<li>&#8220;<a href="http://opds-spec.org/shelf">http://opds-spec.org/shelf</a>&#8220;: ユーザーが取得済みコンテンツ（Acquired Content）の既存のセットを含むリソース（Resource）。取得されたコンテンツ（Acquired Content）はOPDSカタログ（OPDS Catalog）として表現されてもよい<span class="RFC2119">（MAY）</span>。</li>
+
+<li>&#8220;<a href="http://opds-spec.org/subscriptions">http://opds-spec.org/subscriptions</a>&#8220;: ユーザーが定期購読しているコンテンツのセットを含むリソース（Resource）。定期購読されているコンテンツはOPDSカタログ（OPDS Catalog）として表現されてもよい<span class="RFC2119">（MAY）</span>。</li>
+</ul>
+<p>OPDSクライアントはユーザーがローカルで所有しているコンテンツを自動的に同期するため、または定期刊行されるコンテンツの更新を確認するためにこれらのリンクを使用してよい<span class="RFC2119">（MAY）</span>。</p>
+
+</div>
+<div id="Crawlable_Feed_Relation">
+<h5>7.4.4. クローリングできるフィードのリレーション <span class="original_title" lang="en">Crawlable Feed Relation</span></h5>
+<blockquote lang="en">
+<p>For aggregation or crawling purposes, an OPDS Catalog MAY link to an optimized Acquisition Feed. This specification defines one new relation for this goal: &#8220;<a href="http://opds-spec.org/crawlable">http://opds-spec.org/crawlable</a>&#8220;.</p>
+
+<p>See Complete Acquisition Feeds for more information about this feed.</p>
+</blockquote>
+
+<p>集約またはクローリングのために、OPDSカタログ（OPDS Catalog）は最適化された取得フィード（Acquisition Feed）にリンクをしてよい<span class="RFC2119">（MAY）</span>。本仕様はこの目的のために以下の1つの新しいリレーションについて定義する。</p>
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/crawlable">http://opds-spec.org/crawlable</a>&#8220;</li>
+</ul>
+
+
+<p>このフィードについてのさらなる詳細については「<a href="#Complete_Acquisition_Feeds">完全な取得フィード（Complete Acquisition Feeds）</a>」を参照すること。</p>
+
+</div>
+
+
+<div id="Search">
+<h4>7.5. 検索 <span class="original_title" lang="en">Search</span></h4>
+<blockquote lang="en">
+<p>An OPDS Catalog MAY provide a search facility through an <tt><a href="#References">[OpenSearch]</a></tt> description document. Links to <tt><a href="#References">[OpenSearch]</a></tt> description documents MUST use the &#8220;search&#8221; relation value and the &#8220;application/opensearchdescription+xml&#8221; media type as defined in the &#8220;Autodiscovery&#8221; section of the <tt><a href="#References">[OpenSearch]</a></tt> specification.</p>
+
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）は<tt><a href="#References">[OpenSearch]</a></tt>記述文書（description document）を通して検索機能を提供してもよい<span class="RFC2119">（MAY）</span>。<tt><a href="#References">[OpenSearch]</a></tt>記述文書（description document）へのリンクには<tt><a href="#References">[OpenSearch]</a></tt>の仕様書の &#8220;Autodiscovery&#8221;セクションに定義されている通り、rel属性に&#8220;search&#8221;という値を使用し、メディアタイプは&#8220;application/opensearchdescription+xml&#8221;を使用しなければならない<span class="RFC2119">（MUST）</span>。</p>
+
+
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"search"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"search.xml"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/opensearchdescription+xml"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span></pre>
+
+<blockquote lang="en">
+<p>In an <tt><a href="#References">[OpenSearch]</a></tt> description document, the search interface SHOULD use the media type associated to OPDS Catalogs:</p>
+</blockquote>
+<p><tt><a href="#References">[OpenSearch]</a></tt>記述文書（description document）では、検索インターフェイスに次のようにOPDSカタログ（OPDS Catalog）に関連したtype属性（media type）を使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;Url</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span></span>
+<span style="color: rgb(0, 153, 0);">     <span style="color: rgb(0, 0, 102);">template</span>=<span style="color: rgb(255, 0, 0);">"http://example.com/search?q={searchTerms}"</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span></pre>
+
+<blockquote lang="en">
+<p>OPDS Catalog Feed Documents MAY include elements from the <tt><a href="#References">[OpenSearch]</a></tt> namespace such as &#8220;opensearch:totalResults&#8221; or &#8220;opensearch:itemsPerPage&#8221; in <tt><a href="#References">[OpenSearch]</a></tt> responses.</p>
+</blockquote>
+
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）は<tt><a href="#References">[OpenSearch]</a></tt>のレスポンスで&#8220;opensearch:totalResults&#8221;や&#8220;opensearch:itemsPerPage&#8221;のような<tt><a href="#References">[OpenSearch]</a></tt>の名前空間由来の要素を含めてよい<span class="RFC2119">（MAY）</span>。</p>
+
+</p></div>
+<div id="Feed_Examples">
+<h4>7.6. フィードの例 <span class="original_title" lang="en">Feed Examples</span></h4>
+
+<blockquote lang="en">
+<p>An OPDS Catalog Root that is the top of a set of Navigation Feeds references three Acquisition Feeds using atom:links:</p>
+</blockquote>
+
+<p>以下はatom:linksを使用する3つの取得フィード（Acquisition Feed）を参照する一連のナビゲーションフィード（Navigation Feed）のトップであるOPDSカタログルート（OPDS Catalog Root）である。</p>
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?xml</span> <span style="color: rgb(0, 0, 102);">version</span>=<span style="color: rgb(255, 0, 0);">"1.0"</span> <span style="color: rgb(0, 0, 102);">encoding</span>=<span style="color: rgb(255, 0, 0);">"UTF-8"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span></span>
+<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;feed</span> <span style="color: rgb(0, 0, 102);">xmlns</span>=<span style="color: rgb(255, 0, 0);">"http://www.w3.org/2005/Atom"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:2853dacf-ed79-42f5-8e8a-a7bb3d1ae6a2<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"self"</span>  </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/root.xml"</span> </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"start"</span> </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/root.xml"</span> </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>OPDS Catalog Root Example<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:03:10Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Spec Writer<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Popular Publications<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/sort/popular"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/popular.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:01:01Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:d49e8018-a0e0-499e-9423-7c175fa0c56e<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;content</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"text"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>Popular publications from this catalog based 
+      on downloads.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/content<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>New Publications<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/sort/new"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/new.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:02:00Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:d49e8018-a0e0-499e-9423-7c175fa0c56c<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;content</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"text"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>Recent publications from this catalog.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/content<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Unpopular Publications<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"subsection"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/unpopular.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:01:00Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:d49e8018-a0e0-499e-9423-7c175fa0c56d<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;content</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"text"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>Publications that could use some love.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/content<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/feed<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span></pre>
+
+
+<blockquote lang="en">
+<p>An Acquisition Feed listing OPDS Catalog Entries from the &#8220;Unpopular Publications&#8221; Entry in the Navigation Feed above:</p>
+</blockquote>
+
+<p>以下は上のナビゲーションフィード（Navigation Feed）の&#8220;Unpopular Publications&#8221;エントリからOPDSカタログエントリ（OPDS Catalog Entry）を一覧にしている取得フィード（Acquisition Feed）である。</p>
+
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?xml</span> <span style="color: rgb(0, 0, 102);">version</span>=<span style="color: rgb(255, 0, 0);">"1.0"</span> <span style="color: rgb(0, 0, 102);">encoding</span>=<span style="color: rgb(255, 0, 0);">"UTF-8"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span></span>
+<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;feed</span> <span style="color: rgb(0, 0, 102);">xmlns</span>=<span style="color: rgb(255, 0, 0);">"http://www.w3.org/2005/Atom"</span></span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">xmlns:dc</span>=<span style="color: rgb(255, 0, 0);">"http://purl.org/dc/terms/"</span></span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">xmlns:opds</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/2010/catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:433a5d6a-0b8c-4933-af65-4ca4f02763eb<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"related"</span> </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/vampire.farming.xml"</span> </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"self"</span>    </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/unpopular.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"start"</span>   </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/root.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"up"</span>      </span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/root.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">        <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Unpopular Publications<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:01:11Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Spec Writer<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Bob, Son of Bob<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:6409a00b-7bf2-405e-826c-3fdff0fd0734<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:01:11Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Bob the Recursive<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org/authors/1285<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>en<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>1917<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;category</span> <span style="color: rgb(0, 0, 102);">scheme</span>=<span style="color: rgb(255, 0, 0);">"http://www.bisg.org/standards/bisac_subject/index.html"</span></span>
+<span style="color: rgb(0, 153, 0);">              <span style="color: rgb(0, 0, 102);">term</span>=<span style="color: rgb(255, 0, 0);">"FIC020000"</span></span>
+<span style="color: rgb(0, 153, 0);">              <span style="color: rgb(0, 0, 102);">label</span>=<span style="color: rgb(255, 0, 0);">"FICTION / Men's Adventure"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;summary<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>The story of the son of the Bob and the gallant part 
+      he played in the lives of a man and a woman.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/summary<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/image"</span>     </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/covers/4561.lrg.png"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"image/png"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span> 
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/image/thumbnail"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/covers/4561.thmb.gif"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"image/gif"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"alternate"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/entries/4571.complete.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;type=entry;profile=opds-catalog"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">title</span>=<span style="color: rgb(255, 0, 0);">"Complete Catalog Entry for Bob, Son of Bob"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/free/4561.epub"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/epub+zip"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/free/4561.mobi"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/x-mobipocket-ebook"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+
+ <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+ <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Modern Online Philately<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:7b595b0c-e15c-4755-bf9a-b7019f5c1dab<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Stampy McGee<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org/authors/21285<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Alice McGee<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org/authors/21284<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Harold McGee<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org/authors/21283<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:01:10Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;rights<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Copyright (c) 2009, Stampy McGee<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/rights<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:identifier<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:isbn:978029536341X<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:identifier<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:publisher<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>StampMeOnline, Inc.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:publisher<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>en<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2009-10-01<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;content</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"text"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>The definitive reference for the web-curious
+      philatelist.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/content<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/image"</span>     </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/covers/11241.lrg.jpg"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"image/jpeg"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span> 
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition/buy"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/buy/11241.epub"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/epub+zip"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;opds:price</span> <span style="color: rgb(0, 0, 102);">currencycode</span>=<span style="color: rgb(255, 0, 0);">"USD"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>18.99<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/opds:price<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;opds:price</span> <span style="color: rgb(0, 0, 102);">currencycode</span>=<span style="color: rgb(255, 0, 0);">"GBP"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>11.99<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/opds:price<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/link<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+ <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/feed<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span></pre>
+
+</div>
+
+<div id="Element_Definitions7_7">
+<h4>7.7. 要素定義 <span class="original_title" lang="en">Element Definitions</span></h4>
+<div id="The_atom_feed_Element">
+<h5>7.7.1. &#8220;atom:feed&#8221;要素 <span class="original_title" lang="en">The &#8220;atom:feed&#8221;  Element</span></h5>
+
+<blockquote lang="en">
+<p>The &#8220;atom:feed&#8221; element is the document (i.e., top-level) element of an OPDS Catalog Feed Document, acting as a container for metadata, hierarchy, and Publications associated with the OPDS Catalog. Its element children consist of metadata elements followed by zero or more atom:entry child elements.</p>
+
+<p>The following child elements are refined by this specification:</p>
+<ul>
+<li>OPDS Catalog Feed Documents SHOULD contain one atom:link element with a &#8220;rel&#8221; attribute value of &#8220;self&#8221;. This is the preferred URI for retrieving the atom:feed representing this OPDS Catalog Feed Document.</li>
+</ul>
+</blockquote>
+
+<p>&#8220;atom:feed&#8221;要素はOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）のdocument(すなわち、最上位の)要素であり、メタデータ、階層、OPDSカタログ（OPDS Catalog）と関連した出版物（Publication）のコンテナとしての役割を果たす。その要素の子はメタデータ要素とそれに続くゼロ個以上のatom:entry子要素で構成される。</p>
+<p>本仕様は以下の子要素を定義する。</p>
+
+<ul>
+<li>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）は &#8220;rel&#8221;属性の値に&#8220;self&#8221;を入れた1つのatom:link要素を格納するべきである<span class="RFC2119">（SHOULD）</span>。これはこのOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）を表現するatom:feedを検索することに好適なURIである。</li>
+</ul>
+</div>
+</p></div>
+
+</p></div>
+
+
+
+<div id="OPDS_Catalog_Entry_Documents">
+<h3>8. OPDSカタログエントリドキュメント <span class="original_title" lang="en">OPDS Catalog Entry Documents</span></h3>
+
+<blockquote lang="en">
+<p>OPDS Catalog Entry Documents are Atom <tt><a href="#References">[RFC4287]</a></tt> Entry documents that provide a complete representation of the metadata and data associated with an available Publication.</p>
+<p>Each OPDS Catalog Entry Document MUST include at least one Acquisition Link, which is an atom:link element with a relation that begins &#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;. This link refers to the Resource which is the content of the Resource described by the OPDS Catalog Entry in a particular media type. Acquisition Links use one of the relations described in the Section Acquisition Relations.</p>
+</blockquote>
+
+<p>OPDSカタログエントリドキュメントOPDS Catalog Entry Document）はメタデータと利用可能な出版物（Publication）との関連のあるデータを完全な表現を提供するAtom <tt><a href="#References">[RFC4287]</a></tt>エントリドキュメントである。</p>
+
+<p>それぞれのOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）は少なくとも1つの取得リンク（Acquisition Link）を含まなくてはならない<span class="RFC2119">（MUST）</span>。その取得リンク（Acquisition Link）は&#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;で始まるリレーションを持つatom:link要素である。このリンクはOPDSカタログエントリ（OPDS Catalog Entry）によって記述されたリソース（Resource）の特定のメディアタイプのコンテンツであるリソース（Resource）を参照する。取得リンク（Acquisition Link）は「<a href="#Acquisition_Relations">取得リレーション（Acquisition Relations）</a>」セクションで記述されるリレーションの1つを使用する。</p>
+
+<div id="Relationship_Between_Atom_and_Dublin_Core_Metadata">
+<h4>8.1. AtomとDublin Core Metadataとの関係 <span class="original_title" lang="en">Relationship Between Atom and Dublin Core Metadata</span></h4>
+
+<blockquote lang="en">
+<p>OPDS Catalog providers are encouraged to include metadata from the Dublin Core Metadata Initiative (DCMI) Metadata Terms <tt><a href="#References">[DCTERMS]</a></tt> whenever appropriate. However, these elements are not required. Some of the elements defined in <tt><a href="#References">[DCTERMS]</a></tt> overlap in meaning with similar elements defined by Atom in <tt><a href="#References">[RFC4287]</a></tt>. In general, OPDS Catalog Entries prefer the Atom elements over the <tt><a href="#References">[DCTERMS]</a></tt> elements and the following rules should be used by OPDS Catalog providers when choosing elements:</p>
+
+<ul>
+<li>OPDS Catalog Entries MUST be identified by an &#8220;atom:id&#8221;. One or more &#8220;dc:identifier&#8221; elements SHOULD be used to identify the represented Publication, if appropriate metadata is available, and MUST NOT identify the OPDS Catalog Entry.</li>
+<li>OPDS Catalog Entries MUST include an &#8220;atom:updated&#8221; element indicating when the OPDS Catalog Entry was last updated. A &#8220;dc:issued&#8221; element SHOULD be used to indicate the first publication date of the Publication and MUST NOT represent any date related to the OPDS Catalog Entry.</li>
+
+<li>OPDS Catalog Entries MUST include an &#8220;atom:title&#8221; representing the Publication&#8217;s title and MUST NOT use &#8220;dc:title&#8221;.</li>
+
+<li>OPDS Catalog Entries SHOULD use &#8220;atom:author&#8221; to represent the Publication&#8217;s creators and SHOULD NOT use &#8220;dc:creator&#8221;.</li>
+
+<li>OPDS Catalog Entries SHOULD use &#8220;atom:category&#8221; to represent the Publication&#8217;s category, keywords, key phrases, or classification codes and SHOULD NOT use &#8220;dc:subject&#8221;.</li>
+<li>OPDS Catalog Entries SHOULD use &#8220;atom:rights&#8221; to represent rights held in and over the Publication and SHOULD NOT use &#8220;dc:rights&#8221;.</li>
+
+<li>OPDS Catalog Entries SHOULD use &#8220;atom:summary&#8221; and/or &#8220;atom:content&#8221; to describe the Publication SHOULD NOT use &#8220;dc:description&#8221; or &#8220;dc:abstract&#8221;.</li>
+
+<li>OPDS Catalog Entries MAY use &#8220;atom:contributor&#8221; to represent contributors to the Publication beside its creators.</li>
+
+<li>OPDS Catalog Entries MAY use &#8220;atom:published&#8221; to indicate when the OPDS Catalog Entry was first accessible.</li>
+</ul>
+<p>All metadata elements required by Atom are required in OPDS Catalog Entries and Feeds.</p>
+<p>Following Atom <tt><a href="#References">[RFC4287]</a></tt> Section 4.2.6, the content of an &#8220;atom:id&#8221; identifying an OPDS Catalog Entry MUST NOT change when the OPDS Catalog Entry is &#8220;relocated, migrated, syndicated, republished, exported, or imported&#8221; and &#8220;MUST be created in a way that assures uniqueness.&#8221;</p>
+
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）プロバイダは適切な時にいつでもDublin Core Metadata Initiative (DCMI) Metadata Terms <tt><a href="#References">[DCTERMS]</a></tt>で規定されるメタデータを含めることが奨励される。しかし、これらの要素は必須ではない。<tt><a href="#References">[DCTERMS]</a></tt>で定義されるいくつかの要素は<tt><a href="#References">[RFC4287]</a></tt>のAtomによって定義される似た要素と意味において重複する部分がある。一般的にOPDSカタログエントリ（OPDS Catalog Entry）では<tt><a href="#References">[DCTERMS]</a></tt>の要素よりAtom要素のほうを使用するほうがよい。以下は要素を選択する際にOPDSカタログ（OPDS Catalog）プロバイダによって使用されるべき規則である。</p>
+
+<ul>
+<li>OPDSカタログエントリ（OPDS Catalog Entry）は&#8220;atom:id&#8221;によって識別されなければならない<span class="RFC2119">（MUST）</span>。1つ以上の&#8220;dc:identifier&#8221;要素は、適切なメタデータが利用できる場合に（そのメタデータによって）表現される出版物（Publication）を識別するために使用されるべきであり<span class="RFC2119">（SHOULD）</span>、OPDSカタログエントリ（OPDS Catalog Entry）を識別してはならない<span class="RFC2119">（MUST NOT）</span>。</li>
+
+
+
+<li>OPDSカタログエントリ（OPDS Catalog Entry）は最後にいつ更新したかを示す&#8220;atom:updated&#8221;要素を含まなければならない<span class="RFC2119">（MUST）</span>。&#8220;dc:issued&#8221;要素はその出版物（Publication）の最初の出版日を示すために使用されるべきであり<span class="RFC2119">（SHOULD）</span>、OPDSカタログエントリ（OPDS Catalog Entry）に関連する日付を表現してはならない<span class="RFC2119">（MUST NOT）</span>。</li>
+<li>OPDSカタログエントリ（OPDS Catalog Entry）はその出版物（Publication）のタイトルを表現する&#8220;atom:title&#8221;を含めなければならない<span class="RFC2119">（MUST）</span>。&#8220;dc:title&#8221;は使用してはならない<span class="RFC2119">（MUST NOT）</span>。</li>
+
+<li>OPDSカタログエントリ（OPDS Catalog Entry）はその出版物（Publication）の作成者（creator）を表現するために&#8220;atom:author&#8221;を使うべきである<span class="RFC2119">（SHOULD）</span>。&#8220;dc:creator&#8221;を使用するべきではない<span class="RFC2119">（SHOULD NOT）</span>。</li>
+<li>OPDSカタログエントリ（OPDS Catalog Entry）はその出版物（Publication）のカテゴリ、キーワード、キーフレーズ、または分類コードを表現するために&#8220;atom:category&#8221;を使うべきである<span class="RFC2119">（SHOULD）</span>。&#8220;dc:subject&#8221;を使用するべきではない<span class="RFC2119">（SHOULD NOT）</span>。</li>
+
+<li>OPDSカタログエントリ（OPDS Catalog Entry）はその出版物（Publication）の権利に関係する情報を表現するために&#8220;atom:rights&#8221;を使用するべきである<span class="RFC2119">（SHOULD）</span>。&#8220;dc:rights&#8221;を使用するべきではない<span class="RFC2119">（SHOULD NOT）</span>。</li>
+
+<li>OPDSカタログエントリ（OPDS Catalog Entry）はその出版物（Publication）を説明するために&#8220;atom:summary&#8221; 及び/または&#8220;atom:content&#8221;を使用するべきである<span class="RFC2119">（SHOULD）</span>。&#8220;dc:description&#8221;や&#8220;dc:abstract&#8221;を使用するべきではない<span class="RFC2119">（SHOULD NOT）</span>。</li>
+
+<li>OPDSカタログエントリ（OPDS Catalog Entry）は作成者（creator）に加え、その出版物（Publication）の寄与者（contributor）を表現するために&#8220;atom:contributor&#8221;を使用してもよい<span class="RFC2119">（MAY）</span>。</li>
+
+<li>OPDSカタログエントリ（OPDS Catalog Entry）はOPDSカタログエントリ（OPDS Catalog Entry）が最初にいつ利用できるようになったのかを示すために&#8220;atom:published&#8221;を使用してもよい<span class="RFC2119">（MAY）</span>。</li>
+</ul>
+
+<p>Atomで必須とされる全てのメタデータ要素はOPDSカタログエントリ（OPDS Catalog Entry）やOPDSカタログフィード（OPDS Catalog Feed）においても必須である。</p>
+
+<p>Atom <tt><a href="#References">[RFC4287]</a></tt>のセクション4.2.6に従い、OPDSカタログエントリ（OPDS Catalog Entry）が「再配置（relocated）、移動（migrated）、配信（syndicated）、再発行（republished）、エクスポート（exported）、インポート(imported)」された場合でも、OPDSカタログエントリ（OPDS Catalog Entry）を識別する&#8220;atom:id&#8221;の内容は変わってはならない<span class="RFC2119">（MUST NOT）</span>。
+
+そして、「一意であることが保証される方法によって生成されなければならない（MUST be created in a way that assures uniqueness）<span class="RFC2119">（MUST）</span>」。</p></p></div>
+
+
+
+
+<div id="Partial_and_Complete_Catalog_Entries">
+<h4>8.2. 部分的なカタログエントリと完全なカタログエントリ <span class="original_title" lang="en">Partial and Complete Catalog Entries</span></h4>
+
+<blockquote lang="en">
+<p>An OPDS Catalog Entry may be represented as either a Partial or Complete Catalog Entry. Partial Catalog Entries include only critical metadata elements to reduce the size of OPDS Catalog documents for bandwidth- and resource-limited clients and link to their alternate representation as a Complete Catalog Entries, which include all metadata elements.</p>
+<p>A Partial Catalog Entry MUST include an &#8220;alternate&#8221; link relation referencing the Complete Catalog Entry Resource and that atom:link MUST use the &#8220;type&#8221; attribute &#8220;application/atom+xml;type=entry;profile=opds-catalog&#8221;.</p>
+<p>Any OPDS Catalog Entry without a link to a Complete Catalog Entry MUST include all metadata elements.</p>
+
+<p>Partial Catalog Entries SHOULD include the following metadata elements, if available:</p>
+<ul>
+<li>atom:category</li>
+<li>atom:contributor</li>
+<li>atom:rights</li>
+<li>opds:price</li>
+</ul>
+<p>OPDS Catalog providers are strongly encouraged to limit metadata elements not required by Atom, OPDS, or listed above from Partial Catalog Entries to help facilitate the efficient transmission and consumption of OPDS Catalog documents. Implementers are encouraged to include metadata elements from other vocabularies in Complete Catalog Entries.</p>
+</blockquote>
+
+<p>1つのOPDSカタログエントリ（OPDS Catalog Entry）は部分的なカタログエントリ（Partial Catalog Entry）または完全なカタログエントリ（Complete Catalog Entry）として表現されるかもしれない。部分的なカタログエントリ（Partial Catalog Entry）は帯域幅やリソースが制限されたクライアント向けにOPDSカタログ（OPDS Catalog）ドキュメントのサイズを抑えるために必要不可欠なメタデータ要素のみを含む。そして、部分的なカタログエントリ（Partial Catalog Entry）は全てのメタデータ要素を含む完全なカタログエントリ（Complete Catalog Entry）を代替する表現にリンクしている。</p>
+
+<p>部分的なカタログエントリ（Partial Catalog Entry）には完全なカタログエントリリソース（Complete Catalog Entry Resource）を参照する&#8220;alternate&#8221;リンクリレーションが含まれていなければならない<span class="RFC2119">（MUST）</span>。そして、そのatom:linkには&#8220;type&#8221; 属性として&#8220;application/atom+xml;type=entry;profile=opds-catalog&#8221;を使用しなければならない<span class="RFC2119">（MUST）</span>。</p>
+
+
+<p>完全なカタログエントリ（Complete Catalog Entry）へのリンクを持たないOPDSカタログエントリ（OPDS Catalog Entry）には全てのメタデータ要素が含まれていなければならない<span class="RFC2119">（MUST）</span>。</p>
+
+<p>部分的なカタログエントリ（Partial Catalog Entry）には可能であれば、以下のメタデータ要素が含まれているべきである<span class="RFC2119">（SHOULD）</span>。</p>
+<ul>
+<li>atom:category</li>
+<li>atom:contributor</li>
+<li>atom:rights</li>
+<li>opds:price</li>
+</ul>
+<p>OPDSカタログ（OPDS Catalog）プロバイダはOPDSカタログ（OPDS Catalog）ドキュメントの効率的な伝送（transmission）や利用（consumption）を容易にするためにAtom、OPDSまたは部分的なカタログエントリ（Partial Catalog Entry）で上で一覧にされたものによって必須とされないメタデータ要素を制限することが強く推奨される。OPDSカタログ（OPDS Catalog）実装者は完全なカタログエントリー(Complete Catalog Entry)にあるその他の語彙に由来するメタデータ要素を含めることが推奨される。</p>
+
+</p></div>
+
+
+<div id="Summary_and_Content">
+<h4>8.3.要約とコンテンツ <span class="original_title" lang="en">Summary and Content</span></h4>
+
+<blockquote lang="en">
+<p>OPDS Catalog Entries use &#8220;atom:content&#8221; and &#8220;atom:summary&#8221; elements to describe a Publication. This is a distinction from Atom <tt><a href="#References">[RFC4287]</a></tt>, which uses &#8220;atom:content&#8221; for the &#8220;content of the entry.&#8221; Instead, OPDS Catalog Entries reference an electronic document with the Publication&#8217;s content using Acquisition Links.  OPDS Catalog Entries SHOULD include either &#8220;atom:summary&#8221; or &#8220;atom:content&#8221; elements or both to provide a description, summary, abstract, or excerpt of the Publication.</p>
+
+<p>An &#8220;atom:summary&#8221; element in an OPDS Catalog Entry MUST use a &#8220;type&#8221; attribute of &#8220;text&#8221; and the content MUST NOT contain child elements. The content of an &#8220;atom:summary&#8221; element SHOULD NOT duplicate the content of &#8220;atom:title&#8221; or &#8220;atom:content&#8221;. Such text is intended to be presented to humans in a readable fashion. The restriction of the content of &#8220;atom:summary&#8221; and the &#8220;type&#8221; attribute is a restriction of Atom <tt><a href="#References">[RFC4287]</a></tt>.</p>
+
+<p>An &#8220;atom:content&#8221; element in an OPDS Catalog Entry either contains or links to a description, summary, abstract, or excerpt of the Publication. The behavior or &#8220;atomOutOfLineContent&#8221; and the &#8220;src&#8221; attribute is defined in Section 4.1.3 of <tt><a href="#References">[RFC4287]</a></tt>.</p>
+<p>If an OPDS Catalog Entry includes both &#8220;atom:content&#8221; and &#8220;atom:summary&#8221;, the &#8220;atom:content&#8221; SHOULD NOT be included in the Partial Catalog Entry. Both elements SHOULD be included in the Complete Catalog Entry.</p>
+
+</blockquote>
+<p>OPDSカタログエントリ（OPDS Catalog Entry）は出版物（Publication）を説明するために&#8220;atom:content&#8221;要素と&#8220;atom:summary&#8221;要素を使用する。Atom <tt><a href="#References">[RFC4287]</a></tt>によって&#8220;atom:content&#8221;は「エントリのコンテンツ（content of the entry）」のために使用されるよう区別がされている。OPDSカタログエントリ（OPDS Catalog Entry）では代わりに取得リンク（Acquisition Link）を使用し、出版物(Publication)のコンテンツを持つ電子的ドキュメントを参照する。OPDSカタログエントリ（OPDS Catalog Entry）には出版物の説明（description）、要約（summary）、摘要（abstract）、または抜粋（excerpt）を提供するために&#8220;atom:summary&#8221;要素または&#8220;atom:content&#8221;要素のどちらか、またはその両方が含まれているべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<p>OPDSカタログエントリ（OPDS Catalog Entry）にある&#8220;atom:summary&#8221;要素は&#8220;text&#8221; の値を持つ&#8220;type&#8221;属性を使用しなければならない<span class="RFC2119">（MUST）</span>。その内容には子要素が含まれてはならない<span class="RFC2119">（MUST NOT）</span>。&#8220;atom:summary&#8221; 要素の内容は&#8220;atom:title&#8221;または&#8220;atom:content&#8221;の内容を複製するべきではない<span class="RFC2119">（SHOULD NOT）</span>。そのようなテキストは人間が読むことが可能な方法で提供されることが意図されている。&#8220;atom:summary&#8221;の内容と&#8220;type&#8221;属性に対する制限はAtom <tt><a href="#References">[RFC4287]</a></tt>の制限によるものである。</p>
+
+<p>OPDSカタログエントリ（OPDS Catalog Entry）にある&#8220;atom:content&#8221;要素は出版物（Publication）の説明（description）、要約（summary）、摘要（abstract）、または抜粋（excerpt）を含む、またはそれらへのリンクが貼られている。
+その振る舞い(behavior)、または&#8220;atomOutOfLineContent&#8221;と&#8220;src&#8221;属性は<tt><a href="#References">[RFC4287]</a></tt>のセクション4.1.3に定義されている。</p>
+
+<p>OPDSカタログエントリ（OPDS Catalog Entry）に&#8220;atom:content&#8221;と&#8220;atom:summary&#8221;の両要素がいっしょに含まれる場合には、&#8220;atom:content&#8221;は部分的なカタログエントリ（Partial Catalog Entry）に含まれるべきではない<span class="RFC2119">（SHOULD NOT）</span>。両要素は完全なカタログエントリ（Complete Catalog Entry）に含まれるべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<pre>atomSummary =
+  element atom:summary {
+    atomCommonAttributes,
+    attribute type { "text" }?,
+    text
+}</pre>
+</div>
+
+<div id="Entry_Relations">
+<h4>8.4. エントリリレーション <span class="original_title" lang="en">Entry Relations</span></h4>
+
+<blockquote lang="en">
+<p>OPDS Catalog Entry Documents SHOULD include links to related Resources. This specification defines new relations for linking from OPDS Catalog Entry Documents. They are defined in the Sections Acquisition Relations and Artwork Relations.</p>
+<p>OPDS Catalog providers are encouraged to use relations from <tt><a href="#References">[DRAFT-Web-Linking]</a></tt> inside OPDS Catalog Entry Documents where appropriate.</p>
+
+</blockquote>
+
+<p>OPDSカタログエントリドキュメント（OPDS Catalog Entry Document）には関連するリソース（Resource）へのリンクが含まれるべきである<span class="RFC2119">（SHOULD）</span>。本仕様はOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）からのリンクで使用する新しいatom:linkのリレーションを定義するものである。それらは「<a href="#Acquisition_Relations">取得リレーション（Acquisition Relations）</a>」セクションと 「<a href="#Artwork_Relations">アートワークリレーション（Artwork Relations）</a>」セクションで定義されている。</p>
+<p>OPDSカタログプロバイダは適切なOPDSカタログエントリードキュメントの中に<tt><a href="#References">[DRAFT-Web-Linking]</a></tt>からリレーションを使用することが推奨される。</p>
+
+
+<div id="Acquisition_Relations">
+
+<h5>8.4.1. 取得リレーション <span class="original_title" lang="en">Acquisition Relations</span></h5>
+
+<blockquote lang="en">
+<p>Acquisition relations describe the extent of the content referred to by an Acquisition Link or the manner in which that Resource may be acquired. This specification defines six Acquisition Relations, which all begin with &#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;:</p>
+
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;: A generic relation that indicates that the complete representation of the content Resource may be retrieved.</li>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/open-access">http://opds-spec.org/acquisition/open-access</a>&#8220;: Indicates that the complete representation of the Resource can be retrieved without any requirement, which includes payment and registration.</li>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/borrow">http://opds-spec.org/acquisition/borrow</a>&#8220;: Indicates that the complete representation of the content Resource may be retrieved as part of a lending transaction.</li>
+
+<li>&#8220;<a href="http://opds-spec.org/acquisition/buy">http://opds-spec.org/acquisition/buy</a>&#8220;: Indicates that the complete representation of the content Resource may be retrieved as part of a purchase.</li>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/sample">http://opds-spec.org/acquisition/sample</a>&#8220;: Indicates that a subset of the content Resource may be retrieved.</li>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/subscribe">http://opds-spec.org/acquisition/subscribe</a>&#8220;: Indicates that the complete representation of the content Resource may be retrieved as part of a subscription.</li>
+
+</ul>
+</blockquote>
+
+<p>取得リレーション（Acquisition Relations）は取得リンク（Acquisition Link）またはリソース（Resource）が取得されるかもしれない方法によって参照されるコンテンツの範囲を記述する。本仕様では以下の6つの取得リレーション（Acquisition Relation）を定義する。それらは全て&#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;で始まる。</p>
+
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;: コンテンツリソース（Resource）の完全な表現が検索されてもよいことを示す全体的なリレーション。</li>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/open-access">http://opds-spec.org/acquisition/open-access</a>&#8220;: リソース（Resource）の完全な表現が支払いや登録などのいかなる条件もなく検索することができることを示す。</li>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/borrow">http://opds-spec.org/acquisition/borrow</a>&#8220;: コンテンツリソース（Resource）の完全な表現が貸借取引の一部として検索されてもよいことを示す。</li>
+
+
+<li>&#8220;<a href="http://opds-spec.org/acquisition/buy">http://opds-spec.org/acquisition/buy</a>&#8220;: コンテンツリソース（Resource）の完全な表現が購入の一部として検索されてもよいことを示す。</li>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/sample">http://opds-spec.org/acquisition/sample</a>&#8220;: コンテンツリソース（Resource）の一部が検索されてもよいことを示す。</li>
+
+<li>&#8220;<a href="http://opds-spec.org/acquisition/subscribe">http://opds-spec.org/acquisition/subscribe</a>&#8220;: コンテンツリソース（Resource）の完全な表現が定期購読の一部として検索されてもよいことを示す。</li>
+
+</ul>
+
+
+</div>
+
+
+<div id="Artwork_Relations">
+<h5>8.4.2. アートワークリレーション <span class="original_title" lang="en">Artwork Relations</span></h5>
+<blockquote lang="en">
+<p>OPDS Catalog Entries MAY include atom:links to images that provide a visual representation of the Publication. For many Publications, these images will be the Publication&#8217;s artwork. This specification defines two Artwork Relations, which begin with &#8220;<a href="http://opds-spec.org/image">http://opds-spec.org/image</a>&#8220;:</p>
+
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/image">http://opds-spec.org/image</a>&#8220;: a graphical Resource associated to the OPDS Catalog Entry</li>
+<li>&#8220;<a href="http://opds-spec.org/image/thumbnail">http://opds-spec.org/image/thumbnail</a>&#8220;: a reduced-size version of a graphical Resource associated to the OPS Catalog Entry</li>
+</ul>
+
+<p>Image resources related by <a href="http://opds-spec.org/image/thumbnail">http://opds-spec.org/image/thumbnail</a> SHOULD be suitable for presentation at a small size.</p>
+<p>The atom:links with these relations SHOULD include at least one link with a type attribute of &#8220;image/gif&#8221;, &#8220;image/jpeg&#8221;, or &#8220;image/png&#8221; and the image Resources MUST be in GIF, JPEG, or PNG format.</p>
+
+<p>Additional atom:links MAY also include additional resources using a vector-based format.</p>
+<p>While either image Resource is optional and may be included independently, OPDS Catalog providers are encouraged to provide both these relations and Resources whenever possible.</p>
+
+<p>Some OPDS Catalog providers MAY choose to provide <a href="http://opds-spec.org/image/thumbnail">http://opds-spec.org/image/thumbnail</a> image Resources using the &#8220;data&#8221; URL scheme from <tt><a href="#References">[RFC2397]</a></tt>. OPDS Catalog clients SHOULD support the &#8220;data&#8221; URL scheme if they support Artwork relations.</p>
+
+</blockquote>
+
+<p>OPDSカタログエントリ（OPDS Catalog Entry）には出版物（Publication）の視覚表現を提供するイメージへのatom:linksを含めてもよい<span class="RFC2119">（MAY）</span>。多くの出版物（Publication）にとって、これらのイメージは出版物（Publication）のアートワークになるだろう。本仕様では以下の2つのアートワークリレーション（Artwork Relations）を定義する。それらは全て&#8220;<a href="http://opds-spec.org/image">http://opds-spec.org/image</a>&#8220;で始まる。</p>
+
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/image">http://opds-spec.org/image</a>&#8220;: OPDSカタログエントリ（OPDS Catalog Entry）に関連するグラフィカルリソース（Resource）。</li>
+<li>&#8220;<a href="http://opds-spec.org/image/thumbnail">http://opds-spec.org/image/thumbnail</a>&#8220;: OPDSカタログエントリ（OPDS Catalog Entry）に関連するグラフィカルリソース（Resource）のサイズを縮小したバージョン。</li>
+</ul>
+
+<p><a href="http://opds-spec.org/image/thumbnail">http://opds-spec.org/image/thumbnail</a>によって関連付けられているイメージリソースは小さなサイズによる表現に適しているべきである<span class="RFC2119">（SHOULD）</span>。</p>
+<p>これらのリレーションを持つatom:linksには&#8220;image/gif&#8221;、&#8220;image/jpeg&#8221;、または&#8220; image/png&#8221;のtype属性をもつリンクを少なくとも1つが含まれるべきである<span class="RFC2119">（SHOULD）</span>。そして、イメージリソース（Resource）はGIF形式、JPEG形式、またはPNG形式でなければならない<span class="RFC2119">（MUST）</span>。</p>
+
+<p>さらなるatom:linksとしてベクターベースの形式を使用するさらなるリソースを含めてもよい<span class="RFC2119">（MAY）</span>。</p>
+<p>イメージリソースは任意であり、単独で含められているかもしれない。OPDSカタログ（OPDS Catalog ）プロバイダには可能な時にこれらのリレーションとリソース（Resource）を提供することが推奨される。</p>
+
+<p>OPDSカタログ（OPDS Catalog）プロバイダは<tt><a href="#References">[RFC2397]</a></tt>の&#8220;data&#8221; URLスキームを使用した<a href="http://opds-spec.org/image/thumbnail">http://opds-spec.org/image/thumbnail</a>のイメージリソース（Resource）を提供することを選択してもよい<span class="RFC2119">（MAY）</span>。OPDSカタログ（OPDS Catalog）クライアントはもしアートワークリレーション（Artwork Relation）をサポートするのであれば、その&#8220;data&#8221; URLスキームをサポートするべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+</p></div>
+</p></div>
+
+
+<div id="Entry_Examples">
+<h4>8.5. エントリの例 <span class="original_title" lang="en">Entry Examples</span></h4>
+
+<blockquote lang="en">
+<p>An example of a Partial Catalog Entry (as would appear in an Acquisition Feed) for a Publication available in two formats:</p>
+</blockquote>
+
+
+<p>以下は2つのフォーマットで利用可能な1つの出版物（Publication）を表す（取得フィード&lt;Acquisition Feed&gt;に現れる時の）1つの部分的なカタログエントリ（Partial Catalog Entry）の例である。</p>
+
+<pre>  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Bob, Son of Bob<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:6409a00b-7bf2-405e-826c-3fdff0fd0734<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:01:11Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Bob the Recursive<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org/authors/1285<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>en<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>1917<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;category</span> <span style="color: rgb(0, 0, 102);">scheme</span>=<span style="color: rgb(255, 0, 0);">"http://www.bisg.org/standards/bisac_subject/index.html"</span></span>
+<span style="color: rgb(0, 153, 0);">              <span style="color: rgb(0, 0, 102);">term</span>=<span style="color: rgb(255, 0, 0);">"FIC020000"</span></span>
+<span style="color: rgb(0, 153, 0);">              <span style="color: rgb(0, 0, 102);">label</span>=<span style="color: rgb(255, 0, 0);">"FICTION / Men's Adventure"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;summary</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"text"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>The story of the son of the Bob and the gallant part 
+      he played in the lives of a man and a woman.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/summary<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/image"</span>     </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/covers/4561.lrg.png"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"image/png"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span> 
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/image/thumbnail"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/covers/4561.thmb.gif"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"image/gif"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"alternate"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/entries/4571.complete.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;type=entry;profile=opds-catalog"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">title</span>=<span style="color: rgb(255, 0, 0);">"Complete Catalog Entry for Bob, Son of Bob"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/free/4561.epub"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/epub+zip"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/free/4561.mobi"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/x-mobipocket-ebook"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+ <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span></pre>
+
+ 
+ <blockquote lang="en">
+<p>The Complete Catalog Entry for the same Publication:</p>
+</blockquote>
+<p>以下は同じ出版物（Publication）の完全なカタログエントリ（Complete Catalog Entry）である。</p>
+
+<pre>  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Bob, Son of Bob<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/title<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>urn:uuid:6409a00b-7bf2-405e-826c-3fdff0fd0734<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/id<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>2010-01-10T10:01:11Z<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/updated<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>Bob the Recursive<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/name<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>http://opds-spec.org/authors/1285<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/uri<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/author<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>en<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:language<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>1917<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/dc:issued<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;category</span> <span style="color: rgb(0, 0, 102);">scheme</span>=<span style="color: rgb(255, 0, 0);">"http://www.bisg.org/standards/bisac_subject/index.html"</span></span>
+<span style="color: rgb(0, 153, 0);">              <span style="color: rgb(0, 0, 102);">term</span>=<span style="color: rgb(255, 0, 0);">"FIC020000"</span></span>
+<span style="color: rgb(0, 153, 0);">              <span style="color: rgb(0, 0, 102);">label</span>=<span style="color: rgb(255, 0, 0);">"FICTION / Men's Adventure"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;summary</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"text"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>The story of the son of the Bob and the gallant part 
+      he played in the lives of a man and a woman.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/summary<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;content</span> <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"text"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>The story of the son of the Bob and the gallant part
+      he played in the lives of a man and a woman. Bob begins his humble life
+      under the wandering eye of his senile mother, but quickly learns how to
+      escape into the wilder world. Follow Bob as he uncovers his father's past
+      and uses those lessons to improve the lives of others.<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/content<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/image"</span>     </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/covers/4561.lrg.png"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"image/png"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span> 
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/image/thumbnail"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/covers/4561.thmb.gif"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"image/gif"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"self"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/entries/4571.complete.xml"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;type=entry;profile=opds-catalog"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+&nbsp;
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/free/4561.epub"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/epub+zip"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+    <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition"</span> </span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/free/4561.mobi"</span></span>
+<span style="color: rgb(0, 153, 0);">          <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/x-mobipocket-ebook"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+ <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/entry<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span></pre>
+
+</div>
+
+
+
+<div id="Element_Definitions8_6">
+<h4>8.6. 要素定義 <span class="original_title" lang="en">Element Definitions</span></h4>
+<div id="The_atom_entry_Element">
+<h5>8.6.1. &#8220;atom:entry&#8221;要素 <span class="original_title" lang="en">The &#8220;atom:entry&#8221; Element</span></h5>
+
+ <blockquote lang="en">
+
+<p>The &#8220;atom:entry&#8221; element is the document (i.e., top-level) element of an OPDS Catalog Entry Document, acting as a container for metadata and data associated with an available Publication.</p>
+
+<p>The following child elements are refined by this specification:</p>
+<ul>
+<li>OPDS Catalog Entry Documents MUST contain at least one Acquisition Link, an atom:link element with a rel attribute that begins with &#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;.</li>
+</ul>
+ </blockquote>
+
+<p> &#8220;atom:entry&#8221;要素はOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）のdocument(すなわち、最上位の)要素であり、メタデータや利用可能な出版物（Publication）と関連したデータを格納するコンテナの役割を果たす。</p>
+
+<p>本仕様は以下の子要素を定義する。</p>
+<ul>
+<li>OPDSカタログエントリドキュメント（OPDS Catalog Entry Document）は取得リンク（Acquisition Link）、つまり、&#8220;<a href="http://opds-spec.org/acquisition">http://opds-spec.org/acquisition</a>&#8220;で始まるrel属性の値を持つatom:link要素を少なくとも1つは格納していなければならない<span class="RFC2119">（MUST）</span>。</li>
+</ul>
+
+</div>
+
+<div id="The_atom_link_Element">
+<h5>8.6.2. &#8220;atom:link&#8221;要素 <span class="original_title" lang="en">The &#8220;atom:link&#8221; Element</span></h5>
+ <blockquote lang="en">
+<p>The &#8220;atom:link&#8221; element defines a reference from an Atom Entry or Atom Feed to a Resource.</p>
+ </blockquote>
+
+<p>&#8220;atom:link&#8221;要素はAtomエントリやAtomフィードからリソース（Resource）への参照を定義する。</p>
+<pre>atomLink =
+  element atom:link {
+    atomCommonAttributes &amp;
+    attribute href { atomUri } &amp;
+    attribute type { atomMediaType }? &amp;
+    attribute hreflang { atomLanguageTag }? &amp;
+    attribute title { text }? &amp;
+    attribute length { text }? &amp;
+
+  ((attribute rel { "http://opds-spec.org/acquisition/buy" }, opdsPrice+ )
+    |
+    (attribute rel { OPDSUrisExceptBuy }, opdsPrice*)
+    |
+    (attribute rel { atomNCName | ( atomUriExceptOPDS ) } ))? &amp;
+    anyOPDSForeignElement* &amp;
+    text
+  }
+
+  # Here is where OPDS Catalogs use John Cowan's pragmatic evaluation of an
+  # IRI. This modifies xsd:anyURI in XSD 1.0 to exclude ASCII characters not
+  # valid in 1.1 or IRI's without being escaped. This matches the OPDS and Atom
+  # specs, but not the non-normative atom.rnc.
+  atomUri = xsd:anyURI - xsd:string {pattern = '.*[ &lt;&gt;{}|^`"\\\n\r\t].*'}</pre>
+  
+<blockquote lang="en">
+
+<p>The following child elements are defined by this specification:</p>
+<ul>
+<li>atom:link elements with a rel attribute value of &#8220;<a href="http://opds-spec.org/acquisition/buy">http://opds-spec.org/acquisition/buy</a>&#8221; MUST contain at least one opds:price element.</li>
+
+<li>atom:link elements with a rel attribute of &#8220;<a href="http://opds-spec.org/acquisition/borrow">http://opds-spec.org/acquisition/borrow</a>&#8220;, &#8220;<a href="http://opds-spec.org/acquisition/subscribe">http://opds-spec.org/acquisition/subscribe</a>&#8220;, or &#8220;<a href="http://opds-spec.org/acquisition/sample">http://opds-spec.org/acquisition/sample</a>&#8221; MAY contain one or more opds:price elements.</li>
+
+</ul>
+</blockquote>
+ 
+<p>本仕様では以下の子要素を定義する。</p>
+<ul>
+<li>&#8220;<a href="http://opds-spec.org/acquisition/buy">http://opds-spec.org/acquisition/buy</a>&#8221; の値のrel属性を持つatom:link要素は少なくとも1
+つのopds:price要素を格納していなければならない<span class="RFC2119">（MUST）</span>。</li>
+
+<li>&#8220;<a href="http://opds-spec.org/acquisition/borrow">http://opds-spec.org/acquisition/borrow</a>&#8220;、 &#8220;<a href="http://opds-spec.org/acquisition/subscribe">http://opds-spec.org/acquisition/subscribe</a>&#8220;または&#8220;<a href="http://opds-spec.org/acquisition/sample">http://opds-spec.org/acquisition/sample</a>&#8221;の値のrel属性を持つatom:link要素は１つ以上のopds:price要素を格納してよい<span class="RFC2119">（MAY）</span>。</li>
+
+</ul>
+</div>
+
+<div id="The_opds_price_Element">
+<h5>8.6.3. &#8220;opds:price&#8221;要素 <span class="original_title" lang="en">The &#8220;opds:price&#8221; Element</span></h5>
+ <blockquote lang="en">
+<p>The &#8220;opds:price&#8221; element represents the acquisition price in a particular currency of an individual Publication in a particular format from a particular provider. This element can appear as a child of the atom:link element (in OPDS Catalog Entry Documents).</p>
+
+<p>The content of opds:price is text describing a currency value. A currency sign MUST NOT be included.</p>
+</blockquote>
+
+<p>&#8220;opds:price&#8221;要素は特定のプロバイダから特定のフォーマットによって提供される個別の出版物（Publication）の特定の通貨による取得価格を表現するものである。この要素はOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）のatom:link要素の子要素として表示させることができる。</p>
+
+<p>opds:priceの内容は通貨価値を記述するテキストである。通貨記号を含んではならない<span class="RFC2119">（MUST NOT）</span>。</p>
+
+<pre>opdsPrice =
+  element opds:price {
+    atomCommonAttributes,
+    attribute currencycode { opdsPriceCurrencyCode },
+    xsd:decimal { minInclusive="0.0" }
+  }</pre>
+  
+<div id="The_currencycode_Attribute">
+
+<h6>8.6.3.1. &#8220;currencycode&#8221;属性 <span class="original_title" lang="en">The &#8220;currencycode&#8221; Attribute</span></h6>
+
+<blockquote lang="en">
+<p>On the opds:price element, the value of the &#8220;currencycode&#8221; attribute MUST be an active code from <tt><a href="#References">[ISO4217]</a></tt> representing a currency. It defines the currency used for the content of the opds:price element.</p>
+
+</blockquote>
+
+<p>opds:price要素にある&#8220;currencycode&#8221;属性の値は通貨を表現する<tt><a href="#References">[ISO4217]</a></tt>の現行のコード（active code）でなければならない<span class="RFC2119">（MUST）</span>。この属性はopds:price要素の内容で表示される通貨を定義する。</p>
+
+</p></div>
+</p></div>
+</p></div>
+</p></div>
+
+<div id="Acquiring_Publications">
+
+<h3>9. 出版物の取得 <span class="original_title" lang="en">Acquiring Publications</span></h3>
+
+<blockquote lang="en">
+<p>The goal of OPDS Catalogs is to make Publications both discoverable and straightforward to acquire on a range of devices and platforms. To support that goal, this specification strives to provide a framework for describing how a Publication may be acquired while not attempting to constrain this very complex topic.  Commonly-used acquisition scenarios may be specified in an update to this specification.</p>
+<p>All Acquisition Links MUST include a &#8220;type&#8221; attribute that advises clients on the media type of the representation that is expected to be returned when the value of the href attribute is dereferenced. As with Atom, the value of the type attribute MUST conform to the syntax of a MIME media type <tt><a href="#References">[MIMEREG]</a></tt>.</p>
+<p>Publications in a format using Digital Rights Management SHOULD use a different value for the type attribute of the Acquisition Link than the same format without Digital Rights Management.</p>
+
+<p>OPDS Catalog clients may only support a subset of all possible Publication media types. These clients will need to filter both the type attribute of Acquisition Links.</p>
+
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）の目標は出版物（Publications）を発見できるようにし、デバイスやプラットフォームなどから直接取得できるようにすることである。その目標をサポートするために、本仕様は出版物（Publication）がどのように取得されるかについて、このまさに複雑なテーマを制約することは試みないが、記述するためにフレームワークの提供を目指している。一般的に使用される取得のシナリオは本仕様のアップデート版で定義されるかもしれない。</p>
+<p>全ての取得リンク（Acquisition Link）はhref属性の値が指す場所にアクセスする時に返ってくると期待される表現のメディアタイプをクライアントにアドバイスする&#8220;type&#8221;属性を含めなければならない<span class="RFC2119">（MUST）</span>。Atomと同様に&#8220;type&#8221;属性の値はMIMEメディアタイプ<tt><a href="#References">[MIMEREG]</a></tt>のシンタックスに従わなくてはならない<span class="RFC2119">（MUST）</span>。</p>
+
+<p>あるフォーマットでDigital Rights Managementを使用する場合、その出版物（Publications）の取得リンク（Acquisition Link）のtype属性の値には、Digital Rights Managementを使用しない同じフォーマットのものとは異なる値を使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<p>OPDSカタログ（OPDS Catalog）クライアントは出版物（Publication）に利用可能な全てのメディアタイプの一部のみをサポートするだけかもしれない。これらのクライアントは取得リンク（Acquisition Link）のtype属性でフィルターをかける必要あるだろう。</p>
+
+
+
+
+<div id="Acquisition_Examples">
+<h4>9.1. 取得の例 <span class="original_title" lang="en">Acquisition Examples</span></h4>
+<blockquote lang="en"><p>The simplest case is a Publication available in one format:</p></blockquote>
+<p>最もシンプルなケースは以下のような1つのフォーマットで利用可能な出版物（Publication）のケースである。</p>
+
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"video/mp4v-es"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/free/4561.mp4"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span></pre>
+
+<blockquote lang="en"><p>If the Publication was available in multiple formats as unique Resources, they would simply be listed:</p></blockquote>
+<p>ただ1つのリソースで複数のフォーマットが利用可能な出版物（Publication）の場合は、以下のようにシンプルに列記されるだろう。</p>
+
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition/borrow"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/borrow/4561.mobi"</span></span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/x-mobipocket-ebook"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span>
+<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition/borrow"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/content/borrow/4561.epub"</span></span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/epub+zip"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span></pre>
+
+
+<blockquote lang="en"><p>If the Publication requires payment, at least one opds:price element is required:</p></blockquote>
+<p>出版物（Publication）が支払いを要求するなら、以下のように少なくとも1つのopds:price要素が必須である。</p>
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"http://opds-spec.org/acquisition/buy"</span></span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/product/song1.mp3"</span></span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"audio/mpeg"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>
+  <span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;opds:price</span> <span style="color: rgb(0, 0, 102);">currencycode</span>=<span style="color: rgb(255, 0, 0);">"USD"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span>1.99<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/opds:price<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span> 
+<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;/link<span style="color: rgb(0, 0, 0); font-weight: bold;">&gt;</span></span></span></pre>
+
+</div>
+</div>
+
+
+
+<div id="Feed_Handling">
+<h3>10. フィードの処理 <span class="original_title" lang="en">Feed Handling</span></h3>
+<div id="Listing_Acquisition_Feeds">
+<h4>10.1. 取得フィードの一覧 <span class="original_title" lang="en">Listing Acquisition Feeds</span></h4>
+<blockquote lang="en">
+<p>OPDS Catalog Feed Documents, especially Acquisition Feeds, may contain large numbers of Atom Entries.</p>
+<p>A client such as a web spider or web browser might be overwhelmed if the response to a GET contained every Atom Entry in an Acquisition Feed &#8212; in turn the server might also waste bandwidth and processing time on generating a response that cannot be handled. For this reason, servers MAY respond to Acquisition Feed GET requests with a paginated response: an OPDS Catalog Feed Document containing a partial list of the Acquisition Feed&#8217;s member Atom Entries and a link to the next partial Acquisition Feed, if it exists, as defined in Section 3 of <tt><a href="#References">[RFC5005]</a></tt>.</p>
+
+<p>OPDS Catalog providers SHOULD use Partial Catalog Entries in all Acquisition Feeds except Complete Acquisition Feeds, which are intended for crawling and are referenced using the <a href="http://opds-spec.org/crawlable">http://opds-spec.org/crawlable</a> relation.</p>
+
+<p>Clients MUST NOT assume that an OPDS Catalog Entry returned in the Acquisition Feed is a full representation of an OPDS Catalog Entry Resource, as described in the Section Partial and Complete Entries.</p>
+</blockquote>
+
+
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）、特に取得フィード（Acquisition Feed）は多くのAtomエントリを格納しているかもしれない。（may contain）</p>
+<p>GETメソッドによるリクエストに対するレスポンスが取得フィード（Acquisition Feed）にある全てのAtomエントリを格納しているものであるならば、WebスパイダーやWebブラウザのようなクライアントは困惑するかもしれない。サーバーも帯域幅や処理できないレスポンスを生成するための処理時間を浪費するかもしれない。このために、サーバーは取得フィード（Acquisition Feed）へのGETメソッドによるリクエストに対してページを分割したレスポンス（paginated response）で応じてもよい<span class="RFC2119">（MAY）</span>。すなわち、<tt><a href="#References">[RFC5005]</a></tt>のセクション3で定義されているように取得フィード（Acquisition Feed）に含まれるAtomエントリの部分的なリストとその次の部分的な取得フィード（Acquisition Feed）へのリンクを格納するOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）である。</p>
+
+<p>OPDSカタログ（OPDS Catalog）プロバイダは完全な取得フィード（Complete Acquisition Feed）を除き、全ての取得フィード（Acquisition Feed）に部分的なカタログエントリ（Partial Catalog Entry）を使用するべきである<span class="RFC2119">（SHOULD）</span>。完全な取得フィード（Complete Acquisition Feed）はクローリングのためのものであり、<a href="http://opds-spec.org/crawlable">http://opds-spec.org/crawlable</a>リレーションを使用して参照される。</p>
+
+<p>「Partial and Complete Entries[sic]」セクション（訳者注: 「<a href="#Partial_and_Complete_Catalog_Entries">部分的なカタログエントリと完全なカタログエントリ（Partial and Complete Catalog Entries）</a>」セクションのことか？）で記述されているように、クライアントは取得フィード（Acquisition Feed）から返ってくるOPDSカタログエントリ（OPDS Catalog Entry）がOPDSカタログエントリリソース（OPDS Catalog Entry Resource）の全ての表現であることを前提としてはならない<span class="RFC2119">（MUST NOT）</span>。</p>
+
+</p></div>
+
+<div id="Complete_Acquisition_Feeds">
+<h4>10.2. 完全な取得フィード <span class="original_title" lang="en">Complete Acquisition Feeds</span></h4>
+<blockquote lang="en">
+<p>An OPDS Catalog provider MAY provide a single, consolidated Acquisition Feed that includes the complete representation of every unique OPDS Catalog Entry Document in an OPDS Catalog in an atom:feed to facilitate crawling and aggregation. Complete Acquisition Feeds SHOULD NOT be paginated unless they are extremely large.</p>
+<p>This representation is called a Complete Acquisition Feed and each OPDS Catalog Entry MUST be ordered by atom:updated, with the most recently updated Atom Entries coming first in the document order.</p>
+<p>If available, each OPDS Catalog Feed Document in the OPDS Catalog SHOULD contain an atom:link element with a relation of &#8220;<a href="http://opds-spec.org/crawlable">http://opds-spec.org/crawlable</a>&#8221; that references the Complete Acquisition Feed Resource.</p>
+<p>A Complete Acquisition Feed MUST include a fh:complete element from <tt><a href="#References">[RFC5005]</a></tt> unless pagination is required. See Section 2 of <tt><a href="#References">[RFC5005]</a></tt> for the specification of the fh:complete element.</p>
+
+<p>OPDS Catalog providers SHOULD use a compressed Content-Encoding when transmitting Complete Acquisition Feeds over HTTP. See Section 14.11 of <tt><a href="#References">[RFC2616]</a></tt> for more on compression.</p>
+<p>OPDS Catalog providers MUST include Complete Catalog Entries when serializing a Complete Acquisition Feed.</p>
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）プロバイダはクローリングや集約を容易にするためにatom:feedにあるOPDSカタログ（OPDS Catalog）の全てのユニークなOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）の完全な表現を格納した1つの統合された取得フィード（Acquisition Feed）を提供してもよい<span class="RFC2119">（MAY）</span>。完全な取得フィード（Complete Acquisition Feed）は極端に大きいものではない限り、ページは分割されるべきではない<span class="RFC2119">（SHOULD NOT）</span>。</p>
+
+<p>この表現は完全な取得フィード（Complete Acquisition Feed）と呼ばれる。それぞれのOPDSカタログエントリ（OPDS Catalog Entry）はドキュメントの順番において最も最近更新されたAtomエントリが最初にくるようにatom:updatedによって排列されなければならない<span class="RFC2119">（MUST）</span>。</p>
+<p>もし利用することが可能であれば、OPDSカタログ（OPDS Catalog）にあるそれぞれのOPDSカタログフィードドキュメント（OPDS Catalog Feed Document Resource）は完全な取得フィードリソース（Complete Acquisition Feeds Resource）を参照する&#8220;<a href="http://opds-spec.org/crawlable">http://opds-spec.org/crawlable</a>&#8221;のリレーションを持つatom:link要素を格納するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+<p>ページの分割が要求されているのではない限り、完全な取得フィード（Complete Acquisition Feed）は<tt><a href="#References">[RFC5005]</a></tt> のfh:complete要素を含まなければならない<span class="RFC2119">（MUST）</span>。fh:complete要素の仕様は <tt><a href="#References">[RFC5005]</a></tt>のセクション2を参照すること。</p>
+
+<p>完全な取得フィード（Complete Acquisition Feed）をHTTPを介して伝送する場合、OPDSカタログ（OPDS Catalog）プロバイダは圧縮されたContent-Encodingを使用するべきである<span class="RFC2119">（SHOULD）</span>。圧縮についての更なる詳細については<tt><a href="#References">[RFC2616]</a></tt>のセクション14.11を参照すること。</p>
+<p>OPDSカタログ（OPDS Catalog）プロバイダは完全な取得フィード（Complete Acquisition Feed）をシリアライズする場合は完全なカタログエントリ（Complete Catalog Entry）を含まなければならない<span class="RFC2119">（MUST）</span>。</p>
+
+</p></div>
+</p></div>
+
+<div id="Aggregating_OPDS_Catalogs">
+<h3>11. OPDSカタログの集約 <span class="original_title" lang="en">Aggregating OPDS Catalogs</span></h3>
+
+<blockquote lang="en">
+<p>OPDS Catalogs may be aggregated using the same techniques as Atom Feeds. Aggregators SHOULD use the atom:source element from Section 4.2.11 of <tt><a href="#References">[RFC4287]</a></tt> to include information about the original OPDS Catalog.</p>
+</blockquote>
+
+
+
+<p>OPDSカタログ（OPDS Catalog）はAtomフィードとして同じ技術を使用して集約されるかもしれない。アグリゲータはオリジナルのOPDSカタログ（OPDS Catalog）についての情報を含めるために<tt><a href="#References">[RFC4287]</a></tt>のセクション4.2.11にあるatom:source要素を使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+</p></div>
+
+
+<div id="Discovering_OPDS_Catalogs">
+<h3>12. OPDSカタログの検出 <span class="original_title" lang="en">Discovering OPDS Catalogs</span></h3>
+<blockquote lang="en">
+<p>OPDS Catalogs may be referenced in HTML/XHTML pages, HTTP headers, or using other techniques. These links may reference both OPDS Catalog Entries or Feeds. Links to OPDS Catalog Entry Document Resources MUST use a type attribute of &#8220;application/atom+xml;type=entry;profile=opds-catalog&#8221;. Links to OPDS Catalog Feed Document Resources MUST use a type attribute of &#8220;application/atom+xml;profile=opds-catalog&#8221;.</p>
+<p>The most common mechanism for encouraging the auto-discovery of OPDS Catalogs is to link from an HTML document to the OPDS Catalog Root Resource, using the auto-discovery pattern popularized by the syndicated feed community <tt><a href="#References">[AUTODISCOVERY]</a></tt>.</p>
+
+<p>Multiple links to OPDS Catalog Resources MAY be expressed in a single HTML document.</p>
+<p>An example of two links inside an HTML page about the same Publication:</p>
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）はHTML/XHTMLページ、HTTPヘッダ、またはその他の技術によって参照されるかもしれない。これらのリンクはOPDSカタログエントリ（OPDS Catalog Entry）またはOPDSカタログフィード（OPDS Catalog Feed）を参照するかもしれない。OPDSカタログエントリドキュメントリソース（OPDS Catalog Entry Document Resource）へのリンクはtype属性の値に&#8220;application/atom+xml;type=entry;profile=opds-catalog&#8221;を使用しなければならない<span class="RFC2119">（MUST）</span>。OPDSカタログフィードドキュメントリソース（OPDS Catalog Feed Document Resource）へのリンクはtype属性の値に&#8220;application/atom+xml;profile=opds-catalog&#8221;を使用しなければならない<span class="RFC2119">（MUST）</span></p>
+
+<p>OPDSカタログ（OPDS Catalog）のauto-discovery（自動検出）を奨励するために最も普及しているメカニズムはシンジケーテッドフィードコミュニティによって広く普及したauto-discovery（自動検出）パターンを使用してHTMLドキュメントからOPDSカタログルートリソース（OPDS Catalog Root Resource）へリンクを貼ることである<tt><a href="#References">[AUTODISCOVERY]</a></tt>。</p>
+
+<p>OPDSカタログリソース（OPDS Catalog Resource）への多様なリンクは1つのHTMLドキュメント内で表わされてもよい<span class="RFC2119">（MAY）</span>。</p>
+<p>以下はある同じ出版物（Publication）について1つのHTMLページ内にある2つのリンクの例である。</p>
+
+<pre><span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"related"</span>   </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/opds-catalogs/root"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;profile=opds-catalog"</span>  </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">title</span>=<span style="color: rgb(255, 0, 0);">"Example OPDS Catalog"</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span> 
+&nbsp;
+<span style="color: rgb(0, 153, 0);"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;link</span> <span style="color: rgb(0, 0, 102);">rel</span>=<span style="color: rgb(255, 0, 0);">"alternate"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">href</span>=<span style="color: rgb(255, 0, 0);">"/entry/1"</span></span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">type</span>=<span style="color: rgb(255, 0, 0);">"application/atom+xml;type=entry;profile=opds-catalog"</span> </span>
+<span style="color: rgb(0, 153, 0);">      <span style="color: rgb(0, 0, 102);">title</span>=<span style="color: rgb(255, 0, 0);">"Example OPDS Entry"</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">/&gt;</span></span></pre>
+
+<blockquote lang="en"><p>Auto-discovery links MAY also be expressed using HTTP headers as defined in <tt><a href="#References">[DRAFT-Web-Linking]</a></tt>.</p></blockquote>
+
+<p>Auto-discoveryリンクは<tt><a href="#References">[DRAFT-Web-Linking]</a></tt>で定義されているようにHTTPヘッダを使用して表示してもよい<span class="RFC2119">（MAY）</span>。</p>
+
+</p></div>
+
+
+
+<div id="Securing_OPDS_Catalogs">
+<h3>13. OPDSカタログの保護 <span class="original_title" lang="en">Securing OPDS Catalogs</span></h3>
+<blockquote lang="en">
+<p>OPDS Catalogs are delivered over HTTP. Authentication requirements for HTTP are covered in Section 11 of <tt><a href="#References">[RFC2616]</a></tt>.</p>
+
+<p>The type of authentication required for any OPDS Catalog is a decision to be made by the OPDS Catalog provider. OPDS Catalog clients are likely to face authentication schemes that vary across OPDS Catalogs. At a minimum, client and server implementations MUST be capable of being configured to use HTTP Basic Authentication <tt><a href="#References">[RFC2617]</a></tt> in conjunction with a connection made with TLS 1.0 <tt><a href="#References">[RFC2246]</a></tt> or a subsequent standards-track version of TLS supporting the conventions for using HTTP over TLS described in <tt><a href="#References">[RFC2818]</a></tt>. It is RECOMMENDED that OPDS Catalog clients be implemented in such a way that new authentication schemes can be deployed.</p>
+<p>Because this protocol uses HTTP response status codes as the primary means of reporting the result of a request, OPDS Catalog providers are advised to respond to unauthorized or unauthenticated requests using an appropriate 4xx HTTP response code (e.g., 401 &#8220;Unauthorized&#8221; or 403 &#8220;Forbidden&#8221;) in accordance with <tt><a href="#References">[RFC2617]</a></tt>.</p>
+
+</blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）はHTTPを介して配信される。HTTPのための認証の要件は<tt><a href="#References">[RFC2616]</a></tt>のセクション11でカバーされている。</p>
+
+
+<p>OPDSカタログ（OPDS Catalog）で要求される認証のタイプはOPDSカタログ（OPDS Catalog）プロバイダによって決定されるものである。OPDSカタログ（OPDS Catalog）クライアントはOPDSカタログ（OPDS Catalog）によって異なる認証スキームに直面する可能性がある。少なくともクライアントとサーバーへの実装はTLS 1.0 <tt><a href="#References">[RFC2246]</a></tt>または<tt><a href="#References">[RFC2818]</a></tt>で記述されているTLSを介したHTTPを使用するための規約をサポートするTLSの次の標準化過程のバージョンでの接続を併用したHTTP Basic認証 <tt><a href="#References">[RFC2617]</a></tt>を利用する設定が可能となるようにされていなければならない<span class="RFC2119">（MUST）</span>。OPDSカタログ（OPDS Catalog）クライアントは新しい認証スキームが展開しうるように実装されることが推奨される<span class="RFC2119">（RECOMMENDED ）</span>。</p>
+
+<p>このプロトコルはリクエストの結果を報告する主要な手段HTTPレスポンスステータスコードを使用しているため、OPDSカタログ（OPDS Catalog）プロバイダは<tt><a href="#References">[RFC2617]</a></tt>に従い、権限のない、または認証されていないリクエストに対して適切な4xx HTTP レスポンスコード（例えば、401 &#8220;Unauthorized&#8221;または403 &#8220;Forbidden&#8221;）を使用したレスポンスを返すことが勧められる。</p>
+
+</p></div>
+<div id="Bandwidth_and_Processing_Considerations">
+<h3>14. 帯域幅と処理についての考慮事項 <span class="original_title" lang="en">Bandwidth and Processing Considerations</span></h3>
+<blockquote lang="en">
+<p>Many OPDS Catalog clients operate in mobile environments, which may impose strict limitations on bandwidth and processing resources. OPDS Catalog publishers are strongly encouraged to publish their OPDS Catalogs using compression and caching techniques and the partial feeds described in the Section Listing Acquisition Feeds. Implementers are encouraged to investigate and use alternative mechanisms regarded as equivalently good or better at the time of deployment. See <tt><a href="#References">[CACHING]</a></tt> for more on caching techniques.</p></blockquote>
+
+<p>多くのOPDSカタログ（OPDS Catalog）クライアントは帯域幅や処理リソースが厳しく制限されうるモバイル環境で運用されている。OPDSカタログ（OPDS Catalog）出版者には圧縮技術やキャッシュ技術、そして「<a href="#Listing_Acquisition_Feeds">取得フィードの一覧（Listing Acquisition Feeds）</a>」セクションで記述されている部分的なフィードを使用してOPDSカタログ（OPDS Catalog）を公開することが強く推奨される。
+実装者は展開時に同等またはよりよいと見なされる代替手段となるメカニズムの調査及び使用が推奨される。キャッシュ技術についてのさらなる詳細については<tt><a href="#References">[CACHING]</a></tt>を参照すること。</p>
+</p></div>
+
+
+<div id="Security_Considerations">
+<h3>15. セキュリティについての考慮事項 <span class="original_title" lang="en">Security Considerations</span></h3>
+<blockquote lang="en">
+<p>OPDS Catalogs are Atom documents delivered over HTTP and thus subject to the security considerations found in Section 15 of <tt><a href="#References">[RFC2616]</a></tt> and Section 5 of <tt><a href="#References">[RFC4287]</a></tt>.</p></blockquote>
+
+<p>OPDSカタログはHTTPを介して配信されるAtomドキュメントであり、<tt><a href="#References">[RFC2616]</a></tt>のセクション15と <tt><a href="#References">[RFC4287]</a></tt>のセクション5にあるSecurity Considerations（セキュリティについての考慮事項）の影響を受ける。</p>
+
+<div id="Linked_Resources">
+<h4>15.1. リンクされたリソース <span class="original_title" lang="en">Linked Resources</span></h4>
+<blockquote lang="en">
+<p>OPDS Catalogs can contain XML External Entities as defined in Section 4.2.2 of <tt><a href="#References">[REC-xml]</a></tt>. OPDS Catalog implementations are not required to load external entities. External entities are subject to the same security concerns as any network operation and can alter the semantics of an OPDS Catalog Feed Document or OPDS Catalog Entry Document. The same issues exist for Resources linked to by elements such as atom:link and atom:content.</p>
+</p></blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）は<tt><a href="#References">[REC-xml]</a></tt>のセクション4.2.2で定義されているようにXML外部エンティティを格納することができる。OPDSカタログ（OPDS Catalog）の実装には外部エンティティの読み込みを要求されない。外部エンティティはどのネットワークで運用されていたとしても同じセキュリティ上の問題の影響を受け、OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）またはOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）のセマンティックスを変える可能性がある。同じ問題はatom:link要素や atom:content要素のような要素によってリンクされたリソース（Resource）にも存在する。</p>
+
+</div>
+
+
+<div id="URIs_and_IRIs">
+<h4>15.2. URIとIRI <span class="original_title" lang="en">URIs and IRIs</span></h4>
+<blockquote lang="en">
+<p>OPDS Catalog implementations handle URIs and IRIs. See Section 7 of <tt><a href="#References">[RFC3986]</a></tt> and Section 8 of <tt><a href="#References">[RFC3987]</a></tt> for security considerations related to their handling and use.</p></blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）の実装ではURIとIRIを処理する。URIとIRIの処理と使用に関連するSecurity Considerations（セキュリティについての考慮事項）については<tt><a href="#References">[RFC3986]</a></tt>のセクション7や<tt><a href="#References">[RFC3987]</a></tt>のセクション8を参照すること。</p>
+
+</p></div>
+<div id="Code_Injection_and_Cross_Site_Scripting">
+<h4>15.3. コードインジェクションとクロスサイトスクリプティング <span class="original_title" lang="en">Code Injection and Cross Site Scripting</span></h4>
+<blockquote lang="en">
+<p>OPDS Catalogs can contain a broad range of content types including code that might be executable in some contexts. Malicious publishers could attempt to attack servers or other clients by injecting code into OPDS Catalog Feed Documents or OPDS Catalog Entry Documents or Media Resources.</p>
+<p>Server implementations are strongly encouraged to verify that external content is safe prior to aggregating, processing, or publishing it. In the case of HTML, experience indicates that verification based on a white list of acceptable content is more effective than a black list of forbidden content.</p>
+
+<p>Additional information about XHTML and HTML content safety can be found in Section 8.1 of <tt><a href="#References">[RFC4287]</a></tt>.</p></blockquote>
+
+<p>OPDSカタログ（OPDS Catalog）はある状況で実行可能かもしれないコードを含む広い範囲のcontent typeを格納することができる。悪意のある出版者はOPDSカタログフィードドキュメント（OPDS Catalog Feed Document）、OPDSカタログエントリドキュメント（OPDS Catalog Entry Document）やメディアリソース（Media Resource）にコードを埋め込むことによりサーバーやその他のクライアントへの攻撃を試みることがありうる。</p>
+<p>サーバーの実装には集約、処理、公開に先だって外部コンテンツが安全であることを検証することが強く推奨される。HTMLの場合、経験によれば禁止コンテンツのブラックリストより受け入れ可能なコンテンツのホワイトリストに基づく検証がより効果がある。</p>
+<p>XHTMLとHTMLコンテンツの安全性についてにさらに詳細な情報は<tt><a href="#References">[RFC4287]</a></tt>のセクション8.1で見つけることができる。</p>
+
+</div>
+
+
+<div id="The_Atom_Format_Type_Parameter">
+<h3>16. AtomフォーマットTypeパラメータ <span class="original_title" lang="en">The Atom Format Type Parameter</span></h3>
+<blockquote lang="en">
+<p>The Atom Publishing Protocol <tt><a href="#References">[RFC5023]</a></tt> defines the Atom Format Type Parameter.</p>
+<p>Publishers of OPDS Catalogs SHOULD use the &#8220;type&#8221; parameter to help clients distinguish between relations to OPDS Catalog Entries and OPDS Catalog Feeds.</p></blockquote>
+
+<p>The Atom Publishing Protocol <tt><a href="#References">[RFC5023]</a></tt>はAtomフォーマットTypeパラメータ（Atom Format Type Parameter）を定義する。</p>
+
+<p>OPDSカタログ（OPDS Catalog）の出版者はクライアントがOPDSカタログエントリ（OPDS Catalog Entry）とOPDSカタログフィード（OPDS Catalog Feed）へのリレーションを区別することを助けるために&#8220;type&#8221;パラメータを使用するべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+</div>
+
+<div id="The_OPDS_Catalog_Profile_Parameter">
+<h3>17. OPDSカタログProfileパラメータ <span class="original_title" lang="en">The OPDS Catalog Profile Parameter</span></h3>
+<blockquote lang="en">
+<p>Relations to OPDS Catalog Feed Document and OPDS Catalog Entry Document Resources SHOULD use a &#8220;profile&#8221; parameter following Section 4.3 of <tt><a href="#References">[RFC4288]</a></tt> with the value &#8220;opds-catalog&#8221;.  This profile parameter provides clients with an advisory hint that the Resource should be a component of an OPDS Catalog.</p>
+
+
+</blockquote>
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）とOPDSカタログエントリドキュメントリソース（OPDS Catalog Entry Document Resource）へのリレーションには&#8220;opds-catalog&#8221;の値といっしょに<tt><a href="#References">[RFC4288]</a></tt>のセクション4.3に従って&#8220;profile&#8221;パラメータを使用するべきである<span class="RFC2119">（SHOULD）</span>。このprofileパラメータはクライアントにリソース（Resource）がOPDSカタログ（OPDS Catalog）のコンポーネントであると助言的なヒントを提供する。</p>
+
+<blockquote lang="en"><p>The complete media type for a relation to an OPDS Catalog Entry Document Resource SHOULD be:</p></blockquote>
+<p>OPDSカタログエントリドキュメントリソース（OPDS Catalog Entry Document Resource）へのリレーションに使用する完全なメディアタイプは以下のようにするべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<pre>application/atom+xml;type=entry;profile=opds-catalog</pre>
+
+<blockquote lang="en"><p>The complete media type for a relation to an OPDS Catalog Feed Document Resource SHOULD be:</p></blockquote>
+<p>OPDSカタログフィードドキュメントリソース（OPDS Catalog Feed Document Resource）へのリレーションに使用する完全なメディアタイプは以下のようにするべきである<span class="RFC2119">（SHOULD）</span>。</p>
+
+<pre>application/atom+xml;profile=opds-catalog</pre>
+
+</div>
+
+<div id="References">
+<h3>18. リファレンス <span class="original_title" lang="en">References</span></h3>
+<div id="Normative_References">
+<h4>18.1. 引用規定 <span class="original_title" lang="en">Normative References</span></h4>
+<ul>
+<li><tt>[DRAFT-Web-Linking]</tt> Nottingham, M., "Web Linking", draft-nottingham-http-link-header-10, May 2010, <a href="http://tools.ietf.org/html/draft-nottingham-http-link-header">http://tools.ietf.org/html/draft-nottingham-http-link-header</a>.</li>
+<li><tt>[DCTERMS]</tt> DCMI Usage Board, "DCMI Metadata Terms", January 2008, <a href="http://dublincore.org/documents/dcmi-terms/">http://dublincore.org/documents/dcmi-terms/</a>.</li>
+
+<li><tt>[ISO4217]</tt> "ISO 4217 currency and funds name and code elements", International Standard ISO 4217, <a href="http://www.iso.org/iso/en/prods-services/popstds/currencycodeslist.html">http://www.iso.org/iso/en/prods-services/popstds/currencycodeslist.html</a>.</li>
+<li><tt>[MIMEREG]</tt> Freed, N. and J. Klensin, "Media Type Specifications and Registration Procedures", BCP 13, RFC 4288, December 2005.</li>
+<li><tt>[OpenSearch]</tt> Clinton D., "Open Search 1.1 Draft 4", <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1">http://www.opensearch.org/Specifications/OpenSearch/1.1</a>.</li>
+<li><tt>[REC-xml]</tt> Yergeau, F., Paoli, J., Bray, T., Sperberg-McQueen, C., and E. Maler, "Extensible Markup Language (XML) 1.0 (Fourth Edition)", World Wide Web Consortium Recommendation REC-xml-20060816, August 2006, <a href="http://www.w3.org/TR/2006/REC-xml-20060816">http://www.w3.org/TR/2006/REC-xml-20060816</a>.</li>
+
+<li><tt>[REC-xml-infoset]</tt> Cowan, J. and R. Tobin, "XML Information Set (Second Edition)", World Wide Web Consortium Recommendation REC-xml-infoset-20040204, February 2004, <a href="http://www.w3.org/TR/2004/REC-xml-infoset-20040204">http://www.w3.org/TR/2004/REC-xml-infoset-20040204</a>.</li>
+<li><tt>[REC-xml-names]</tt> Hollander, D., Bray, T., Tobin, R., and A. Layman, "Namespaces in XML 1.0 (Second Edition)", World Wide Web Consortium Recommendation REC-xml-names-20060816, August 2006, <a href="http://www.w3.org/TR/2006/REC-xml-names-20060816">http://www.w3.org/TR/2006/REC-xml-names-20060816</a>.</li>
+<li><tt>[RFC2119]</tt> Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.</li>
+<li><tt>[RFC2246]</tt> Dierks, T. and C. Allen, "The TLS Protocol Version 1.0", RFC 2246, January 1999.</li>
+
+<li><tt>[RFC2397]</tt> L. Masinter, "The 'data' URL scheme", RFC 2397, August 1998.</li>
+<li><tt>[RFC2616]</tt> Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext Transfer Protocol — HTTP/1.1", RFC 2616, June 1999.</li>
+<li><tt>[RFC2617]</tt> Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, "HTTP Authentication: Basic and Digest Access Authentication", RFC 2617, June 1999.</li>
+<li><tt>[RFC2818]</tt> Rescorla, E., "HTTP Over TLS", RFC 2818, May 2000.</li>
+<li><tt>[RFC3986]</tt> Berners-Lee, T., Fielding, R., and L.  Masinter, "Uniform Resource Identifier (URI): Generic Syntax", STD 66, RFC 3986, January 2005.</li>
+
+<li><tt>[RFC3987]</tt> Duerst, M. and M. Suignard, "Internationalized Resource Identifiers (IRIs)", RFC 3987, January 2005.</li>
+<li><tt>[RFC4287]</tt> Nottingham, M. and R. Sayre, "The Atom Syndication Format", RFC 4287, December 2005.</li>
+<li><tt>[RFC4288]</tt> Freed, N. and J. Klensin, "Media Type Specifications and Registration Procedures", RFC 4288, December 2005.</li>
+<li><tt>[RFC5005]</tt> Nottingham, M., "Feed Paging and Archiving", RFC 5005, September 2007.</li>
+</ul>
+
+</div>
+
+
+<div id="Informative_References">
+<h4>18.2. 参考文献 <span class="original_title" lang="en">Informative References</span></h4>
+
+<ul>
+<li><tt>[AUTODISCOVERY]</tt> Cadenhead, R., Holderness, J., Morin, R., "RSS Autodiscovery", November 2006, <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a>.</li>
+<li><tt>[CACHING]</tt> Nottingham, M., "Caching Tutorial", 1998, <a href="http://www.mnot.net/cache_docs/">http://www.mnot.net/cache_docs/</a>.</li>
+<li><tt>[REC-webarch]</tt> Walsh, N. and I. Jacobs, "Architecture of the World Wide Web, Volume One", W3C REC REC-webarch-20041215, December 2004, <a href="http://www.w3.org/TR/2004/REC-webarch-20041215">http://www.w3.org/TR/2004/REC-webarch-20041215</a>.</li>
+
+<li><tt>[RNC]</tt> Clark, J., "RELAX NG Compact Syntax", December 2001, <a href="http://www.oasis-open.org/committees/relax-ng/compact-20021121.html">http://www.oasis-open.org/committees/relax-ng/compact-20021121.html</a>.</li>
+</ul>
+
+</div>
+</p></div>
+<div id="Appendix_A._Contributors">
+<h3>付録A.貢献者 <span class="original_title" lang="en">Contributors</span></h3>
+<blockquote lang="en">
+<p>The content and concepts within this specification are a product of the openpub community.</p>
+</blockquote>
+<p>本仕様の内容とコンセプトはopenpubコミュニティの成果である。</p>
+
+</p></div>
+<div id="Appendix_B._RELAX_NG_Compact_Schema">
+<h3>付録B RELAX NG Compact Schema <span class="original_title" lang="en">RELAX NG Compact Schema</span></h3>
+<blockquote lang="en">
+
+<p>This appendix is informative.</p>
+<p>The RELAX NG schema explicitly excludes elements in the OPDS Catalog namespace that are not defined in this revision of the specification. Requirements for Atom Protocol processors encountering such markup are given in Sections 6.2 and 6.3 of <tt><a href="#References">[RFC4287]</a></tt>.</p>
+
+<p>The Schema for OPDS Catalog Feed &amp; Entry Documents:</p>
+</blockquote>
+
+<p>本付録は参考（informative）である。</p>
+<p>以下のRELAX NG schemaは本仕様のこの改訂で定義されていないOPDSカタログ（OPDS Catalog）の名前空間の要素を明示的に除外している。こうしたマークアップに遭遇したAtom Protocolの処理系の要件は、<tt><a href="#References">[RFC4287]</a></tt>のセクション6.2とセクション6.3にある。</p>
+
+<p>OPDSカタログフィードドキュメント（OPDS Catalog Feed Document）とOPDSカタログエントリドキュメント（OPDS Catalog Entry Document）のスキーマは以下の通りである。</p>
+
+<pre># -*- rnc -*-
+# RELAX NG Compact Syntax Grammar for OPDS Catalog Feed &amp; Entry Documents
+# Version 2010-08-18
+namespace atom = "http://www.w3.org/2005/Atom"
+namespace opds = "http://opds-spec.org/2010/catalog"
+namespace local = ""
+
+# The OPDS Catalog spec extends Atom (RFC4287), and the additions require some
+# patterns not used in the Atom schema. The first is atomUriExceptOPDS, which
+# is used to describe an atomLink whose rel value is an atomNCName (no-colon
+# name) or any URI other than these from OPDS Catalogs. In these cases, no
+# opds:price element should appear.
+atomUriExceptOPDS = string - ( string "http://opds-spec.org/acquisition/buy"
+                             | string "http://opds-spec.org/acquisition/borrow"
+                             | string "http://opds-spec.org/acquisition/subscribe"
+                             | string "http://opds-spec.org/acquisition/sample" )
+
+# Next is OPDSUrisExceptBuy, which is used to describe an atomLink whose
+# rel value is from OPDS Catalogs but is not ".../acquisition/buy". In such
+# cases, an opds:price element is optional.
+OPDSUrisExceptBuy = string "http://opds-spec.org/acquisition/borrow"
+                  | string "http://opds-spec.org/acquisition/subscribe"
+                  | string "http://opds-spec.org/acquisition/sample"
+
+# To simplify OPDS Catalog validation, we do not use Schematron to assert that
+# any atom:link with a rel value of ".../acquisition/buy" must be accompanied
+# by one or more opds:price elements.
+# Instead we rely on Relax NG to describe one of three situations:
+# - the rel value is ".../acquisition/buy" and at least one opds:price element
+#   is required
+# - the rel value is ".../acquisition/borrow" or ".../acquisition/subscribe" or
+#   ".../acquisition/sample", in case opds:price elements may be
+#   included; or
+# - the value of the rel attribute is any other URI or an Atom-defined no-colon
+#   name, and no opds:price element is permitted
+
+# Note that this OPDS Catalog schema includes atom.rnc, so that schema must be
+# present for validation.
+#
+# Note also that atom.rnc defines atomUri as text and not as xsd:anyURI, and so
+# wherever the Atom spec requires an IRI, the schema will not check the value
+# against any URI pattern or logic. The OPDS Catalog schema overrides atom.rnc
+# to provide a relatively accurate test. With the approval of XSD 1.1, the
+# schema definition should change to xsd:anyURI to match what the spec text
+# says.
+include "atom.rnc" {
+  atomLink =
+    element atom:link {
+      atomCommonAttributes &amp;
+      attribute href { atomUri } &amp;
+      attribute type { atomMediaType }? &amp;
+      attribute hreflang { atomLanguageTag }? &amp;
+      attribute title { text }? &amp;
+      attribute length { text }? &amp;
+
+    ((attribute rel { "http://opds-spec.org/acquisition/buy" }, opdsPrice+ )
+     |
+     (attribute rel { OPDSUrisExceptBuy }, opdsPrice*)
+     |
+     (attribute rel { atomNCName | ( atomUriExceptOPDS ) } ))? &amp;
+      anyOPDSForeignElement* &amp;
+      text
+    }
+
+    # Here is where OPDS Catalogs use John Cowan's pragmatic evaluation of an
+    # IRI. This modifies xsd:anyURI in XSD 1.0 to exclude ASCII characters not
+    # valid in 1.1 or IRI's without being escaped. This matches the OPDS and Atom
+    # specs, but not the non-normative atom.rnc.
+    atomUri = xsd:anyURI - xsd:string {pattern = '.*[ &lt;&gt;{}|^`"\\\n\r\t].*'}
+
+    # Here we override Atom to account for HTML abuse in the summary element,
+    # restricting it in OPDS Catalog to text:
+    atomSummary =
+      element atom:summary {
+        atomCommonAttributes,
+        attribute type { "text" }?,
+        text
+    }
+}
+
+anyOPDSForeignElement =
+  element * - ( atom:* | opds:* ) {
+      ( attribute * { text }
+      | text
+      | anyElement )*
+  }
+
+# An opds:price element should not contain a currency symbol; it is
+# restricted to non-negative decimal numbers.
+opdsPrice =
+  element opds:price {
+    atomCommonAttributes,
+    attribute currencycode { opdsPriceCurrencyCode },
+    xsd:decimal { minInclusive="0.0" }
+  }
+
+# Instead of allowing every possible 3-letter or 3-digit combination as a
+# currency code, here the permissible codes (as identified in ISO4217 as of
+# 2010-08-25) are enumerated. In 2012 or so, that standard may add, remove or
+# change some currency codes, thus requiring this schema to be updated. Note
+# that codes for metals and funds are not included.
+opdsPriceCurrencyCode =  (
+  "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARS" | "AUD" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" |
+  "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOV" | "BRL" | "BSD" | "BTN" | "BWP" | "BYR" | "BZD" |
+  "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLF" | "CLP" | "CNY" | "COP" | "COU" | "CRC" | "CUC" | "CUP" |
+  "CVE" | "CZK" | "DJF" | "DKK" | "DOP" | "DZD" | "EEK" | "EGP" | "ERN" | "ETB" | "EUR" | "FJD" | "FKP" |
+  "GBP" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" |
+  "IDR" | "ILS" | "INR" | "IQD" | "IRR" | "ISK" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" |
+  "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LVL" | "LYD" |
+  "MAD" | "MDL" | "MGA" | "MKD" | "MMK" | "MNT" | "MOP" | "MRO" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" |
+  "MYR" | "MZN" | "NAD" | "NGN" | "NIO" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEN" | "PGK" | "PHP" |
+  "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SEK" |
+  "SGD" | "SHP" | "SLL" | "SOS" | "SRD" | "STD" | "SVC" | "SYP" | "SZL" | "THB" | "TJS" | "TMT" | "TND" |
+  "TOP" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UGX" | "USD" | "USN" | "USS" | "UYI" | "UYU" | "UZS" |
+  "VEF" | "VND" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XBC" | "XBD" | "XCD" | "XDR" |
+  "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XTS" | "XXX" | "YER" | "ZAR" | "ZMK" | "ZWL" | "008" | "012" |
+  "032" | "036" | "044" | "048" | "050" | "051" | "052" | "060" | "064" | "068" | "072" | "084" | "090" |
+  "096" | "104" | "108" | "116" | "124" | "132" | "136" | "144" | "152" | "156" | "170" | "174" | "188" |
+  "191" | "192" | "203" | "208" | "214" | "222" | "230" | "232" | "233" | "238" | "242" | "262" | "270" |
+  "292" | "320" | "324" | "328" | "332" | "340" | "344" | "348" | "352" | "356" | "360" | "364" | "368" |
+  "376" | "388" | "392" | "398" | "400" | "404" | "408" | "410" | "414" | "417" | "418" | "422" | "426" |
+  "428" | "430" | "434" | "440" | "446" | "454" | "458" | "462" | "478" | "480" | "484" | "496" | "498" |
+  "504" | "512" | "516" | "524" | "532" | "533" | "548" | "554" | "558" | "566" | "578" | "586" | "590" |
+  "598" | "600" | "604" | "608" | "634" | "643" | "646" | "654" | "678" | "682" | "690" | "694" | "702" |
+  "704" | "706" | "710" | "748" | "752" | "756" | "760" | "764" | "776" | "780" | "784" | "788" | "800" |
+  "807" | "818" | "826" | "834" | "840" | "858" | "860" | "882" | "886" | "894" | "901" | "931" | "932" |
+  "934" | "936" | "937" | "938" | "940" | "941" | "943" | "944" | "946" | "947" | "948" | "949" | "950" |
+  "951" | "952" | "953" | "955" | "956" | "957" | "958" | "959" | "960" | "961" | "962" | "963" | "964" |
+  "968" | "969" | "970" | "971" | "972" | "973" | "974" | "975" | "976" | "977" | "978" | "979" | "980" |
+  "981" | "984" | "985" | "986" | "990" | "997" | "998" | "999"
+)</pre>
+
+
+
+<blockquote lang="en">
+<p>This schema is also maintained in version control: <a href="http://openpub.googlecode.com/svn/trunk/schemas/opds_catalog.rnc">http://openpub.googlecode.com/svn/trunk/schemas/opds_catalog.rnc</a></p></blockquote>
+<p>このスキーマは以下でもバージョンの管理が維持されている。<br />
+<a href="http://openpub.googlecode.com/svn/trunk/schemas/opds_catalog.rnc">http://openpub.googlecode.com/svn/trunk/schemas/opds_catalog.rnc</a></p>
+
+</p></div>
+</div>
+
+
+
+        
+		</div><!-- #content -->
+	</div><!-- #container -->
+
+
+
+
+    </div><!-- #main -->
+	<div id="footer">
+            
+	</div><!-- #footer -->
+
+</body>
+</html>
