@@ -1,0 +1,21 @@
+#translation_notes {
+margin:0 0 2em 0;
+padding:0.5em 1.5em;
+border:1px solid rgba(66,0,243,1);
+color:rgba(0,0,0,1);
+background-color:rgba(203,196,240,0.79);
+font-size:80%; }
+
+#translation_notes dl {
+line-height:1.5;}
+
+#translation_notes dt {
+width:8em;
+float:left;
+clear:left;
+margin-top:0;
+font-weight:normal;}
+
+#translation_notes dd {
+display:block;}
+
