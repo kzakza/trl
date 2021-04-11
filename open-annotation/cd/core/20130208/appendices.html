@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Open Annotation Data Model: 付録（2013年2月8日付コミュニティドラフト　日本語訳）</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"></meta>
+      <meta name="viewport" content="width=device-width; initial-scale=1,minimum-scale=1, user-scalable=yes" />
+
+<style>
+div.toc OL { counter-reset: item 5 }
+div.toc OL LI OL { counter-reset: item 0}
+</style>
+<link rel="stylesheet" href="css/oa-spec.css" type="text/css" />
+<link rel="stylesheet" href="css/translation_memo.css" type="text/css" />
+
+</head>
+<body dir="ltr">
+<div id="status" style="position: absolute; -moz-transform-origin: top left; transform-origin: top left; -webkit-transform-origin: top left;
+        height: 30px; width: 250px; padding-top: 8px; top:250px; left:0px;
+        font-size: 18px; text-align: center; font-family: Arial, sans-serif; font-weight: 100;
+	 	-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); MozTransform: rotate(-90deg); 
+		background: #ff0000; color: #ffffff; ">W3C Community Draft</div>
+<div id="translation_notes">
+<p>この文書「Open Annotation Data Model Open Annotation」（2013年2月8日付コミュニティドラフト）は、<a href="http://www.w3.org/">W3C</a> の <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>による&quot;<a href="http://www.openannotation.org/spec/core/20130208/index.html" hreflang="en">Open Annotation Data Model (W3C Community Draft, 08 February 2013)</a>&quot;の日本語訳です。この日本語訳はあくまで参考情報であり、W3Cの公式な日本語訳ではありません。翻訳・解釈に誤りがある可能性があります。<a href="http://www.openannotation.org/spec/core/">原文の最新版</a>が存在する可能性があります。</p>
+<dl class="translator_info">
+<dt>日本語訳更新日:</dt>
+<dd class="date"><span class="modified">2014-06-18</span></dd>
+<dt>日本語訳公開日:</dt>
+<dd class="date"><span class="published">2014-04-27</span></dd>
+<dt>翻訳者:</dt>
+<dd><a href="http://www.kzakza.com/">kzakza</a></dd>
+</dl>
+</div>
+<div id="header">
+<table class="layout">
+<tr>
+<td><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72" /></a></td>
+<td>
+<h2 class="title">Open Annotation Data Model: 付録</h2>
+<h3 class="subTitle">2013年2月8日付コミュニティドラフト（Community Draft）</h3>
+</td>
+</tr>
+</table>
+</div>
+<center>
+<a href="publishing.html">前のページ</a>&nbsp; &nbsp;<a href="index.html#contents">目次</a>
+</center>
+<hr />
+<div class="toc">
+<h2>目次</h2>
+<p class="toc">
+<ol>
+<li><a href="appendices.html#Appendices"><b>付録</b></a>
+<ol id="ToC_Appendix">
+<li><a href="appendices.html#ProvMapping">W3C 由来モデル（Provenance Model）へのマッピング</a></li>
+<li><a href="appendices.html#ExtendingMotivations">動機（Motivation）の拡張</a></li>
+<li><a href="appendices.html#References">参照</a></li>
+<li><a href="appendices.html#Acknowledgements">Acknowledgements</a></li>
+<li><a href="appendices.html#ChangeLog">変更履歴</a></li>
+</ol>
+</li></ol></p></div>
+<hr />
+<div class="body">
+<div class="section">
+<a id="Appendices" name="Appendices"></a>
+<h2>6.　付録</h2>
+<div>
+<a id="ProvMapping" name="ProvMapping"></a>
+<h3>A. 由来モデル（Provenance Model）へのマッピング</h3>
+<p>Open Annotation Data Modelは、アノテーション（Annotation）の由来を表現する非常にシンプルな方法を指定する。これは、より豊かで複雑​な<a href="http://www.w3.org/TR/prov-overview/">W3C PROV</a>モデルへマッピングすることが可能である。</p>
+<p>PROVモデルは、アクティビティ（Activity）で表現し、それらの実体（Entity）のアクティビティ（Activity）によって利用も生成される。Open Annotationモデルには、便宜とシンプルさのためだけに<code>oa:Annotation</code>になた2つのエンティティがある。 これらはアノテーション(Annotation)文書であり、 アノテーション(Annotation)が具体化し、記述する概念である。これによって、<code>oa:annotatedBy</code>と<code>oa:annotatedAt</code>、 <code>oa:serializedBy</code>と<code>oa:serializedAt</code>の間は区別される 。 PROVモデルでは、再度これらを分割する必要がある。我々は概念に<code>oa:Annotation</code>を使用している。したがって、まだ アノテーション(Annotation)文書を必要とする。</p>
+<p>2つのアクティビティ（Activity）、アノテーション（Annotation）及びシリアライズ（Serialize）もある。これらは実体（Entity）を生成する。この場合、アノテーション（Annotation）は、リソースにアノテーションを付与するプロセスであり、同名の動機（Motivation）と混同されるべきではあなく、融合させるべきではない。シリアル化は、アノテーション文書が作成されるプロセスである。</p>
+<p>アノテーション文書は、概念から生成される。その概念は必ず最初に来る。概念は、アノテーティングのプロセスの結果として制作される。そのプロセスは、エージェント、つまり、<code>oa:annotatedBy</code>
+オブジェクトによって実行される。アノテーション文書は、シリアル化のプロセスの結果として制作されたものである。そのプロセスは、エージェント、つまり、<code>oa:serializedBy</code>
+オブジェクトによって実行されたものである。この２つのプロセスはある特定の時間 <code>oa:annotatedAt</code>
+と <code>oa:serializedAt</code>
+ にそれぞれに起きたものである。</p>
+<h4>Model</h4>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/provmapping.png" width="600px" />
+<br /><span class="caption">図A. 由来モデル（Provenance Model）へのマッピング</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+	  a prov:Entity ;
+    prov:wasGeneratedBy &lt;serializing1&gt; ;
+    prov:wasDerivedFrom &lt;annoConcept1&gt; ;
+    prov:generatedAt &quot;datetime1&quot; ;
+    oa:serializedAt &quot;datetime2&quot; ;
+    oa:serializedBy &lt;agent2&gt; ;
+    oa:annotatedBy &lt;agent1&gt;
+    oa:annotatedAt &quot;datetime1&quot; ;
+
+  &lt;annotating1&gt; a prov:Activity ;
+    prov:wasAssociatedWith &lt;agent1&gt; .
+
+  &lt;annoDocument1&gt; a prov:Entity ;
+    prov:generatedAt &quot;datetime2&quot; ;
+    prov:wasGeneratedBy &lt;serializing1&gt; .
+    
+  &lt;serializing1&gt; a prov:Activity ;
+    prov:wasAssociatedWith &lt;agent2&gt; .</pre>
+</div>
+</div>
+<div>
+<a id="ExtendingMotivations" name="ExtendingMotivations"></a>
+<h3>B. 動機（Motivation）の拡張</h3>
+<p>本仕様に記載されている動機（Motivation）のリストは、アノテーション（Annotation）の展望に関する大規模な調査に由来するが、モチベーションのより正確な定義が必要とされる、もしくは望ましいされている状況が多くある。これらのケースでは、新しい動機リソースを作成し、1つ以上の既存のリソースに関連付けることが推奨される（RECOMMENDED）。</p>
+<p>新しい動機は、 <code>skos:Concept</code>
+クラスのサブクラスである<code>oa:Motivation</code>クラスのインスタンスでなければならない（MUST）。もし対象範囲がより広範なものがある場合、<code>skos:broader</code>の関係は、新たな動機と1つ以上の既存の動機の間に主張されるべきである（SHOULD）。 <code>skos:relatedMatch</code>
+、 <code>skos:exactMatch</code>、<code>skos:closeMatch</code>
+のようなその他の関係は他のコミュニティにょって作成された概念に主張されるべきである（SHOULD）。</p>
+<h4>Model</h4>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/skosmotivations.png" width="600px" />
+<br /><span class="caption">図B. 動機の拡張</span>
+</div>
+<pre>
+ oa:motivationScheme a skos:ConceptScheme ;
+
+  oa:editing a oa:Motivation ;
+    skos:inScheme oa:motivationScheme ;
+    skos:prefLabel &quot;Editing&quot;@en .
+
+  new:correcting a oa:Motivation ;
+    skos:inScheme new:aScheme ;
+    skos:broader oa:editing ;
+    skos:prefLabel &quot;Correcting a Mistake&quot;@en .
+
+  new2:fixing a oa:Motivation ;
+    skos:inScheme new2:anotherScheme ;
+    skos:broader oa:editing ;
+    skos:closeMatch new:correcting ;
+    skos:prefLabel &quot;Fixing a Mistake&quot;@en .</pre>
+</div>
+</div>
+<div>
+<a id="References" name="References"></a>
+<h3>C. リファレンス</h3>
+<dl>
+<dt><a id="ref-awww">[AWWW]</a></dt>
+<dd><a href="http://www.w3.org/TR/webarch/">Architecture of the World Wide Web, Volume One</a>, Jacobs, I. Walsh, N., 15 December 2004</dd>
+<dt><a id="ref-content">[Content in RDF]</a></dt>
+<dd><a href="http://www.w3.org/TR/Content-in-RDF10/">Representing Content in RDF 1.0</a>, Koch, J. Velasco, C. 10 May 2011.</dd>
+<dt><a id="ref-css">[CSS]</a></dt>
+<dd><a href="http://www.w3.org/TR/CSS2/">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>, Bos, B. et al. 7 June 2011.</dd>
+<dt><a id="ref-dc" name="ref-dc">[DC Elements]</a></dt>
+<dd><a href="http://dublincore.org/documents/dces/">Dublin Core Metadata Elements</a>, DCMI Recommendation, 14 June 2012.</dd>
+<dt><a id="ref-dct" name="ref-dct">[DC Terms]</a></dt>
+<dd><a href="http://dublincore.org/documents/dcmi-terms/">DCMI Metadata Terms</a>, DCMI Usage Board, 14 June 2012.</dd>
+<dt><a id="ref-dct" name="ref-dct">[DC Types]</a></dt>
+<dd><a href="http://dublincore.org/documents/dcmi-type-vocabulary/#H7">DCMI Type Vocabulary</a>, DCMI Usage Board, 14 June 2012.</dd>
+<dt><a id="ref-dom" name="ref-dom">[DOM]</a></dt>
+<dd><a href="http://www.w3.org/TR/DOM-Level-3-Core/">Document Object Model (DOM) Level 3 Core Specification</a>, Le Hors, A et al. 7 April 2004.</dd>
+<dt><a id="ref-foaf" name="ref-foaf">[FOAF]</a></dt>
+<dd><a href="http://xmlns.com/foaf/spec/">FOAF Vocabulary Specification 0.91</a>, D. Brickley, L. Miller. 9 August 2010.</dd>
+<dt><a id="ref-fragbp">[FRAG-BP]</a></dt>
+<dd><a href="http://www.w3.org/TR/fragid-best-practices/">Best Practices for Fragment Identifiers and Media Type Definitions</a>, Tennison, J. 25 October 2012.</dd>
+<dt><a id="ref-html5">[HTML5]</a></dt>
+<dd><a href="http://www.w3.org/TR/html5/">HTML5</a>, Berjon R. et al. 17 December 2012.</dd>
+<dt><a id="ref-jsonld">[JSON-LD]</a></dt>
+<dd><a href="http://www.w3.org/TR/json-ld-syntax/">JSON-LD Syntax 1.0</a>, Sporny, M. et al. 12 July 2012.</dd>
+<dt><a id="ref-mediafrags">[Media-Frags]</a></dt>
+<dd><a href="http://www.w3.org/TR/media-frags/">Media Fragments URI 1.0 (basic)</a>, Troncy, R. et al. 25 September 2012</dd>
+<dt><a id="ref-memento">[Memento]</a></dt>
+<dd><a href="http://www.mementoweb.org/">Memento: Time Travel for the Web</a>, H. Van de Sompel, M. Nelson, R. Sanderson. October 2010.</dd>
+<dt><a id="ref-prov">[PROV]</a></dt>
+<dd><a href="http://www.w3.org/TR/prov-overview/">PROV-Overview</a>, Groth, P. Moreau, L., 11 December 2012.</dd>
+<dt><a id="ref-rdf" name="ref-rdf">[RDF]</a></dt>
+<dd><a href="http://www.w3.org/TR/rdf-primer/">RDF Primer</a>, F. Manola, E. Miller, Editors. W3C Recommendation, 10 February 2004.</dd>
+<dt><a id="ref-rdf11" name="ref-rdf11">[RDF Concepts]</a></dt>
+<dd><a href="http://www.w3.org/TR/rdf11-concepts/">RDF 1.1 Concepts and Abstract Syntax</a>, Cyganiak, R., Wood, D., 15 January 2013.</dd>
+<dt><a id="ref-rdfs" name="ref-rdfs">[RDF Schema]</a></dt>
+<dd><a href="http://www.w3.org/TR/rdf-schema/">RDF Vocabulary Description Language 1.0: RDF Schema</a>, Dan Brickley and R.V. Guha, Editors. W3C Recommendation, 10 February 2004.</dd>
+<dt><a id="ref-rdfs" name="ref-rdfs">[RDFa]</a></dt>
+<dd><a href="http://www.w3.org/TR/rdfa-core/">RDFa Core 1.1</a>, Adida, B. et al. 7 June 2012.</dd>
+<dt><a id="ref-rfc-3778">[RFC 3023]</a></dt>
+<dd><a href="http://tools.ietf.org/rfc/rfc3023">The &#39;application/pdf&#39; Media Type</a>, Taft, E. et al. May 2004.</dd>
+<dt><a id="ref-rfc-3236">[RFC 3236]</a></dt>
+<dd><a href="http://tools.ietf.org/rfc/rfc3236">XML Media Types</a>, Murata, M. St. Laurent, S., Kohn, D. January 2001.</dd>
+<dt><a id="ref-rfc-3778">[RFC 3778]</a></dt>
+<dd><a href="http://tools.ietf.org/rfc/rfc3778">The &#39;application/pdf&#39; Media Type</a>, Taft, E. et al. May 2004.</dd>
+<dt><a id="ref-rfc-3778">[RFC 3870]</a></dt>
+<dd><a href="http://tools.ietf.org/rfc/rfc3870">application/rdf+xml Media Type Registration</a>, Swartz, A. September 2004.</dd>
+<dt><a id="ref-rfc-3986">[RFC 3986]</a></dt>
+<dd><a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>, Berners-Lee, T., Fielding, R., and L. Masinter, STD 66, RFC 3986, January 2005.</dd>
+<dt><a id="ref-rfc-5147">[RFC 5147]</a></dt>
+<dd><a href="http://tools.ietf.org/rfc/rfc3236">URI Fragment Identifiers for the text/plain Media Type</a>, Wilde, E., Duerst, M. April 2008.</dd>
+<dt><a id="ref-skos">[SKOS]</a></dt>
+<dd><a href="http://www.w3.org/TR/skos-reference/">SKOS Simple Knowledge Organization System Reference</a>, Miles, A., Bechhofer, S. 18 August 2009</dd>
+<dt><a id="ref-svg">[SVG]</a></dt>
+<dd><a href="http://www.w3.org/TR/SVG/">Scalable Vector Graphics (SVG) 1.1 (Second Edition)</a>, Dahlström, E. et al. 2011年8月16日</dd>
+<dt><a id="ref-trig">[TRIG]</a></dt>
+<dd><a href="http://www.w3.org/2004/03/trix/">Named Graphs</a>, Semantic Web Interest Group, March 2004.</dd>
+</dl>
+</div>
+<div>
+<a id="Acknowledgements" name="Acknowledgements"></a>
+<h3>D. 謝辞</h3>
+<p>この仕様は、特に以下を含む多くの過去のアノテーション（Annotation）への取り組みの上に成り立っている。<ul>
+<li><a href="http://code.google.com/p/annotation-ontology/">Annotation Ontology</a>
+<br />Ciccarese, P. Ocana, M. et al. <i>&quot;An open annotation ontology for science on web 3.0&quot;</i>, Journal of Biomedical Semantics 2011 2(Suppl 2):S4, DOI: 10.1186/2041-1480-2-S2-S4, 17 May 2011</li>
+<li><a href="http://www.openannotation.org/spec/beta/">Open Annotation Collaboration</a>
+<br />Sanderson, R. Van de Sompel, H. <i>&quot;</i><i>Making Web Annotations Persistent over Time&quot;</i>, Proceedings of the 10th ACM/IEEE Joint Conference on Digital Libraries, June 2010</li>
+</ul>
+</p>
+<p>Open Annotation Collaborationへの財政支援及びAnnotation OntologyとOpen Annotation Collaborationのモデルの間の初期調整に対する資金提供をしてくれたアンドリュー·W·メロン財団に対してエディタは感謝の言葉を伝えたい。</p>
+</div>
+<div>
+<a id="ChangeLog" name="ChangeLog"></a>
+<h3>E.変更履歴</h3>
+<table class="changelog" summary="change log">
+<tbody>
+<tr>
+<th>日付</th>
+<th>エディター</th>
+<th>説明</th>
+</tr>
+<tr>
+<td>2013-02-08</td>
+<td>rsanderson</td>
+<td>Namespace change for W3C best practice</td>
+</tr>
+<tr>
+<td>2013-02-05</td>
+<td>rsanderson</td>
+<td>W3C Community Draft 2</td>
+</tr>
+<tr>
+<td>2013-01-28</td>
+<td>rsanderson</td>
+<td>W3C Community Draft 2 (internal for final review)</td>
+</tr>
+<tr>
+<td>2013-01-07</td>
+<td>rsanderson</td>
+<td>W3C Community Draft 2 (internal for review)</td>
+</tr>
+<tr>
+<td>2012-05-09</td>
+<td>rsanderson</td>
+<td>License Correction</td>
+</tr>
+<tr>
+<td>2012-05-01</td>
+<td>rsanderson</td>
+<td>W3C Community Draft</td>
+</tr>
+<tr>
+<td>2012-04-05</td>
+<td>rsanderson</td>
+<td>Internal Draft 2</td>
+</tr>
+<tr>
+<td>2012-03-30</td>
+<td>rsanderson</td>
+<td>Internal Draft 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<center>
+<a href="publishing.html">前のページ</a>
+<a href="index.html#contents">目次</a>
+</center>
+<hr />
+</div>
+</div>
+</body>
+</html>

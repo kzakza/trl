@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Open Annotation Data Model（2013年2月8日付コミュニティドラフト　日本語訳）</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"></meta>
+<meta name="viewport" content="width=device-width; initial-scale=1,minimum-scale=1, user-scalable=yes" />
+	
+<!--  Reset counter to 0 for first page -->	
+<style>
+div.toc OL { counter-reset: item }
+
+.subsection {counter-increment: section; }
+.subsubsection {counter-increment: subsection; }
+.body h2:before { content: "1. "; }
+.subsection > h3:before { content: "1." counters(section, ".") ". "; }
+.subsubsection > h3:before { content: "1." counters(section, ".") "." counters(subsection, ".") ". "; }
+
+</style>	
+<link rel="stylesheet" href="css/oa-spec.css" type="text/css" />
+<link rel="stylesheet" href="css/translation_memo.css" type="text/css" />
+
+</head>
+<body dir="ltr">
+<div id="status" style="position: absolute; -moz-transform-origin: top left; transform-origin: top left; -webkit-transform-origin: top left;
+        height: 30px; width: 250px; padding-top: 8px; top:250px; left:0px;
+        font-size: 18px; text-align: center; font-family: Arial, sans-serif; font-weight: 100;
+	 	-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); MozTransform: rotate(-90deg); 
+		background: #ff0000; color: #ffffff; ">W3C Community Draft</div>
+<div id="translation_notes">
+<p>この文書「Open Annotation Data Model Open Annotation」（2013年2月8日付コミュニティドラフト）は、<a href="http://www.w3.org/">W3C</a> の <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>による&quot;<a href="http://www.openannotation.org/spec/core/20130208/index.html" hreflang="en">Open Annotation Data Model (W3C Community Draft, 08 February 2013)</a>&quot;の日本語訳です。この日本語訳はあくまで参考情報であり、W3Cの公式な日本語訳ではありません。翻訳・解釈に誤りがある可能性があります。<a href="http://www.openannotation.org/spec/core/">原文の最新版</a>が存在する可能性があります。</p>
+<dl class="translator_info">
+<dt>日本語訳更新日:</dt>
+<dd class="date"><span class="modified">2014-06-18</span></dd>
+<dt>日本語訳公開日:</dt>
+<dd class="date"><span class="published">2014-04-27</span></dd>
+<dt>翻訳者:</dt>
+<dd><a href="http://www.kzakza.com/">kzakza</a></dd>
+</dl>
+</div>
+
+<div id="header">
+<table class="layout">
+<tr>
+<td><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72" /></a></td>
+<td>
+<h2 class="title">Open Annotation Data Model</h2>
+<h3 class="subTitle">2013年2月8日付コミュニティドラフト（Community Draft）</h3>
+</td>
+</tr>
+</table>
+</div>
+<hr />
+<dl>
+<dt>本バージョン：</dt>
+<dd><a href="http://www.openannotation.org/spec/core/20130208/index.html">http://www.openannotation.org/spec/core/20130208/index.html</a></dd>
+<dt>最新バージョン：</dt>
+<dd><a href="http://www.openannotation.org/spec/core/">http://www.openannotation.org/spec/core/</a></dd>
+<dt>旧バージョン：</dt>
+<dd><a href="http://www.openannotation.org/spec/core/20130205/index.html">http://www.openannotation.org/spec/core/20130205/index.html</a></dd>
+</dl>
+<dl class="EditorsContributors">
+<dt>編集者</dt>
+<dd>Robert Sanderson, Los Alamos National Laboratory</dd>
+<dd>Paolo Ciccarese, Massachusetts General Hospital and Harvard Medical School</dd>
+<dd>Herbert Van de Sompel, Los Alamos National Laboratory</dd>
+</dl>
+<dl class="EditorsContributors">
+<dt>貢献者（アルファベット順）：</dt>
+<dd>Shannon Bradshaw, Dan Brickley, Leyla Jael García Castro, Timothy Clark, 
+Timothy Cole, Phil Desenne, Anna Gerber, Antoine Isaac, Jacob Jett, 
+Thomas Habing, Bernhard Haslhofer, Sebastian Hellmann, Jane Hunter, 
+Randall Leeds, Andrew Magliozzi, Bob Morris, Paul Morris, Jacco van 
+Ossenbruggen, Stian Soiland-Reyes, James Smith, Dan Whaley.</dd>
+</dl>
+<div class="abstract">
+<h2>概要
+</h2>
+<p>Open Annotation Core Data ModelはWorld Wide Webのアーキテクチャに準拠した方法論を用いて、関連するリソースとアノテーションの連携を生成するための相互運用可能なフレームワークを規定する。単一のWebリソースに一片のテキストを付与するような、最も一般的なユースケースを可能にするのに十分にシンプルさを維持しつつ、複雑な要件を満たすための表現の十分な豊かさと兼ね備えて、Open Annotationをプラットフォーム間で簡単に共有することができる。</p>
+<p>アノテーション（Annotation）は、典型的には本体(body)とターゲット（target）を含む、関係するリソースのセットと考えられる。本体(body)は何らかの形でターゲット（target）が必要である。フルモデルは、セマンティックなアノテーションの付与、コンテンツの埋め込み、リソースのセグメントの選択、リソースの適切な表現の選択と利用するクライアントのために様式のヒントの提供という、さらなる機能をサポートする。</p>
+</div>
+<div class="abstract">
+<h2>この文書のステータス</h2>
+<p><i>このセクションでは、公開時点でのこの文書のステータスについて述べる。</i><i>他の文書がこの文書を置き換える場合がある。</i>
+</p>
+<p>Copyright © 2012-2013 the Contributors to the Open Annotation Core Data Model Specification, published by the <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>
+under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a>
+is available. </p>
+<p>この仕様は<a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>によって公開された。この仕様は、W3C標準ではなく、また、W3C標準化過程（Standard Track）上のものではない。<a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>の元に、限定的なオプトアウトとその他の条件が適用されることに留意してほしい。詳細は、<a href="http://www.w3.org/community/">W3C Community and Business Groups</a>を参照してほしい 。</p>
+<p>この文書は、レビューのためにOpen Annotation Community Groupに提供されてきたが、まだ彼らによって承認されていない。これはワーキングドラフトであり、W3Cやその構成員によって承認されたものではない。「進行中のもの」として以外に、この文書を参照することは適切ではない。</p>
+<p>この文書に関する全般的なコメントは公開メーリングリスト <a href="mailto:public-openannotation@w3.org">public-openannotation@w3.org</a>
+（ <a href="http://lists.w3.org/Archives/Public/public-openannotation/">公開アーカイブ</a>
+）に送ってほしい。</p>
+</div>
+<hr />
+<div class="toc">
+<h2><a id="contents" name="contents"></a>目次</h2>
+<p class="toc">
+<ol>
+<li><a href="index.html#Introduction"><b>イントロダクション</b></a>
+<ol>
+<li><a href="index.html#Aims">モデルの目的</a></li>
+<li><a href="index.html#Namespaces">名前空間</a></li>
+<li><a href="index.html#Terminology">用語</a></li>
+<li><a href="index.html#Examples">例</a></li>
+</ol>
+</li>
+<li><a href="core.html"><b>Open Annotationコア</b></a>
+<ol>
+<li><a href="core.html#BodyTarget">本体(Body)リソースとターゲット(Target)リソース</a>
+<ol>
+<li><a href="core.html#BodyTargetType">本体(Body)とターゲット(Target)の型付け</a></li>
+<li><a href="core.html#BodyEmbed">埋め込まれたテキスト形式の本体（Body）</a></li>
+<li><a href="core.html#Tagging">タグとセマンティックタグ</a></li>
+<li><a href="core.html#FragmentURIs">本体(Body)またはターゲット(Target)を識別するフラグメントURI</a></li>
+<li><a href="core.html#NoBody">本体（Body）なしのアノテーション（Annotation）</a></li>
+<li><a href="core.html#MultipleBodyTarget">複数の本体(Body)とターゲット(Target)</a></li>
+</ol>
+</li>
+<li><a href="core.html#Provenance">アノテーション（Annotation）の由来</a><ol><a href="core.html#Provenance">
+</a><li><a href="core.html#Provenance"><a href="core.html#ProvAgents">エージェント</a></a></li><a href="core.html#Provenance">
+</a></ol><a href="core.html#Provenance">
+</a></li>
+<li><a href="core.html#Motivations">動機（Motivation）</a></li>
+</ol>
+</li>
+<li><a href="specific.html"><b>モジュール：指定子（Specifier）と特定リソース（Specific Resource）</b></a>
+<ol>
+<li><a href="specific.html#Specific">指定子（Specifier）と特定リソース（Specific Resource）</a></li>
+<li><a href="specific.html#Selectors">セレクタ（Selector）</a>
+<ol>
+<li><a href="specific.html#FragmentSelector">フラグメントセレクタ（Fragment Selector）</a></li>
+<li><a href="specific.html#RangeSelectors">レンジセレクタ（Range Selector）</a>
+<ol>
+<li><a href="specific.html#TextPositionSelector">テキスト位置セレクタ（Text Position Selector）</a></li>
+<li><a href="specific.html#TextQuoteSelector">テキスト引用セレクタ（Text Quote Selector）</a></li>
+<li><a href="specific.html#DataPositionSelector">データ位置セレクタ（Data Position Selector）</a></li>
+</ol>
+</li>
+<li><a href="specific.html#AreaSelectors">エリアセレクタ（Area Selector）</a>
+<ol>
+<li><a href="specific.html#SvgSelector">SVGセレクタ（SVG Selector）</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="specific.html#States">状態（State）</a>
+<ol>
+<li><a href="specific.html#TimeState">時間状態（Time State）
+</a></li>
+<li><a href="specific.html#HttpRequestState">リクエストヘッダ状態（Request Header State）</a></li>
+</ol>
+</li>
+<li><a href="specific.html#Style">スタイル（Style）</a>
+<ol>
+<li><a href="specific.html#CssStyle">CSSスタイル（CSS Style）</a></li>
+</ol>
+</li>
+<li><a href="specific.html#Scope">リソースのスコープ（Scope）</a></li>
+</ol>
+</li>
+<li><a href="multiplicity.html"><b>モジュール：多重構造物</b></a>
+<ol>
+<li><a href="multiplicity.html#Choice">選択（Choice）</a></li>
+<li><a href="multiplicity.html#Composite">複合物（Composite）</a></li>
+<li><a href="multiplicity.html#List">リスト（List）</a></li>
+</ol>
+</li>
+<li><a href="publishing.html"><b>モジュール：発行</b></a>
+<ol>
+<li><a href="publishing.html#Serialization">シリアライゼーション</a></li>
+<li><a href="publishing.html#Embedding">リソースの埋め込み</a></li>
+<li><a href="publishing.html#Graphs">RDFグラフの埋め込み</a></li>
+<li><a href="publishing.html#Equivalence">リソースの等価性</a></li>
+</ol>
+</li>
+<li><a href="appendices.html#Appendices"><b>付録</b></a>
+<ol id="ToC_Appendix">
+<li><a href="appendices.html#ProvMapping">W3C 由来モデル（Provenance Model）へのマッピング</a></li>
+<li><a href="appendices.html#ExtendingMotivations">動機（Motivation）の拡張</a></li>
+<li><a href="appendices.html#References">リファレンス</a></li>
+<li><a href="appendices.html#Acknowledgements">謝辞</a></li>
+<li><a href="appendices.html#ChangeLog">変更履歴</a></li>
+</ol>
+</li>
+</ol></p></div>
+<hr />
+<div class="body">
+<div class="section">
+<a id="Introduction" name="Introduction"></a>
+<h2>イントロダクション</h2>
+<p>アノテーションの付与、つまり、情報の異なる一片と一片との繋がりを作る行為は、様々な形で幅広くオンライン上で行われている活動であるが、現在、構造化されたアプローチを欠いている。ウェブ市民は、ホスティングしているウェブサイトが内蔵しているツールや、外部のウェブサービス、または、アノテーションクライアントの機能を利用してオンライン上のリソースに対してコメントをつけている。Flickr上の写真やYouTube上のビデオへのコメント、Facebook上の人々の投稿、Twitter上でのリソースに対する言及は全て、議論されているリソースに関係づけられたアノテーションと考えることができる。また、クローズドで独自仕様のWebベースの「付箋」システムやスタンドアロンのマルチメディアのアノテーションシステムも大量に存在する。これらのタイプのシステムに対する主な不満は、ユーザーが作成したアノテーションが、意図的にアノテーションを作成された環境にロックインさせる戦略がとられているため、共有できないことや再利用できないことである。これらの問題を解決するための最低限の要件は、アノテーションを表現する共通のアプローチをとることである。</p>
+<p>Open Annotation Data Modelは、アノテーションを表現するための拡張可能で相互運用可能なフレームワークを提供する。このフレームワークでは、例えば単一のWebリソースにテキストの一片を付与するような、もっと共通するユースケースを許容するシンプルさを維持しつつ、複雑な要件を満たす表現の充分な豊かさを持ち、アノテーション（Annotation）をプラットフォーム間で容易に共有できる。</p>
+<p>アノテーションは、典型的には本体（body）とターゲット（target）を含む連結されたリソースのセットであると考えられ、本体（body）がターゲット（target）と関係することを伝達する。この関係の正確な性質は、アノテーションの意図に応じて変化するが、本体（body）がターゲット（target）「について」のものであることを最も頻繁に伝達する。本体（body）がターゲット（target）の識別子であることも含む、他の可能性のある関係は、ターゲット（target）の表現を提供するか、何らかの方法でターゲット（target）を分類する。この全体像は、以下に示すように、3つのパーツからなる基本モデルになる。フルモデルは、さらなる次の機能をサポートする。アノテーションの中に埋め込まれたコンテンツ、リソースの任意のセグメントの選択、リソースの適切な表現の選択と利用するクライアントのために様式のヒントの提供。機械によって作成された、もしくは機械を対象としたアノテーション（Annotation）は人間指向のDocument Webを考慮するだけではなく、Data Webも無視されないことを保証することをスコープに入れることも考慮されている。</p>
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/intro_model.png" width="400px" />
+<br /><span class="caption">図0.1. </span><span class="caption">アノテーション（Annotation）、本体（Body）とターゲット（Target）</span>
+</div>
+<p>アノテーションの相互運用性を高める以前の試みとは異なり、 Open Annotationシステムは、アノテーションを作成し、管理し、検索するためのトランスポートプロトコルを規定しない。代わりに、Web中心の方法や、これらのアノテーションをやり取りするために特定のネットワーク取引に合意しなければならないクライアントもしくはサーバーがない、アノテーションの発見と共有の推進について述べている。</p>
+<p>この仕様は不可欠なコアの部分と機能を追加するモジュールに分かれる。モジュールは、本体（body）もしくはターゲット（target）の正確な性質をURIで十分に捕捉できないケースや、多様性のための明確なセマンティクス、発行のためのベストプラクティスの推奨をカバーする。</p>
+<div class="subsection">
+<a id="Aims" name="Aims"></a>
+<h3>モデルの目的</h3>
+<p>
+Open Annotation Data Model の主な目的は、システム間でアノテーション（Annotation）を共有するための標準的な記述メカニズムを提供することである。この相互運用性は、他の人と共有するためであったり、デバイス間のプライベートなアノテーション（Annotation）の移行のためでもよい。共有されたアノテーション（Annotation）は、重要な情報を失うことなく、既存のコレクションに統合できたり、再利用できなけれならない。このモデルは、シンプルなアノテーションの容易さを維持し、そのべースラインから複雑なユースケースを可能とするところまで拡張しながら、可能な限り多くのアノテーションのユースケースをカバーするはずである。</p>
+<p>全ての利害関係者に利用されうる単一で、一貫性のあるモデルは、この標準化プロセスの目標である。求められるRDFのトリプルの数やシリアライゼーションに必要なバイトは、考慮すべき事項ではあるが、モデルの一貫性よりは重要ではない。すべての努力は制作者と利用者の両者の実装コストを最小限にするためになされる。受け入れる必要のある既存の仕様が存在するか、別段必要となる方法と関係するコストが著しくかかるのでなければ、複数な方法よりも、1つのユースケースを満たす１つの方法のほうがはるかに望ましい。</p>
+<p>アノテーション（Annotation）用のストレージやメンテナンスの方法を、このモデルでは規定しない。データベースは再構築される必要がなく、RDFトリプルストア（triplestore）技術が使用される必要はなく、既存のWebサイトやインターフェイスもは、再度スクリプティングする必要はなく、再設計する必要もない。唯一の要件は、アノテーション（Annotation）を記述するモデルの少なくとも1つのシリアライゼーションを、他のシステムが、他のシリアライゼーションに沿う可能性があるが、その他のモデルに取り込むことが可能であることである。全ての努力は、内部構造からOpen Annotation Data Model へのこのマッピングが明確かつ可能な限り簡潔であることを保証するためになられたものである。 <p>
+</p></p></div>
+<div class="subsection">
+<a id="Namespaces" name="Namespaces"></a>
+<h3>名前空間</h3>
+<p>Open Annotationモデルは、そのクラスやプロパティの名前空間を定義し、以下のリストに挙げるものを使用する。名前空間のURIはたとえオントロジーが変化した場合でも、常に同じであるだろう。オントロジーのすべてのバージョンは、バージョン固有のURLから利用可能であるであろうし、名前空間のURIは、最新バージョンへのアクセスを提供するであろう。</p>
+<p>この仕様では、次の名前空間が使用される。</p>
+<blockquote class="diagram">
+<table>
+<tr><th>接頭辞</th><th>名前空間</th><th>説明</th></tr>
+<tr><td>oa</td><td>http://www.w3.org/ns/oa＃</td>
+<td>Open Annotation ontology</td></tr>
+<tr><td>cnt</td><td>http://www.w3.org/2011/content＃</td><td><a href="http://www.w3.org/TR/Content-in-RDF10/">Representing Content in RDF</a></td></tr>
+<tr><td>dc</td><td>http://purl.org/dc/elements/1.1/</td><td><a href="http://dublincore.org/documents/dces/">Dublin Core Elements</a></td></tr>
+<tr><td>dcterms</td><td>http://purl.org/dc/terms/</td><td><a href="http://dublincore.org/documents/dcmi-terms/">Dublin Core Terms</a></td></tr>
+<tr><td>dctypes</td><td>http://purl.org/dc/dcmitype/</td><td><a href="http://dublincore.org/documents/dcmi-type-vocabulary/">Dublin Core Type Vocabulary</a></td></tr>
+<tr><td>foaf</td><td>http://xmlns.com/foaf/0.1/</td><td><a href="http://xmlns.com/foaf/spec/">Friend-of-a-Friend Vocabulary</a></td></tr>
+<tr><td>prov</td><td>http://www.w3.org/ns/prov＃</td><td><a href="http://www.w3.org/TR/prov-o/">Provenance Ontology</a></td></tr>
+<tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns＃</td><td><a href="http://www.w3.org/TR/rdf-syntax-grammar/">RDF</a></td></tr>
+<tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema＃</td><td><a href="http://www.w3.org/TR/rdf-schema/">RDF Schema</a></td></tr>
+<tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core＃</td><td><a href="http://www.w3.org/TR/skos-reference/">Simple Knowledge Organization System</a></td></tr>
+<tr><td>trig</td><td>http://www.w3.org/2004/03/trix/rdfg-1/</td><td><a href="http://www.w3.org/2004/03/trix/">TriG Named Graphs</a></td></tr>
+</table>
+</blockquote>
+<div class="editorsnote">&quot;Content in RDF&quot;の仕様は、その仕様のエディタによれば、安定していると考えられているが、発行時点ではまだワーキングドラフトの段階である。 &quot;TriG Named Graph&quot;オントロジーのステータスは不明である。これらのオントロジーの使用は、それらに影響を与える活動を考慮するために将来、再検討されるかもしれない。</div>
+</div>
+<div class="subsection">
+<a id="Terminology" name="Terminology"></a>
+<h3>用語</h3>
+<p>
+この文書で利用されているキーワード &quot;MUST&quot;、&quot;MUST NOT&quot;、&quot;REQUIRED&quot;、　&quot;SHALL”、　&quot;SHALL NOT&quot; 、&quot;SHOULD&quot;、&quot;SHOULD NOT&quot;、&quot;RECOMMENDED&quot;、 &quot;MAY&quot;、そして、 &quot;OPTIONAL&quot; は<a href="http://www.ietf.org/rfc/rfc2119">RFC 2119</a>で規定されている通りに解釈されることとする。</p>
+</div>
+<div class="subsection">
+<a id="Examples" name="Examples"></a>
+<h3>例</h3>
+<p>これらの文書を通して示される例は、図とRDFの<a href="http://www.w3.org/TR/turtle/">Turtle</a>形式で示される。実際のリソースについての特定のユースケースを表現するものではない。Turtleの例は名前空間の宣言を提供していない。上記の<a href="index.html#Namespaces">名前空間テーブル</a>に従うことを検討するべきである。<a href="http://www.w3.org/TR/rdf-sparql-query/">SPARQL</a>の使用例は、自然言語で表現されるクエリに基づいて、各セクションで提供される。特定の状況のモデル化及び実装方法の追加の例が必要ならば、<a href="http://www.openannotation.org/spec/tutorial/">チュートリアル</a>や<a href="http://www.w3.org/community/openannotation/wiki/Cookbook">Annotation Cookbook</a>
+が利用可能である。</p>
+<p>この仕様で示される図は、次のスタイルを使用する。<ul>
+<li>インスタンスは、着色された楕円として描かれる。<ul>
+<li>解決可能なURIを持つインスタンスの境界線は、単一線である。</li>
+<li>解決不可能なURNまたは空白ノードを持つインスタンスの境界線は、二重線である。</li>
+</ul>
+</li>
+<li>クラスは白い長方形として描かれている。</li>
+<li>リテラルは白いひし形として描かれている</li>
+<li>関係は、黒い直線として描かれている。<br />関係は、範囲がリソースであり、かつOWLオブジェクトプロパティに相当するRDFの述語である。</li>
+<li>プロパティは、黒い曲線で描かれている。<br />プロパティは、範囲がリテラルであり、かつOWLデータタイププロパティに相当するRDF述語である。</li>
+<li>クラスのインスタンス化（ <code class="tech">rdf:type</code>
+）は、白い矢印でまっすぐな黒線で描かれている。</li>
+<li>例にあるインスタンス識別子は小文字で表記され、最後は数字で終了する<br />例えば、<code class="tech">oa:Annotation</code>はクラスであるのに対して、 <code>anno1</code>はアノテーション（Annotation）のある特定のインスタンスである。</li>
+<li>例にあるリテラルはモデルの要件に従う。唯一の可能な値として解釈されてはならない。</li>
+<li>モデルの中では、明示的ではないが、理解のために重要であると考えられる概念的なリソースの境界は、コンポーネントのまわりの灰色の破線のボックスとして描かれる。これらは、図の空間的なパーツを伝えるために使用され、無視しても問題ない。</li>
+</ul>
+</p>
+</div>
+</div>
+<hr />
+<center><a href="#contents">目次</a> <a href="core.html">次のページ</a></center>
+<hr />
+</div>
+</body>
+</html>

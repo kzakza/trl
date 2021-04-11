@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Open Annotation Data Model モジュール : 多重構造物（2013年2月8日付コミュニティドラフト　日本語訳）</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"></meta>
+<meta name="viewport" content="width=device-width; initial-scale=1,minimum-scale=1, user-scalable=yes" />
+<style>
+div.toc OL { counter-reset: item 3 }
+div.toc OL LI OL { counter-reset: item 0}
+
+.subsection {counter-increment: section; }
+.subsubsection {counter-increment: subsection; }
+.subsubsubsection {counter-increment: subsubsection; }
+.body h2:before { content: "4. "; }
+.subsection > h3:before { content: "4." counters(section, ".") ". "; }
+.subsubsection > h3:before { content: "4." counters(section, ".") "." counters(subsection, ".") ". "; }
+.subsubsubsection > h3:before { content: "4." counters(section, ".") "." counters(subsection, ".") "." counters(subsubsection, ".") ". "; }
+</style>
+<link rel="stylesheet" href="css/oa-spec.css" type="text/css" />
+<link rel="stylesheet" href="css/translation_memo.css" type="text/css" />
+
+</head>
+<body dir="ltr">
+<div id="status" style="position: absolute; -moz-transform-origin: top left; transform-origin: top left; -webkit-transform-origin: top left;
+        height: 30px; width: 250px; padding-top: 8px; top:250px; left:0px;
+        font-size: 18px; text-align: center; font-family: Arial, sans-serif; font-weight: 100;
+	 	-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); MozTransform: rotate(-90deg); 
+		background: #ff0000; color: #ffffff; ">W3C Community Draft</div>
+<div id="translation_notes">
+<p>この文書「Open Annotation Data Model Open Annotation」（2013年2月8日付コミュニティドラフト）は、<a href="http://www.w3.org/">W3C</a> の <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>による&quot;<a href="http://www.openannotation.org/spec/core/20130208/index.html" hreflang="en">Open Annotation Data Model (W3C Community Draft, 08 February 2013)</a>&quot;の日本語訳です。この日本語訳はあくまで参考情報であり、W3Cの公式な日本語訳ではありません。翻訳・解釈に誤りがある可能性があります。<a href="http://www.openannotation.org/spec/core/">原文の最新版</a>が存在する可能性があります。</p>
+<dl class="translator_info">
+<dt>日本語訳更新日:</dt>
+<dd class="date"><span class="modified">2014-06-18</span></dd>
+<dt>日本語訳公開日:</dt>
+<dd class="date"><span class="published">2014-04-27</span></dd>
+<dt>翻訳者:</dt>
+<dd><a href="http://www.kzakza.com/">kzakza</a></dd>
+</dl>
+</div>
+<div id="header">
+<table class="layout">
+<tr>
+<td><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72" /></a></td>
+<td>
+<h2 class="title">Open Annotation Data Model モジュール : 多重構造物</h2>
+<h3 class="subTitle">2013年2月8日付コミュニティドラフト（Community Draft）</h3>
+</td>
+</tr>
+</table>
+</div>
+<center>
+<a href="specific.html">前のページ</a>&nbsp; &nbsp;<a href="index.html#contents">目次</a>&nbsp; &nbsp;<a href="publishing.html">次のページ</a>
+</center>
+<hr />
+<div class="toc">
+<h2>目次</h2>
+<p class="toc">
+<ol>
+<li><a href="multiplicity.html#Multiplicity"><b>モジュール : 多重構造物</b></a>
+<ol>
+<li><a href="multiplicity.html#Choice">選択（Choice）</a></li>
+<li><a href="multiplicity.html#Composite">複合物（Composite）</a></li>
+<li><a href="multiplicity.html#List">リスト（List）</a></li>
+</ol>
+</li>
+</ol>
+</p></div>
+<hr />
+<div class="body">
+<div class="section">
+<a id="Multiplicity" name="Multiplicity"></a>
+<h2>モジュール：多重構造物</h2>
+<p>アノテーション（Annoation）が、複数の本体（Body）、ターゲット（Target）、もしくはその両方から構成されるユースケースが多くある。複数の本体（Body）、ターゲット（Target）のために<a href="core.html#MultipleBodyTarget">コア</a>で定義されたセマンティクスは、それぞれのリソースが個々に他のリソースと関係を持っていることであるが、いつもそのケースとはかぎらない。アノテーション（Annoation）を代替となるあるグループからの１つのリソースと関係づけるのに役に立つ。例えば、異なる3つの言語で利用可能なコメントを持ち、ユーザーのクライアントがその中から適切な１つの言語を表示させる場合。または、リソースを比較する時のように全てのリソースが等しく重要であるリソースのセットにアノテートする場合である。この後者のケースでは、コメントはリソースに個々に適用されず、それらのすべてに適用される。最後に、特に意図したセグメントを抽出するために適切な順序で処理しなければならないセレクタ（Selector）のグルーピングのためにリソースのそのセットの順序付けが考慮されれば有用である。</p>
+<p>
+Open Annotationモデルは、これらの要件をモデル化するために3つの多重構造物を含んでいる。<code>oa:Choice、oa:Composite</code>および<code>oa:List</code>である。これらのノードは、<code class="tech">oa:hasBody、oa:hasTarget、oa:hasSelector,、oa:hasState, oa:styledBy</code>のオブジェトと<code class="tech">oa:hasScope</code>関係として使用され、<code class="tech">oa:item</code>関係を使用する構成リソースを順に参照する。アイテムはリソースもしくはさらに複数のリソースからなる構造物のようかもしれない。例えば、複合物（Composite）は、2つのアイテムをもつかもしれず、そのうちの1つはリソースであり、もう1つは2つのさらなるリソースの間にある<code>oa:Choice</code>
+かもしれない。</p>
+<p>多重構造物は、UUIＤ、URNのような、識別するためのグローバルにユニークなURIを持つべきである（SHOULD）。URIは解決可能であってもよい（MAY）。アノテーション（Annotation）グラフのように、そのURIが構造物のRDFのdescription要素である場合、もしデリファレンスされたときに返されなければならない（MUST）。この識別勧告は<code>rdf:Alt</code>
+、<code>rdf:Bag</code>、<code>rdf:List</code>の同等クラスでは、標準的ではない。それらのクラスに基づく要件のさらなる処理およびモデリングを有効な状態にすることができない。他のアノテーションやシステムから直接参照されることが重要であると考えられないならば、RDF空白ノードを使用して構造物が代わりにモデリングされることはよい（MAY）。</p>
+<p><b>注意事項：</b>以下の全ての例が1つのレベルの１つの構造物を表示しているが、同じパターンは、全ての関係と1つ以上のグルーピングされたリソースからなる構造物に従う。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:item</td><td>Relationship</td><td>[rdfs:memberのサブプロパティ] 複数の構造ノードと構成要素であるリソースとの関係<br />1個以上のアイテムがなくてはならない（MUST）。</td></tr>
+</table>
+</blockquote>
+<div class="subsection">
+<a id="Choice" name="Choice"></a>
+<h3>選択（Choice）</h3>
+<p>選択（Choice）は、アノテーション（Annotation）を利用するアプリケーション処理をするか表示するかを選択するリソースのセットである。指定子（Specifier）にとって、選択（Choice）が同等か等価であるときに、クライアントは使用するための構成要素リソースの中から1つ選ぶべきである。クライアントは、どのリソースを選ぶべきかの決定に任意のアルゴリズムを使用しようしてもよい（MAY）。そして、自動的にそれを行うために、アノテーション（Annotation ）の中にある情報表示を利用するべきである（SHOULD）。または、リストを表示し、ユーザーに決断を求めてもよい（MAY）。</p>
+<p>選択（Choice）は、デフォルトのオプションを用意すべきである。これは、クライアントが独自の好みを持っていない場合に、アノテーション（Annotation）の発行者が使用されるべきことを推奨する構造要素リソースである。この機能は、特に好まれるセレクタ（Selector）もしくは状態（State）を表現するために使用されるべきである。<code>rdf:Alt</code>は等価的なプロパティを持たないことに注意する。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:Choice</td><td>Class</td><td>[rdf:Altのサブクラス] 利用するアプリケーションに構成要素リソースの中からユーザーに表示する１個を選ぶべきことと、全てをレンダリングしないことを伝える１個の多重構造物。
+この構造物は、rdf:Alt container クラスと等価である。</td></tr>
+<tr><td>oa:default</td><td>Relationship</td><td>[oa:itemのサブプロパティ] 最も適切なものを決定する他の手段がない場合にデフォルトオプションとして使用するための構成要素リソース。<br />各選択（Choice）にきっちり1個ずつのデフォルトの関係があるべきである（SHOULD）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/choice.png" width="600px" />
+<br /><span class="caption">図4.1. 選択（Choice）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;choice1&gt; ;
+    oa:hasTarget &lt;target1&gt; .
+    
+  &lt;choice1&gt; a oa:Choice ;
+    oa:default &lt;body1&gt; ;
+    oa:item &lt;body2&gt; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>デフォルトで本体（body）が選択（Choice）であるところのリソースのアノテーションを検索する。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasBody ?body . ?body a oa:Choice . 
+    ?body oa:default ?default }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#Choice">さらなる例はこちらを参照すること。</a></p>
+</div>
+<div class="subsection">
+<a id="Composite" name="Composite"></a>
+<h3>複合物（Composite）</h3>
+<p>複合物（Composite）は、アノテーション（Annotation）が正しく解釈されるために全てに要求されるリソースのセットである。以下の例では、2つのリソース間の違いを比較したアノテーション（Annotation）もしくは人間が読むことができる形式のものと必要な構造化データ·ファイルの両方で本体（Body）が構成されるアノテーション（Annotation）が含まれている。それぞれが個々にアノテーション（Annotation）を作成したりされたりするため、これらは個別の本体（body）とターゲット（target）である。１つのセレクタ（Selector）はビデオの時間範囲を指定し、もう１つのセレクタ（Selector）がその時間範囲上に示すために長方形ではないエリアを指定するなど、2つのセレクタ（Selector）を使用するなど、指定子（Specifier）を組み合わせることができることも重要である。</p>
+<p>データモデルは、<code>oa:Composite</code>クラスを定義し、上で定義された<code>oa:item</code>関係を使用する。各複合物（Composite）は2つ以上の構成要素リソースを持っていなければならない（MUST）。そして、すべてが要求された時にデフォルトではない。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:Composite</td><td>Class</td><td>[subClass of rdf:Bag] アノテーション（Annotation）が正しく解釈されるために全ての構成要素リソースが要求されることをアプリケーションに伝える多重構造物。この構造物は<code>rdf:Bag</code>クラスのRDFコンテナと等価である。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/composite.png" width="600px" />
+<br /><span class="caption">図4.2. 複合物（Composite）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;comp1&gt; .
+    
+  &lt;comp1&gt; a oa:Composite ;
+    oa:item &lt;target1&gt; ;
+    oa:item &lt;target2&gt; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>ターゲット（target）が特定のリソースを含む複合物であるアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:Composite . 
+    ?target oa:item &lt;Target1&gt; }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#Composite">さらなる例はこちらを参照すること。</a></p>
+</div>
+<div class="subsection">
+<a id="List" name="List"></a>
+<h3>リスト（List）</h3>
+<p>リスト（List）には、アノテーション（Annotation）のコンテキストでその構成要素リソースに順序を与える複合物（Composite）である。以下の図にある使用例では、セレクタ（Selector）が特に強い。そこでは、アプリケーションの処理が最初の選択にならなくてはならない。もしそれが他の順序で行われたなら、結果は正しくないものになるだろう。これは、独自のURIを持たない本の中の特定のページを参照し、そのページの中のテキストを選択する状況が含まれている。別のユースケースは、クラスの定義に優先順位をつけるためにスタイル（Style）のセットに順序を割り振る。</p>
+<p><code>rdf:List</code>構造には順序が与えられるべきである。<code>oa:List</code>リソースは、同時に<code>rdf:first</code>関係と<code>rdf:rest</code>関係を持つ<code>rdf:List</code>リソースである。リソースは、指定された順序で処理されるべきである。シリアライゼーションフォーマットは、以下の図で描かれた複雑さを隠すリスト表現する異なる方法を持っている。</p>
+<p>アノテーション（Annotation）作成者は<code>oa:item</code>とリストの述語の両方を提供するべきである（SHOULD）。これによりリンクされたリスト構造物を通して反復せずに順序付けされていない方式でリストを処理するためのフォールバックをクライアントにさせることができる。</p>
+<div class="editorsnote">公開時点での順序を表現するための代替方法については、一般的に、RDFコミュニティの継続的な議論があります。 順序付けはグラフ構造に本質的に問題があり、下位の仕様が変更されるなら、上位の順位付けの勧告も変わってしまうかも知れない。これは、リソースに対するoa:Listクラスとrdf:Listクラスの二重クラス付けの理由の１つである。もしrdf:Listクラスが廃止された場合にこの仕様で定義するクラスによってある程度の一貫性を維持するためである。さらに、もし明示的に宣言されない場合に、rdf:Listsクラスを処理するシステムがそのアイテムを処理しない可能性があるだろう。<br /><br /><code>rdf:first</code>
+、<code>rdf:rest</code>パターンから<code>oa:item</code>のステートメントを自動的に抽出するアルゴリズムは<ol>
+<li>全ての [l rdf:first i .] ステートメントに１つの [l oa:item i .] ステートメントを作成することができる。<li>新しいステートメントが作成できなくなるまで、 [l rdf:rest r . r oa:item i .]ステートメントの全てのチェーンに１つの [l oa:item i .] ステートメントを作成することができる。</li></li></ol>次の原理は、意図したアルゴリズムを反映しているが、OWL2（-DL）に有効でないかもしれない。<pre>
+    rdf:first rdfs:subPropertyOf oa:item .
+    oa:item owl:propertyChainAxiom  ( rdf:rest  oa:item ) .
+</pre>
+</div>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:List</td><td>Class</td><td>[oa:Compositeのサブクラス] アノテーション（Annotation）が正しく、そして、特定の順序で解釈されるため全ての構成要素リソースが要求されることをアプリケーションに伝える多重構造物。この構造物はrdf:BagクラスのRDFコンテナと等価である。</td></tr>
+<tr><td>rdf:List</td><td>Class</td><td>rdf:Listは順序付けされたリストとその他のリストライクな構造のdecriptionの構築に使用することができるリソース</td></tr>
+<tr><td>rdf:first</td><td>Relationship</td><td>ある特定のリストの最初のリソース。リストの残りは rdf:restによって参照される</td></tr>
+<tr><td>rdf:rest</td><td>Relationship</td><td>rdf:Listのインスタンスかリストにさらなるアイテムがなければrdf:nilのインスタンス</td></tr>
+<tr><td>rdf:nil</td><td>Resource</td><td>空のリストを表現するrdf:List のある特定のインスタンス</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/list.png" width="600px" />
+<br /><span class="caption">図4.3. リスト（List）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSource &lt;source1&gt; ;
+    oa:hasSelector &lt;list1&gt; .
+
+  &amp;ltlist1&gt; a oa:List, rdf:List ;
+    oa:item &lt;selector1&gt;, &lt;selector2&gt; ;
+    rdf:first &lt;selector1&gt; ;
+    rdf:rest ( &lt;selector2&gt; ) .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>ターゲット（target）セグメントが順番に複数のセレクタを要求する場合、アノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:SpecificResource . 
+    ?target oa:hasSelector ?list . ?list a oa:List }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#List">さらなる例はこちらを参照すること。</a></p>
+</div>
+<hr/>
+<center>
+<a href="specific.html">前のページ</a>&nbsp; &nbsp;<a href="index.html#contents">目次</a>&nbsp; &nbsp;<a href="publishing.html">次のページ</a>
+</center>
+<hr/>
+
+</div> <!--  full block -->
+</div> <!--  body -->
+</body>
+</html>

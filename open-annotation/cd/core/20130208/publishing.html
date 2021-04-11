@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Open Annotation Data Model モジュール: 発行（2013年2月8日付コミュニティドラフト　日本語訳）</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"></meta>
+<meta name="viewport" content="width=device-width; initial-scale=1,minimum-scale=1, user-scalable=yes" />
+<style>
+div.toc OL { counter-reset: item 4 }
+div.toc OL LI OL { counter-reset: item 0}
+
+.subsection {counter-increment: section; }
+.subsubsection {counter-increment: subsection; }
+.subsubsubsection {counter-increment: subsubsection; }
+.body h2:before { content: "5. "; }
+.subsection > h3:before { content: "5." counters(section, ".") ". "; }
+.subsubsection > h3:before { content: "5." counters(section, ".") "." counters(subsection, ".") ". "; }
+.subsubsubsection > h3:before { content: "5." counters(section, ".") "." counters(subsection, ".") "." counters(subsubsection, ".") ". "; }
+
+</style>
+<link rel="stylesheet" href="css/oa-spec.css" type="text/css" />
+<link rel="stylesheet" href="css/translation_memo.css" type="text/css" />
+
+</head>
+<body dir="ltr">
+<div id="status" style="position: absolute; -moz-transform-origin: top left; transform-origin: top left; -webkit-transform-origin: top left;
+        height: 30px; width: 250px; padding-top: 8px; top:250px; left:0px;
+        font-size: 18px; text-align: center; font-family: Arial, sans-serif; font-weight: 100;
+	 	-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); MozTransform: rotate(-90deg); 
+		background: #ff0000; color: #ffffff; ">W3C Community Draft</div>
+<div id="translation_notes">
+<p>この文書「Open Annotation Data Model Open Annotation」（2013年2月8日付コミュニティドラフト）は、<a href="http://www.w3.org/">W3C</a> の <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>による&quot;<a href="http://www.openannotation.org/spec/core/20130208/index.html" hreflang="en">Open Annotation Data Model (W3C Community Draft, 08 February 2013)</a>&quot;の日本語訳です。この日本語訳はあくまで参考情報であり、W3Cの公式な日本語訳ではありません。翻訳・解釈に誤りがある可能性があります。<a href="http://www.openannotation.org/spec/core/">原文の最新版</a>が存在する可能性があります。</p>
+<dl class="translator_info">
+<dt>日本語訳更新日:</dt>
+<dd class="date"><span class="modified">2014-06-05</span></dd>
+<dt>日本語訳公開日:</dt>
+<dd class="date"><span class="published">2014-04-27</span></dd>
+<dt>翻訳者:</dt>
+<dd><a href="http://www.kzakza.com/">kzakza</a></dd>
+</dl>
+</div>
+<div id="header">
+<table class="layout">
+<tr>
+<td><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72" /></a></td>
+<td>
+<h2 class="title">Open Annotation Data Model モジュール: 発行</h2>
+<h3 class="subTitle">2013年2月8日付コミュニティドラフト（Community Draft）</h3>
+</td>
+</tr>
+</table>
+</div>
+<center>
+<a href="multiplicity.html">前のページ</a>&nbsp; &nbsp;<a href="index.html#contents">目次</a>&nbsp; &nbsp;<a href="appendices.html">次のページ</a>
+</center>
+<hr />
+<div class="toc">
+<h2><a id="contents" name="contents"></a>目次</h2>
+<p class="toc">
+<ol>
+<li><a href="publishing.html#Publishing"><b>モジュール：発行</b></a>
+<ol>
+<li><a href="publishing.html#Serialization">シリアライゼーション</a></li>
+<li><a href="publishing.html#Embedding">その他のリソースの埋め込み</a></li>
+<li><a href="publishing.html#Graphs">RDFグラフの埋め込み</a></li>
+<li><a href="publishing.html#Equivalence">リソースの等価性</a></li>
+</ol>
+</li>
+</ol>
+</p></div>
+<hr />
+<div class="body">
+<div class="section">
+<a id="Publishing" name="Publishing"></a>
+<h2>モジュール：発行</h2>
+<p>Open Annotation Data Model は、アノテーション(Annotation) がネットワークのプロトコルレベルでシステム間をどのように伝達するかについて規定していないが、概して発行に関して相互運用性のために対処しなければならない問題がいくつか存在する。これらには、外部のURIから参照されるのでははなく、アノテーション（Annotation）内にリソースを埋め込む方法、複数のシステム間の重複排除を支援するためにリソース間の等価性の表現すること、そして、名前付きグラフを用いてアノテーション（Annotation）を表現する方法が含まれている。
+</p>
+<div class="subsection">
+<a id="Serialization" name="Serialization"></a>
+<h3>シリアライゼーション</h3>
+<p>アノテーション（Annotation）のシリアライゼーションは、RDFグラフを表現できるどのフォーマットでもよい（MAY）。<a href="http://www.w3.org/TR/rdfa-core/">RDFa</a>を使用してアノテーション（Annotation） をWebページ内に埋め込むように、他のリソースに埋め込まれてもよい（MAY）。</p>
+<p>アノテーション（Annotation）がHTTP URIを持ち、そのURIがデリファレンスされた場合には、そのアノテーション（Annotation）の表現は、適切にグラフがシリアライズされたフォーマットに戻されなくてはならない（MUST）。RDFaとして表現されたときのように、シリアライゼーションが他のリソースに埋め込まれれる形で行われた場合、このHTTP URIは、そのシリアル化されたフォーマットの中で表現され続けられなければならない（MUST）。アノテーション（Annotation）がデリファレンスされたURIから利用できず、格納するリソースに埋め込まれたもののみが利用可能な場合、UUIDやタグURIのような、グローバルにユニークなURN識別子を持っていなければならない（MUST）。</p>
+<p>シリアライゼーションのフォーマットに<a href="http://www.w3.org/TR/json-ld-syntax/">JSON-LD</a>を推奨する（RECOMMENDED） 。このフォーマットは、開発者になじみのあるツールや方法を使用することで、ウェブブラウザベースの実装で容易にアノテーション（Annotation）を利用させることができる。以下に提示するコンテキスト（Context）が実装間の一貫性を担保するために推奨される（RECOMMENDED）。このコンテキスト（Context）は<code>http://www.w3.org/ns/oa-context-20130208.json</code>
+で参照することができる。その他のシリアライゼーションのフォーマット、特にRDF/XMLとTurtleのコンテンツネゴシエーションをサポートすることを推奨する（RECOMMENDED）。</p>
+<h4>モデル</h4>以下は、Open Annotation Data Model を実装するシステムでの使用が推奨される（RECOMMENDED）コンテキスト（Context）の説明である。<div class="diagramWrapper">
+<pre>
+{
+ &quot;@context&quot;: {
+    &quot;oa&quot; :     &quot;http://www.w3.org/ns/oa#&quot;,
+    &quot;cnt&quot; :    &quot;http://www.w3.org/2011/content#&quot;,
+    &quot;dc&quot; :     &quot;http://purl.org/dc/elements/1.1/&quot;,
+    &quot;dcterms&quot;: &quot;http://purl.org/dc/terms/&quot;,
+    &quot;dctypes&quot;: &quot;http://purl.org/dc/dcmitype/&quot;,
+    &quot;foaf&quot; :   &quot;http://xmlns.com/foaf/0.1/&quot;,
+    &quot;rdf&quot; :    &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;,
+    &quot;rdfs&quot; :   &quot;http://www.w3.org/2000/01/rdf-schema#&quot;,
+    &quot;skos&quot; :   &quot;http://www.w3.org/2004/02/skos/core#&quot;,
+
+    &quot;hasBody&quot; :         {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:hasBody&quot;},
+    &quot;hasTarget&quot; :       {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:hasTarget&quot;},
+    &quot;hasSource&quot; :       {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:hasSource&quot;},
+    &quot;hasSelector&quot; :     {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:hasSelector&quot;},
+    &quot;hasState&quot; :        {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:hasState&quot;},
+    &quot;hasScope&quot; :        {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:hasScope&quot;},
+    &quot;annotatedBy&quot; :  {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:annotatedBy&quot;},
+    &quot;serializedBy&quot; : {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:serializedBy&quot;},
+    &quot;motivatedBy&quot; :  {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:motivatedBy&quot;},
+    &quot;equivalentTo&quot; : {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:equivalentTo&quot;},
+    &quot;styledBy&quot; :     {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:styledBy&quot;},
+    &quot;cachedSource&quot; : {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:cachedSource&quot;},
+    &quot;conformsTo&quot; :   {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;dcterms:conformsTo&quot;},
+    &quot;default&quot; :      {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:default&quot;},
+    &quot;item&quot; :         {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;oa:item&quot;},
+    &quot;first&quot;:         {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;rdf:first&quot;},
+    &quot;rest&quot;:          {&quot;@type&quot;:&quot;@id&quot;, &quot;@id&quot; : &quot;rdf:rest&quot;, &quot;@container&quot; : &quot;@list&quot;},
+
+    &quot;chars&quot; :        &quot;cnt:chars&quot;,
+    &quot;bytes&quot; :        &quot;cnt:bytes&quot;,
+    &quot;format&quot; :       &quot;dc:format&quot;,
+    &quot;annotatedAt&quot; :  &quot;oa:annotatedAt&quot;,
+    &quot;serializedAt&quot; : &quot;oa:serializedAt&quot;,
+    &quot;when&quot; :         &quot;oa:when&quot;,
+    &quot;value&quot; :        &quot;rdf:value&quot;,
+    &quot;start&quot; :        &quot;oa:start&quot;,
+    &quot;end&quot; :          &quot;oa:end&quot;,
+    &quot;exact&quot; :        &quot;oa:exact&quot;,
+    &quot;prefix&quot; :       &quot;oa:prefix&quot;,
+    &quot;suffix&quot; :       &quot;oa:suffix&quot;,
+    &quot;label&quot; :        &quot;rdfs:label&quot;,
+    &quot;name&quot; :         &quot;foaf:name&quot;,
+    &quot;mbox&quot; :         &quot;foaf:mbox&quot;,
+    &quot;styleClass&quot; :        &quot;oa:styleClass&quot;
+  }
+}
+</pre>
+<center>
+<span class="caption">図5.1.1 Open Annotation JSON-LD コンテキスト（Context）仕様</span>
+</center>
+</div>
+<br />
+<p>利用は以下の2つの例と同じようなシリアライゼーションになる。</p>
+<div class="diagramWrapper">
+<pre>
+{
+    &quot;@context&quot;: &quot;http://www.w3.org/ns/oa-context-20130208.json&quot;, 
+    &quot;@type&quot;: &quot;oa:Annotation&quot;,
+    &quot;hasBody&quot;: &quot;http://www.example.org/body1&quot;,
+    &quot;hasTarget&quot;: &quot;http://www.example.org/target1&quot;
+}
+    </pre>
+<center>
+<span class="caption">図5.1.2.</span><span class="caption">シンプルなOpen Annotation シリアライゼーション</span>
+</center>
+</div>
+<br />
+<div class="diagramWrapper">
+<pre>
+{
+    &quot;@context&quot;: &quot;http://www.w3.org/ns/oa-context-20130208.json&quot;, 
+    &quot;@id&quot;: &quot;http://www.example.org/annotations/anno1&quot;, 
+    &quot;@type&quot;: &quot;oa:Annotation&quot;,
+
+    &quot;annotatedAt&quot;: &quot;2012-11-10T09:08:07&quot;, 
+    &quot;annotatedBy&quot;: {
+        &quot;@id&quot;: &quot;http://www.example.org/people/person1&quot;, 
+        &quot;@type&quot;: &quot;foaf:Person&quot;, 
+        &quot;mbox&quot;: {
+            &quot;@id&quot;: &quot;mailto:person1@example.org&quot;
+        }, 
+        &quot;name&quot;: &quot;Person One&quot;
+    },
+
+    &quot;hasBody&quot;: {
+        &quot;@id&quot;: &quot;urn:uuid:1d823e02-60a1-47ae-ae7f-a02f2ac348f8&quot;, 
+        &quot;@type&quot;: [&quot;cnt:ContentAsText&quot;, &quot;dctypes:Text&quot;], 
+        &quot;chars&quot;: &quot;This is part of our logo&quot;
+    }, 
+    &quot;hasTarget&quot;: {
+        &quot;@id&quot;: &quot;urn:uuid:cc2c8f08-3597-4d73-a529-1c5fed58268b&quot;, 
+        &quot;@type&quot;: &quot;oa:SpecificResource&quot;, 
+        &quot;hasSelector&quot;: {
+            &quot;@id&quot;: &quot;urn:uuid:7978fa7b-3e03-47e2-89d8-fa39d1280765&quot;, 
+            &quot;@type&quot;: &quot;oa:FragmentSelector&quot;, 
+            &quot;conformsTo&quot;: &quot;http://www.w3.org/TR/media-frags/&quot;, 
+            &quot;value&quot;: &quot;xywh=10,10,5,5&quot;
+        }, 
+        &quot;hasSource&quot;: {
+            &quot;@id&quot;: &quot;http://www.example.org/images/logo.jpg&quot;, 
+            &quot;@type&quot;: &quot;dctypes:Image&quot;
+        }
+    }
+}
+</pre>
+<center>
+<span class="caption">図5.1.3. 詳細なOpen Annotation シリアライゼーション</span>
+</center>
+</div>
+</div>
+<div class="subsection">
+<a id="Embedding" name="Embedding"></a>
+<h3>リソースの埋め込み</h3>
+<p>Open Annotation コアは <a href="core.html#BodyEmbed">
+文字列の本体（Body）を埋め込む</a>方法について説明している。しかし、表現が利用可能であることを確認するためにセレクタ（Selector）、スタイル（Style）、可能性としてはターゲット（Target）までもに埋め込むことが有用であることがしばしばある。
+</p>
+<p>Webアーキテクチャは、すべてのリソースがURIを持っていることを前提とし、さらにそれらがHTTP URIからの検索で利用可能であることが期待されている。しかし、一部のクライアントは、アノテーション処理の一部として作成されるリソース全てに対してデリファレンス可能なURIを自分で生成できないかもしれない。これは本体（Body）、指定子（Spcifier）、スタイル（Style）やその他ユーザーが生成した情報を含むだけでなく、それがオンラインで利用可能でない場合は、可能性としてターゲット（Target）を含む。</p>
+<p>オンライン上にあり、デリファレンス可能なリソースと埋め込まれたリソースの両方を丁寧かつ一貫して扱うモデルを持つことが重要である。両方のケースでは、「埋め込まれたテキスト形式の本体（Body）」セクションにあるように、コンテンツは単なる文字列リテラルとして使用されるだけはなく、リソースとして表現される。どちらの場合も、バイナリデータを含む全てのコンテンツタイプを処理しなければならないし、Open Annotationモデル内のリソースの全てのクラス（ Body、Target、Style、Selector、State）を処理しなければならない。</p>
+<p>Open Annotationモデルは、アノテーション（Annotation）グラフ内のそのようなリソースを直接含めるために、<a href="http://www.w3.org/TR/Content-in-RDF10/">&quot;Representing Content in RDF&quot;</a>の仕様を使用する。リソースは、解決できないURNと、<code class="tech">cnt:ContentAsTextや <code class="tech">cnt:ContentAsBase64</code></code>
+のように&quot;Representing Content in RDF&quot;の仕様にあるような適切なクラスを割り当てられるべきである（SHOULD）。リソースの識別が重要ではないと考えられる場合は、RDFの空白ノードをURNの代わりに使用してもよい（MAY）。</p>
+<p>アノテーション（Annotation）の中のRDFグラフのシリアライゼーションを埋め込む方法については 「<a href="publishing.html#Graphs">RDFグラフの埋め込み</a>」 を参照すること。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>cnt:ContentAsText</td><td>Class</td><td>リソースの表現は、プレーンテキストとして表現。</td></tr>
+<tr><td>cnt:ContentAsBase64</td><td>Class</td><td>リソースの表現は、Base64エンコードされたテキストとして表現。</td></tr>
+<tr><td>cnt:chars</td><td>Property</td><td>表現を格納するContextAsTextのプロパティ。<br />１個のContentAsText リソースに対してきっちり1個のcnt:charsプロパティがなくてはならない（MUST）。</td></tr>
+<tr><td>cnt:bytes</td><td>Property</td><td>表現を格納するContentAsBase64のプロパティ。<br />１個のContentAsBase64リソースに対してきっちり1個のcnt:byteプロパティがなくてはならない（MUST）。</td></tr>
+<tr><td>cnt:characterEncoding</td><td>Property</td><td>cnt:charsプロパティもしくはcnt:bytesプロパティのコンテンツの文字列の文字コードエンコーディング。<br />１個のContentAsTextもしくは ContentAsBase64リソースに対してきっちり1個のcnt:characterEncoding プロパティがあるべできある（SHOULD）。</td></tr>
+<tr><td>dc:format</td><td>Property</td><td>表現のメディアタイプ。<br />埋め込まれたリソースごとにきっちり１個ののdc:formatプロパティがあるべきである（SHOULD）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/embeddedcssstyle.png" width="600px" />
+<br /><span class="caption">図 5.2. リソースの埋め込み</span>
+</div>
+<pre>
+&lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; ;
+    oa:styledBy &lt;style1&gt; .
+
+   &lt;style1&gt; a oa:CssStyle, cnt:ContentAsText ;
+    cnt:characterEncoding &quot;utf-8&quot; ;
+    cnt:chars &quot;.red { color : red }&quot; .
+
+   &lt;sptarget1&gt; a oa:SpecificResource ;
+     oa:hasSource &lt;source1&gt; ;
+     oa:styleClass &quot;red&quot; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>埋め込まれたCSSスタイルを持つアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:styledBy ?style . ?style a oa:CssStyle .
+    ?style a cnt:ContentAsText } 
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#Embedding">さらなる例はこちらを参照すること。</a></p>
+</div>
+<div class="subsection">
+<a id="Graphs" name="Graphs"></a>
+<h3>RDFグラフの埋め込み</h3>
+<p>
+アノテーション（Annotation）の中にリソースを埋め込むこと１つの特定のケースは、RDFグラフとして表現されたステートメントを埋め込むことである。トリプルは著作者と由来が区別できる状態でなければならないため、リソースを構成するトリプルをアノテーション（Annotation）グラフに単純にいれてはならない（MUST NOT）。そうでない場合、本体（Body）グラフやターゲット（Target）グラフのメタデータと識別子はアノテーション（Annotation）グラフの中で消失されたまま、組み込まれてしまうだろう。</p>
+<p>最も簡単な方法は、をデリファレンス可能な HTTP URIを持つその他のリソースとしてグラフを公開し、アノテーション（Annotation）でこのURIを参照することである。この方法を推奨する（RECOMMENDED）。</p>
+<p>単一のドキュメントが要求され、グラフをアノテーション（Annotation）の中に埋め込まれなければならない場合には、２つの方法をとることが可能である。<ol>
+<li>前のセクションで説明したように、グラフのシリアライゼーションに、&quot;Content in RDF&quot;を使用して埋めこんでもよい（MAY）。リソースは、<code>dc:format</code>のメディアタイプと<code>trig:Graph</code>で与えられたクラスのように、リソースを使用するアプリケーションに表現がグラフであることを決定するに必要な適切なメタデータを持たなければならない（MUST）。 <li>別の方法として、クライアントが名前付きグラフを処理できることを明確にするような方法でアノテーション（Annotation）が要求された場合は、アノテーション（Annotation）をTrigやTrixのように名前付きグラフを使用して表現してよい（MAY）。リクエストは、HTTPのContent Negotiation機能を使用するか、サーバがTrig/Trixシリアライゼーションのために別のURIを提供してもよい。この制限は、シリアアライゼーションを解析できず、故にアノテーテーション（Annotation）を全く処理できないクライアントとの相互運用性を確保するためである。この方法は、以下の図5.3.に示されるとおりである。</li></li></ol>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>trig:Graph</td><td>Class</td><td>名前付きグラフのクラス</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/namedgraph.png" width="600px" />
+<br /><span class="caption">図5.3.</span><span class="caption">名前付きグラフのシリアライゼーション</span>
+</div>
+<pre>
+ {
+ &lt;anno1&gt; a oa:Annotation ;
+      oa:hasBody :graph1 ;
+      oa:hasTarget &lt;target1&gt; .
+
+    :graph1 a trg:Graph .
+  }
+    
+  :graph1 { 
+    &lt;target1&gt; relationship &lt;thing1&gt; . 
+  }</pre>
+<br /><span class="caption">NB.この図はTurtleではなく、Trig形式が使用されている。</span>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>ターゲット（target）に関する関係を表現する本体（body）を持つアノテーションを全て検索。<pre>
+ SELECT ?anno, ?what WHERE { ?anno oa:hasBody ?g . ?anno oa:hasTarget ?t .
+           GRAPH ?g { ?t relationship ?what } }
+  }
+=&gt; &lt;anno1&gt;, &lt;thing1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#Graphs">さらなる例はこちらを参照すること。</a></p>
+</p></div>
+<div class="subsection">
+<a id="Equivalence" name="Equivalence"></a>
+<h3>リソースの等価性</h3>
+<p>アノテーション（Annotation）に固有の課題ではないが、システム間でシンジケート化されるリソースを取り除くことは、複数の複製物かとても近い派生物の間の等価性を表現することによって、大いに減らすことができる。重複したアノテーション（Annotation）を発見することができなかったシステムは、単純にもそれらのすべてを提供してしまい、とてもよくない経験を提供しまうことになる。統計を生成するシステム、評価モデル、アノテーションのためのスパムフィルタリング、またはそれに類似するシステムも、この能力を持たずにとてもよくない結果を生むことになるだろう。これらの要件を考えると、Open Annotationモデルには、2つのリソースが必ずしも完全に同一ではないとはいえ、等価であり、故に分けて維持及び処理されるべきではない主張する関係が含まれている。</p>
+<p>システムがあるアノテーション（Annotation）を取得し、別のHTTP URIでそれを再発行した場合には、オリジナルのアノテーション（Annotation）と再発行されたアノテーション（Annotation）の関係を<code class="tech">oa:equivalentTo</code>で表現するべきである（SHOULD）。<code class="tech">oa:equivalentTo</code>関係を追加することでグラフが変化した時、システムは<code class="tech">oa:serializedAt</code>と<code class="tech">oa:serializedBy</code>プロパティを更新するべきである（SHOULD）。</p>
+<p>埋め込まれたリソースも、独自のHTTP URIで再発行された時には同様に扱われるべきである（SHOULD）。システムが新しいHTTP URIで埋め込 ​​まれたリソースを公開する場合、それはリソースのURNと利用可能な新しいURIの間の<code class="tech">oa:equivalentTo</code>関係を表現するべきである（SHOULD）。埋め込 ​​まれたリソースは空白ノードとして伝達されている場合は、<a href="http://www.w3.org/TR/rdf11-concepts/#section-skolemization">RDF Concepts 1.1</a>に記載されたスコーレム化（Skolemization）の手法を使用するべきである（SHOULD）。このシステムはその裁量により、グラフから埋め込まれたリソースを削除してもよく（MAY）、デリファレンス可能なURIから参照してもよい（MAY）。これが発生すると、アノテーション（Annotation）グラフは等価性を維持しつつ、最初のバージョンから再発行した状態へ変化することが可能になる。</p>
+<h4>Model</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:equivalentTo</td><td>Relationship</td><td>[prov:alternateOfのサブプロパティ]oa:equivalentToの関係のサブジェクトとオブジェクトリソースは、同じリソースを表現する。しかし、oa:serializedBy、oa:serializedAt のような異なるメタデータ、異なるシリアライゼーションフォーマットをもつ可能性がある。oa:equivalentToは対照的で推移的な関係である。もしA oa:equivalentTo Bであるならば、B  oa:equivalentTo Aも真である。B oa:equivalentTo Cであるならば、A oa:equivalentTo Cも真である。<br />アノテーション（Annotation）は、アノテーション（Annotation）の複製物もしくは他のリソースのoa:equivalentTo関係の0個以上のインスタンスを含んでもよい（MAY）。また、利用可能な数だけ含めるべきである（SHOULD）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/equivalence.png" width="600px" />
+<br /><span class="caption">図5.4.</span><span class="caption">リソースの等価性</span>
+</div>
+<pre>
+&lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;target1&gt; ;
+    oa:serializedAt &quot;2012-12-12T12:12:12Z&quot; ;
+    oa:equivalentTo &lt;anno2&gt; .
+    
+  &lt;anno2&gt; oa:serializedAt &quot;2013-01-28T20:00:00Z&quot; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>特定のアノテーションと等価であるアノテーションを検索。<pre>
+ SELECT ?anno WHERE { &lt;Anno1&gt; a oa:Annotation ; oa:equivalentTo ?anno }
+=&gt; &lt;anno2&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#Equivalence">さらなる例はこちらを参照すること。</a></p>
+</div>
+<hr />
+<center>
+<a href="multiplicity.html">前のページ</a>&nbsp; &nbsp;<a href="index.html#contents">目次</a>&nbsp; &nbsp;<a href="appendices.html">次のページ</a>
+</center>
+<hr />
+</div>
+</div>
+</body>
+</html>

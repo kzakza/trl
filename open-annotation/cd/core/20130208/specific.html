@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Open Annotation Data Model モジュール: 指定子と特定リソース（2013年2月8日付コミュニティドラフト　日本語訳）</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"></meta>
+<meta name="viewport" content="width=device-width; initial-scale=1,minimum-scale=1, user-scalable=yes" />
+<style>
+div.toc OL { counter-reset: item 2 }
+div.toc OL LI OL { counter-reset: item 0}
+
+.subsection {counter-increment: section; }
+.subsubsection {counter-increment: subsection; }
+.subsubsubsection {counter-increment: subsubsection; }
+.body h2:before { content: "3. "; }
+.subsection > h3:before { content: "3." counters(section, ".") ". "; }
+.subsubsection > h3:before { content: "3." counters(section, ".") "." counters(subsection, ".") ". "; }
+.subsubsubsection > h3:before { content: "3." counters(section, ".") "." counters(subsection, ".") "." counters(subsubsection, ".") ". "; }
+
+</style>
+<link rel="stylesheet" href="css/oa-spec.css" type="text/css" />
+<link rel="stylesheet" href="css/translation_memo.css" type="text/css" />
+
+</head>
+<body dir="ltr">
+<div id="status" style="position: absolute; -moz-transform-origin: top left; transform-origin: top left; -webkit-transform-origin: top left;
+        height: 30px; width: 250px; padding-top: 8px; top:250px; left:0px;
+        font-size: 18px; text-align: center; font-family: Arial, sans-serif; font-weight: 100;
+	 	-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); MozTransform: rotate(-90deg); 
+		background: #ff0000; color: #ffffff; ">W3C Community Draft</div>
+<div id="translation_notes">
+<p>この文書「Open Annotation Data Model Open Annotation」（2013年2月8日付コミュニティドラフト）は、<a href="http://www.w3.org/">W3C</a> の <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>による&quot;<a href="http://www.openannotation.org/spec/core/20130208/index.html" hreflang="en">Open Annotation Data Model (W3C Community Draft, 08 February 2013)</a>&quot;の日本語訳です。この日本語訳はあくまで参考情報であり、W3Cの公式な日本語訳ではありません。翻訳・解釈に誤りがある可能性があります。<a href="http://www.openannotation.org/spec/core/">原文の最新版</a>が存在する可能性があります。</p>
+<dl class="translator_info">
+<dt>日本語訳更新日:</dt>
+<dd class="date"><span class="modified">2014-06-18</span></dd>
+<dt>日本語訳公開日:</dt>
+<dd class="date"><span class="published">2014-04-27</span></dd>
+<dt>翻訳者:</dt>
+<dd><a href="http://www.kzakza.com/">kzakza</a></dd>
+</dl>
+</div>
+
+<div id="header">
+<table class="layout">
+<tr>
+<td><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72" /></a></td>
+<td>
+<h2 class="title">Open Annotation Data Model モジュール:  指定子（Specifier）と特定リソース（Specific Resource）</h2>
+<h3 class="subTitle">2013年2月8日付コミュニティドラフト（Community Draft）</h3>
+</td>
+</tr>
+</table>
+</div>
+<center>
+<a href="core.html">前のページ</a>&nbsp; &nbsp;<a href="index.html#contents">目次</a>&nbsp; &nbsp;<a href="multiplicity.html">次のページ</a>
+</center>
+<hr />
+<div class="toc">
+<h2><a id="contents" name="contents"></a>目次</h2>
+<p class="toc">
+<ol>
+<li><a href="specific.html#SpecificAnnotations"><b>モジュール：指定子（Specifier）と特定リソース（Specific Resource）</b></a>
+<ol>
+<li><a href="specific.html#Specific">指定子（Specifier）と特定リソース（Specific Resource）</a></li>
+<li><a href="specific.html#Selectors">セレクタ（Selector）</a>
+<ol>
+<li><a href="specific.html#FragmentSelector">フラグメントセレクタ</a></li>
+<li><a href="specific.html#RangeSelectors">レンジセレクタ（Selector）</a>
+<ol>
+<li><a href="specific.html#TextPositionSelector">テキスト位置セレクタ（Selector）</a></li>
+<li><a href="specific.html#TextQuoteSelector">テキスト引用セレクタ（Selector）</a></li>
+<li><a href="specific.html#DataPositionSelector">データ位置セレクタ（Selector）</a></li>
+</ol>
+</li>
+<li><a href="specific.html#AreaSelectors">エリアセレクタ（Selector）</a>
+<ol>
+<li><a href="specific.html#SvgSelector">SVGセレクタ（Selector）</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="specific.html#States">状態（State）</a>
+<ol>
+<li><a href="specific.html#TimeState">時間状態（Time State）</a></li>
+<li><a href="specific.html#HttpRequestState">ヘッダーの状態を要求する</a></li>
+</ol>
+</li>
+<li><a href="specific.html#Style">スタイル</a>
+<ol>
+<li><a href="specific.html#CssStyle">CSSスタイル</a></li>
+</ol>
+</li>
+<li><a href="specific.html#Scope">リソースのスコープ（Scope）</a></li>
+</ol>
+</li>
+</ol>
+</p></div>
+<hr />
+<div class="body">
+<div class="section">
+<a id="SpecificAnnotations" name="SpecificAnnotations"></a>
+<h2>モジュール: 指定子（Specifier）と特定リソース（Specific Resource）</h2>
+<p>コアデータモデルの構造物のみを使用して、フラグメントURIによってリソースのある部分を参照するアノテーション（Annotation）を作成することができる一方で、これだけでは十分ではない状況が多くある。例えば、画像内の単純な円形の領域もしくはそれを横切る斜め線でさえ可能ではない。HTMLページ内のテキストの任意の範囲の選択、おそらくもっともシンプルなアノテーション概念であるが、これもフラグメントURIではサポートされていない。本仕様のこのモジュールは、興味のあるセグメントを識別して記述する方法、リソースの正しい表現を獲得する方法、アノテーション（Annotation）とスタイル情報を関係づけ、そのアノテーション（Annotation）に固有の本体（Body）リソースとターゲット（Target）リソースの範囲情報を提供する方法を紹介する。</p>
+<div class="subsection">
+<a name="Specific"></a>
+<h3>指定子（Specifier）と特定リソース（Specific Resource）</h3>
+<p>Open Annotationモデルにおける指定子（Specifier）はアノテーション（Annotation）が参照するリソースの文脈的な詳細を記述するために使用される。これは、例えば頻繁に変更されるリソースの適用可能なタイムスタンプのように、あるリソースの特定のセグメントを記述することによって、もしくはレンダリングのためのスタイル情報を提供することによってなされるかもしれない。セグメントがグローバルに参照できる同一性を有することを確実にするために、本モデルでは、リソース、典型的には指定子（Specifier）によって記述されたあるセグメントを識別するために使用するSpecific Resourceクラスを導入する。</p>
+<p>指定子（Specifier）は、アノテーション（Annotation）における本体（Body）もしくはターゲット（Target）の役割を担うそれぞれの特定リソース（Specific Resource）と直接関係づけられている。これに関連して、完全なリソースはソース（Source）リソースと呼ばれ、特定リソース（Specific Resource）を構成するソース（Source）の側面を決定する方法を指定子（Specifier）が記述する。例えば、画像の円形の領域は指定子（Specifier）によって記述された特定リソース（Specific Resource）によって識別される。完全な画像リソースがソース（Source）である。型付け、フォーマット、由来のような、本体（Body）リソースとターゲット（Target）リソースについて表現されることが可能なプロパティと関係（Relationship）は、ソース（Source）リソースに付属されたままであるべきである。</p>
+<p>Open Annotation Data Modelは、異なる役割を持つ2つの主たる指定子（Specifier）クラス、<code class="tech">oa:State</code>クラスと<code class="tech">oa:Selector</code>クラスを定義する 。Stateクラスは、ソース（Source）リソースの正しい表現を決定する方法を記述する。Selectorクラスはその表現の正しいセグメントを発見する方法を記述する。特定リソース（Specific Resource）は、Styleクラスを通してそれを関係づけられたレンダリングに関する情報と、別のリソース内にある外観のような、そのリソースにより明確なスコープを提供するその他のリソースに関する情報も持っているかもしれない。</p>
+<p>なお、Stateクラスがある場合、正しい表現が取得されていることを確認するために最初に処理されるだろう。そして、Selectorクラスがある場合、その表現の正確なセグメントを決定するために適用されるであろう。最終的にStyleクラスがある場合、正しいレンダリングもしくはリソースもしくはセグメントを確実にするために適用されるだろう。Scopeクラスはレンダリングに直接影響を与えないため、ユーザーインターフェイスやアプリケーションに適すると判断される方法で処理をされるかもしれない。</p>
+<p>Stateクラス、SelectorクラスとStyleクラスは、複数のアノテーション（Annotation）によって、再利用可能であることが意図されている。そのため、ソース（Source）リソースに直接リンクされていない。例えば、Selectorクラスのインスタンスは、複数のリソースの同じセグメントを選択するために再利用されてもよい（MAY）。また、Stateクラスのインスタンスは矛盾のない時間もしくはHTTPリクエストヘッダのセットを確かなものとするために再利用されていもよい（MAY）。特定リソース（Specific Resoure）に関係づけられた情報がStateクラス、Selectorクラス、Styleクラス、Scopeクラスを含む新しい文脈に適用可能であるならば、特定リソース（Specific Resource） も再利用されてもよい（MAY）。</p>
+<p>指定子（Specifier）の記述は、外部リソースもしくは<a href="publishing.html#Embedded">埋め込まれたリソース</a>、もしくはグラフ付きのRDFプロパティとして伝達してもよい（MAY）。記述は可能な限り既存の規格を使用すべきである（SHOULD）。指定子（Specifier）がHTTP URIを持つ場合、URIがデリファレンスされた際にその記述、そして、唯一その記述のみが返されなくてはならない（MUST）。</p>
+<p>特定リソース（Specific Resource）がHTTP URIを持つ場合、URIがデリファレンスされた際に、URIが識別するソース（Source）リソースの正確なセグメントと唯一そのセグメントが返されなくてはならない（MUST）。興味のあるセグメントは、画像のある領域であり、特定リソース（Specific Resource） がHTTP URIを持つ場合、そのURIがデリファレンスされることで、選択された画像の領域はアノテーションが作成された時間のものとして返されなくてはならない（MUST）。通常、これはサポートするための負担になる。そのため、特定リソース（Specific Resource）はUUIDやURNのようなグローバルにユニークなURIで識別されるべきである（SHOULD）。もしその他のアノテーション（Annotation）やシステムから特定リソース（Specific Resource）を参照できることが重要ではないと考えれる場合は、空白ノードを代わりに使用してもよい（MAY）。</p>
+<p><b>注意事項：</b>同じSpecifierクラスは、特定ターゲット（Specific Target）と特定本体（Specific Body）の両方に使用される。しかし、このモジュールの図は、両方のために採用されている同じモデルのうち１つのみを描いている。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:SpecificResource</td><td>Class</td><td>特定リソース（Specific Resource）のクラス。<br />oa:SpecificResourceクラスは、より明確な範囲もしくはその他のリソースの状態としてその役割が明確になるようにするためにoa:SpecificResourceと関係づけられているべきである（SHOULD）。</td></tr>
+<tr><td>oa:hasSource</td><td>Relationship</td><td>特定リソース（Specific Resource）とそれのより明確な表現であるリソースの関係。<br />
+特定リソース（Specific Resource）と関係づけられた oa:hasSource関係をちょうど１つもたなくてはならない（MUST）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/specificresource.png" width="600px" />
+<br /><span class="caption">図3.1.2.</span><span class="caption">特定リソース（Specific Resource）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSource &lt;source1&gt; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+クエリ<b>：</b>特定の表現をターゲットするアノテーション（Annotation）を検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:SpecificResource }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+</div>
+<div class="subsection">
+<a name="Selectors"></a>
+<h3>セレクタ（Selector）</h3>
+<p>多くのアノテーション（Annotation）をターゲット（Target）として、リソース全体よりもリソースの一部を参照する。例としては、画像またはビデオ内のある領域上のアノテーション（Annotation）、テキストのある範囲、オーディオファイル内のある時間のセグメント、もしくはデータセットのある断片が挙げられる。同様にセグメントは、ビデオの中のある特定の箇所やテキストのある特定のパラグラフにつけられたコメントのような、アノテーション（Annotation）の本体（Body）かもしれない。</p>
+<p>セレクタ（Selector）は、ソース（Source）リソースの取得された表現の中から 興味のあるセグメント を決定する方法を記述する指定子（Specifier）である。セレクタ（Selector）の性質は、セグメントが伝達される表現の型に依存するであろう。例えば、画像のある部分を記述するために使用される方法は、テキストの正しい段落、またはデータセットの正しいスライスを発見するために使用される方法と非常に異なるものになる。</p>
+<p>ただ1つのセレクタ（Selector ）は、１つの特定リソース（Specific Resource）と関係づけることができる。任意であり同等である異なるセレクタの間での選択、もしくは全てが処理されるべき一連のセレクタを表現するため、複数のセレクタが求められる場合、<a href="multiplicity.html">多重構造物</a>モジュールの中で説明される構造物を使用する必要がある。</p>
+<p>一般的に、FragmentSelectorクラス、TextQuoteSelectorクラス、TextPositionSelectorクラス、DataPositionSelectorクラスのケースように、セレクタ（Selector）（またはその他の指定子（Specifier））が解決される必要のある全ての情報がグラフ内に存在するならば、同じ情報を提供する解決可能なリソースを持つ必要はない。しかし、SvgSelectorクラスや独立した1つの形としての表現を持つ他の指定子は、HTTP URI経由のアノテーション（Annotation）から別々にSVGドキュメントを解決可能にするほうがより容易もしくはより効率的かもしれない。</p>
+<p>同じ興味のあるセグメントに対して、モデルはいくつかの同等の表現を認めていることは注意しなければならない。例えば、長方形の領域を記述するために、（「コア」ドキュメントのように）FragmentSelector クラスやSvgSelector.クラスのフラグメントURIを直接使用することが可能である。同様に、プレーンテキストドキュメントのために、RFC 5147またはテキストセレクタ（Text Selector）のどちらかを使用することができる。これは、相互運用性の観点から最適ではないが、Open Annotationモデルを柔軟かつ既存の仕様との互換性を維持するためにこれは同時に避けることができなかった。コミュニティがシェアドブリッヂング戦略を実施し、仕様の推奨やベストプラクティスのに可能な限り従うことを推奨する（RECOMMENDED）。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:Selector</td><td>Class</td><td>個々のセレクタ（Selector）のスーパークラス。このクラスはアノテーション（Annotation）では直接使用されない。そのサブクラスが使用されるのみである。</td></tr>
+<tr><td>oa:hasSelector</td><td>Relationship</td><td>特定リソース（Specific Resource）とセレクタ（Selector）との関係。<br />特定リソース（Specific Resource）と関係づけられた0個もしくは1個のoa:hasSelector関係がなくてはならない（MUST）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/selector.png" width="600px" />
+<br /><span class="caption">図3.2.</span><span class="caption">セレクタ（Selector）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSource &lt;source1&gt; ;
+    oa:hasSelector &lt;selector1&gt; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>リソースのある部分に対するアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:SpecificResource . 
+    ?target oa:hasSelector ?select }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<div class="subsubsection">
+<a name="FragmentSelector"></a><a name="xywh=1,2,3,4" id="xywh=1,2,3,4"></a>
+<h3>フラグメントセレクタ（Fragment Selector）</h3>
+<p>ウェブアーキテクチャは、URIのフラグメント部分を使用して、リソースの特定のセグメントを同定する方法を定義する。これは（XMLやPDFのような）メディアタイプの規定されたフラグメントと、より最近では正確なメディアタイプにかかわらず、画像やビデオのような、リソースの全体のクラスに適応できるメディアフラグメントのために使用される。</p>
+<p>Open Annotationモデルは、興味のあるセグメントを記述するために使用される既存と将来のフラグメントの仕様を許容するフラグメントベースのセレクタ（Selector）（<code>oa:FragmentSelector</code>）を定義する。セグメントの記述はURIのフラグメント識別子コンポーネントの構文であり、<code class="tech">rdf:value</code>
+プロパティを通してアノテーション（Annotation）グラフに含まれる。フラグメントURIは<code class="tech">oa:hasSource</code>
+関係のリソースのURIに&quot;#&quot;と値を加え、結びつけることで再構築されているかもしれない。例えば、リソースのURIが <code>http://www.example.com/image.jpg</code>であり、<code>rdf:value</code>プロパティが<code>&quot;xywh=1,2,3,4&quot;</code>であるならば、結果のURIには次のようになり<code>http://www.example.com/image.jpg#xywh=1,2,3,4</code>
+になるだろう。</p>
+<p><a href="http://www.openannotation.org/spec/core/core.html#FragmentURIs">コア</a>で述べられているように、直接、フラグメントURIでアノテーション（Annotation）を作成するよりも<code>oa:FragmentSelector</code>クラスを使用することを推奨する（RECOMMENDED）。消費するアプリケーションは、どちらもしなければならない（MUST）。発行システムは、フラグメントURIを対応する<code>oa:FragmentSelector</code>クラスの形式に書き換えてもよい（MAY）。<p>クライアントは <code class="tech">dcterms:conformsTo</code>関係を使用して表現される規格をベースにしたフラグメントセレクタ（FragmentSelector）の値を処理しなければならない（MUST）。それが存在しない場合、クライアントは、フラグメントの意味を決定するために、ソース（Source）リソースのメディアタイプを使用するべきである。これは、フラグメント識別子コンポーネントが、定義によりメディアタイプに依存しているため、フラグメント識別子コンポーネントの誤った解釈を防ぐためである。例えば、HTMLアンカーの一部として<a href="http://www.w3.org/TR/media-frags/">W3C Media Fragment</a>の仕様に従うフラグメント識別子を構築することが可能である（例えば、<a href="specific.html#xywh=1,2,3,4">#xywh=1,2,3,4</a>
+は、このHTMLドキュメントのこのセクションを3から4ピクセルエリアではなく1と2を開始点として参照する）。そのため、クライアントは、フラグメントセレクタ（FragmentSelector）にとって適切な表現が取得されることを確かなものとするために、提供されるどのような <a href="specific.html#States">状態（State）</a>
+情報も使用しなければならない（MUST）。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:FragmentSelector</td><td>Class</td><td>[oa:Selectorのサブクラス] URIのフラグメント識別子コンポーネントを使用して、表現内に興味のあるセグメントを記述するリソース。</td></tr>
+<tr><td>rdf:value</td><td>Property</td><td>リソース内の興味のあるセグメント を記述するURIのフラグメント識別子コンポーネントのコンテンツ。<br />oa:FragmentSelectorは必ず1個のrdf:valueプロパティを持たなくてはならない（MUST）。</td></tr>
+<tr><td>dcterms:conformsTo</td><td>Relationship</td><td>フラグメントセレクタ（Fragment Selector）は、フラグメントのシンタックスを定義した仕様であるオプジェクトと関係づけられた１つのdcterms:conformsTo関係を持つべきである（SHOULD）。</td></tr>
+</table>
+</blockquote>
+<p>URIはフラグメントの仕様を識別するために使用される。<blockquote>
+<table>
+<tr><th>フラグメントの仕様</th><th>説明</th></tr>
+<tr><td>http://tools.ietf.org/rfc/rfc3236</td><td><a href="http://tools.ietf.org/rfc/rfc3236">XHTML, and HTML</a>. 例: #namedSection </td></tr>
+<tr><td>http://tools.ietf.org/rfc/rfc3778</td><td><a href="http://tools.ietf.org/rfc/rfc3778">PDF</a>. 例: #page=10&amp;viewrect=50,50,640,480</td></tr>
+<tr><td>http://tools.ietf.org/rfc/rfc5147</td><td><a href="http://tools.ietf.org/rfc/rfc5147">Plain Text</a>. 例: #char=0,10</td></tr>
+<tr><td>http://tools.ietf.org/rfc/rfc3023</td><td><a href="http://tools.ietf.org/rfc/rfc3023">XML</a>. 例: #xpointer(/a/b/c) </td></tr>
+<tr><td>http://www.ietf.org/rfc/rfc3870</td><td><a href="http://www.ietf.org/rfc/rfc3870">RDF/XML</a>. 例: #namedResource </td></tr>
+<tr><td>http://www.w3.org/TR/media-frags/</td><td><a href="http://www.w3.org/TR/media-frags/">W3C Media Fragments</a>. 例: #xywh=50,50,640,480</td></tr>
+<tr><td>http://www.w3.org/TR/SVG/</td><td><a href="http://www.w3.org/TR/SVG/">SVG</a>. 例: #svgView(viewBox(50,50,640,480))</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/fragmentselector.png" width="600px" />
+<br /><span class="caption">図3.2.1.</span><span class="caption">フラグメントセレクタ（Fragment Selector）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSelector &lt;selector1&gt; ;
+    oa:hasSource &lt;source1&gt; .
+    
+  &lt;selector1&gt; a oa:FragmentSelector ;
+    rdf:value &quot;namedSection&quot; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>URIのフラグメントコンポーネントによって記述される興味のあるセグメントを持つアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:SpecificResource . 
+    ?target oa:hasSelector ?select . ?select a oa:FragmentSelector .
+    ?select rdf:value &quot;fragment1&quot; }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#SelectorFragment">さらなる例はこちらを参照すること。</a></p>
+</p></p></div>
+<div class="subsubsection">
+<a name="RangeSelectors"></a>
+<h3>レンジセレクタ（Range Selector）</h3>
+<p>テキストから文字を抽出したり、データからバイトを抽出するように、線形データでの開始点と終了点を持つセグメントを抽出する方法を記述するいくつかのセレクタがある。レンジセレクタは、線形データのポイントの記述にも使用される。例えば、ウェブページ内に情報を挿入するべき場所を示すカーソルの位置などである。これは、長さ0の選択を与えることによってなされる。</p>
+<p>3つのレンジセレクタ（Range Selector）は、2つはテキスト、１つはデータストリームのためのモデルによって定義される。</p>
+<div class="subsubsubsection">
+<a name="TextPositionSelector"></a>
+<h3>テキスト位置セレクタ（Text Position Selector）</h3>
+<p>文字の順序付きリストの任意のサブリストは、ストリームの特定のポイントから開始し、終了点まで前方に読むことで選択することができる。開始は、リスト内のカーソルの位置として考えることができる。位置0は、最初の文字の直前であり、位置１は2番目の文字の直前になるだろう（以下、同様）。従って開始文字は、このリストに含まれているが、最後の文字は、カーソルがその直前に停止したものではない。<br />例えば、ドキュメントが&quot;abcdefghijklmnopqrstuvwxyz&quot;であったとして、開始が4、終了が7であるならば、選択されたものは、&quot;efg&quot;となるだろう。</p>
+<p>テキストは文字をカウントする前に正規化されなければならない（MUST）。従って、例えば、HTML / XMLタグは削除されるべきであり、文字エンティティはエンコードされた文字に置き換えられるべきであり、不必要なホワイトスペースは正規化されるべきである。正規化ルーチンは、ブラウザによって自動的に実行してもよい。そして、他のクライアントは<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-5DFED1F0">DOM内の文字列比較</a>メソッドを実装するべきである。これによってセレクタ（Selector）を、異なるフォーマットで使用することができ、それでも同じセマンティクスおよびユーテリティを有することができる。レンダリングされた文字ではなく、ビットストリームの作品のためのセレクタ（Selector）は、<a href="specific.html#DataPositionSelector">データ位置セレクタ（ Data Position Selector.）</a>を参照すること 。</p>
+<p>テキスト引用セレクタ（Text Quote Selector）と異なり、このセレクタ（Selector）の使用はソース（Source）ドキュメントから（Annotation）グラフへテキストがコピーされることを求めない。しかし、リソースへの変更に関して、非常に脆い。編集は、選択したものを変更することがある。したがって、<a href="specific.html#States">状態（State）</a>が付加的に正しい表現の識別に役立てるために使用されることが推奨される（RECOMMENDED ）。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:TextPositionSelector</td><td>Class</td><td>[oa:Selectorのサブクラス]開始位置と終了位置に基づくテキストの範囲を記述するセレクタ（Selector）のクラス。</td></tr>
+<tr><td>oa:start</td><td>Property</td><td>テキストセグメントの開始位置。全文の最初の文字は、文字位置0であり、文字じゃセグメントに含まれる。<br />それぞれのTextPositionSelectorクラスは1個のoa:startプロパティを持っていなければならない（MUST）。</td></tr>
+<tr><td>oa:end</td><td>Property</td><td>テキストセグメントの終了位置。最後の文字はセグメント内に含まれない。<br />各TextPositionSelectorクラスは１つのoa:endプロパティ を持たなくてはならない（MUST）。 </td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/textposition.png" width="600px" />
+<br /><span class="caption">図3.2.2.1.</span><span class="caption">テキスト位置セレクタ（Selector）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSource &lt;source1&gt; ;
+    oa:hasSelector &lt;selector1&gt; .
+  
+  &lt;selector1&gt; a oa:TextPositionSelector ;
+    oa:start 4 ;
+    oa:end 7 .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>テキストある範囲を対象したアノテーションを検索。<pre>
+  SELECT ?anno WHERE { ?anno oa:hasTarget ?spt . ?spt a oa:SpecificResource .
+            ?spt oa:hasSelector ?txt . ?txt a oa:TextPositionSelector .
+            ?txt oa:start ?s ; oa:end ?e . FILTER (?s &lt; 5) .
+            FILTER (?e &gt; 6) }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+</div>
+<div class="subsubsubsection">
+<a name="TextQuoteSelector"></a>
+<h3>テキスト引用セレクタ（Text Quote Selector）</h3>
+<p>このセレクタ（Selector）は、コピーすることによるある範囲のテキストを記述する。そして、それはドキュメント内の同じ連続する文字の複合的なコピーの間を区別するためのその直前と直後のある一定の範囲のテキストを含む。接頭辞と接尾辞の長さは、ドキュメントの文脈によって判断すべきである。</p>
+<p>
+例えば、ドキュメントがまた&quot;abcdefghijklmnopqrstuvwxyz&quot;であった場合、接頭辞&quot;abcd&quot;、引用する”efg”、&quot;接尾辞&quot;hijk&quot;によって&quot;efg&quot;を選択することができる。</p>
+<p>テキストは、記録前に正規化されなければならない（MUST）。従って、例えば、HTML / XMLタグは削除されるべきであり、文字エンティティはエンコードされた文字に置き換えられるべきであり、不必要なホワイトスペースは正規化されるべきである。正規化ルーチンは、ブラウザによって自動的に実行されてもよいし、その他のクライアントは、<a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-5DFED1F0">DOM内の文字列比較</a>の方法を実装するべきである。これは、セレクタ（Selector）が異なるエンコーディングによって使用されることを認めるものであり、また、同じセマンティクスとユーティリティを有する。</p>
+<p>コンテンツが著作権で保護されている場合、テキストを選択するこの方法は危険性を有する可能性がある。ユーザーは、アノテーション（Annotation）を付けるために、ドキュメントのテキスト全体を選択するかもしれないし、それをアノテーション（Annotation）に単純にコピーしてウェブ上に公然と公開するかもしれない。静的なテキストへのアクセス 及び / もしくは　配布の制限には、テキスト位置セレクタ（Text Position Selector）の使用がおそらくより適切である。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:TextQuoteSelector</td><td>Class</td><td>[oa:Selectorのサブクラス]前もしくは後ろにテキストの一節を加えた引用によるテキストセグメントを記述するセレクタ（Selector）のクラス。</td></tr>
+<tr><td>oa:exact</td><td>Property</td><td>正規化の後に選択されたテキストのコピー。<br />各TextQuoteSelectorクラスは1個のoa:exactプロパティを持たなくてはならない（MUST）。</td></tr>
+<tr><td>oa:prefix</td><td>Property</td><td>選択されたテキストの直前にあるテキストの断片。<br />各TextQuoteSelectorクラスは1個の oa:prefixプロパティをもつべきであり（SHOULD）、2個以上もってならない（MUST NOT）。</td></tr>
+<tr><td>oa:suffix</td><td>Property</td><td>選択されたテキストの直後にあるテキストの断片。<br />各TextQuoteSelectorクラスは1個のoa:suffixプロパティをもつべきであり（SHOULD）、2個以上もってならない（MUST NOT）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/textquote.png" width="600px" />
+<br /><span class="caption">図3.2.2.2. 引用セレクタ（Quotation Selector）モデル</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; .
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSource &lt;source1&gt; ;
+    oa:hasSelector &lt;selector1&gt; .
+  
+  &lt;selector1&gt; a oa:TextQuoteSelector ;
+    oa:exact &quot;efg&quot; ;
+    oa:prefix &quot;abcd&quot; ;
+    oa:suffix &quot;hij&quot; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>&quot;efg&quot;を読むテキストセグメントを対象にしたアノテーションを検索。<pre>
+  SELECT ?anno WHERE { ?anno oa:hasTarget ?spt . ?spt a oa:Specific Resource .
+            ?spt oa:hasSelector ?txt . ?txt a oa:TextQuoteSelector .
+            ?txt oa:exact &quot;efg&quot; }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+</div>
+<div class="subsubsubsection">
+<a name="DataPositionSelector"></a>
+<h3>データ位置セレクタ（Data Position Selector）</h3>
+<p>テキスト位置セレクタ（Text Position Selector）に非常に似ており、データ位置セレクタ（Data Position Selector）は、同じプロパティを使用するが、テキストレベルの文字ではなく、ビットストリームレベルでのバイトで機能する。例えば、法医学的目的のためのディスクイメージのセグメントやセンサーによって記録されたデータのストリームの一部にアノテーション（Annotation）をつけるために有用である。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:DataPositionSelector</td><td>Class</td><td>[oa:Selectorのサブクラス）]バイトストリーム内での開始位置と終了位置に基づいたデータの範囲を記述したセレクタ（Selector）のクラス。</td></tr>
+<tr><td>oa:start</td><td>Property</td><td>データのセグメントの開始位置。最初のバイトは文字位置0である。<br />各DataPositionSelectorクラスは1個のoa:startプロパティを持たなくてはならない（MUST）。</td></tr>
+<tr><td>oa:end</td><td>Property</td><td>データのセグメントの終了位置。最後の文字はセグメント内に含まれない。<br />各DataPositionSelectorは1個のoa:end プロパティを持つべきである（MUST）。 </td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/dataposition.png" width="600px" />
+<br /><span class="caption">図3.2.2.1.</span><span class="caption">データ位置セレクタ（Data Position Selector）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSource &lt;source1&gt; ;
+    oa:hasSelector &lt;selector1&gt; .
+  
+  &lt;selector1&gt; a oa:DataPositionSelector ;
+    oa:start 4096 ;
+    oa:end 4104 .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>ビットストリームのある範囲を対象にしたアノテーションを検索。<pre>
+  SELECT ?anno WHERE { ?anno oa:hasTarget ?spt . ?spt a oa:SpecificResource .
+            ?spt oa:hasSelector ?data . ?data a oa:DataPositionSelector .
+            ?data oa:start ?s ; oa:end ?e . FILTER (?s &lt; 4100) .
+            FILTER (?e &gt; 4100) }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+</div>
+</div>
+<div class="subsubsection">
+<a name="AreaSelectors"></a>
+<h3>エリアセレクタ（Area Selector）</h3>
+<p>単純な長方形領域は、メディアフラグメントセレクタ（Selector）を使用して記述することができるが、円形領域、楕円領域、任意多角形領域で記述することができることもしばしば有用である。</p>
+<div class="subsubsubsection">
+<a id="SvgSelector" name="SvgSelector"></a>
+<h3>SVGセレクタ（SVG Selector）</h3>
+<p>SvgSelectorは<a href="http://www.w3.org/TR/SVG/">Scalable Vector Graphics</a>の規格の使用によって領域を定義する。セレクタ（Selector）のコンテンツは、有効なSVGドキュメントである。ドキュメントには、形状要素が１つのみ含まれていることを推奨する（RECOMMENDED）。その要素は<code class="tech">path, rect, circle, ellipse, polyline, polygon</code>
+もしくは<code class="tech">g</code>
+のいずれかの1つであるべきである。g要素は、例えば、外側の円とクリップされた内部の円を要求するドーナツ形状を定義するためのような、複数の要素のグループの構築のためだけに使用されるべきである（SHOULD）。</p>
+<p>形状とSVGキャンバスの両方の縦横のサイズは、ソース（Source）リソースのそれと比例したものでなければならない（MUST）。例えば、400ピクセル×600ピクセルの画像ならば、、目的のセクションは、画像の中心にある半径が100ピクセルのサークルである。そして、画像の中央に100ピクセル半径の円である場合、SVG要素は<code class="tech">&lt;circle cx=&quot;300&quot; cy=&quot;200&quot; r=&quot;100&quot;/&gt;</code>になるだろう。</p>
+<p>SVG要素内、もしくはJavaScript、アニメーション、テキストやその他の非形状指向の情報にスタイル情報を含めることは推奨されない（NOT RECOMMENDED）。存在する場合、クライアントはそのような情報は無視するべきである（SHOULD）。</p>
+<p>このモジュールのみを使用して、別個のリソースとしてSVGドキュメントを有することが必要である。例えば以下の図あるようにに、「selector1」という名付けられたリソースが実際にURI &quot;http://www.example.com/selections/2341.svg」を持っているかもしれない。このURIはデリファレンスされた時にSVGドキュメントを返すだろう。アノテーション（Annotation）内に SvgSelectorクラスのリソースを埋め込む方法については <a href="publishing.html#Embedding">「リソースの埋め込み」</a>を参照すること。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:SvgSelector</td><td>Class</td><td>[oa:Selectorのサブクラス] SVGの仕様を使用して形状を定義するセレクタ（Selector）のクラス。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/svgSelector.png" width="600px" />
+<br /><span class="caption">図3.2.3.1.</span><span class="caption">SVGセレクタ（Selector）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSelector &lt;selector1&gt; ;
+    oa:hasSource &lt;source1&gt; .
+    
+  &lt;selector1&gt; a oa:SvgSelector .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>SVGでターゲットを持つアノテーションを検索。<pre>
+  SELECT ?anno WHERE { ?anno oa:hasTarget ?spt . ?spt a oa:SpecificResource .
+                ?spt oa:hasSelector ?svg . ?svg a oa:SvgSelector }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="subsection">
+<a name="States"></a>
+<h3>状態（State）</h3>
+<p>状態指定子（State Specifier）は、特定のアノテーション（Annotation）に適応される本体（Body）もしくはターゲット（Target）リソースの意図された状態を記述し、消費するクライアントにそのリソースの正しい表現を取得するために必要な情報を提供する。ウェブリソースが時間とともに変化するために、ソース（Source）リソースのアーカイブされたコピーへのリンクもしくは適切なアーカイブされた表現を発見することを助けるためにアノテーション（Annotation）が用いるタイムスタンプを含むかもしれない。リソースは、さまざまな形式の複数の表現をもつかもしれない。そして、アノテーション（Annotation）はそのうちの１つのみに適応するかもしれない。したがって、状態（State）はソース（Source）から直接正しいフォーマットで表現を取得する方法を記述することができる。他のファセットは、取得された表現がアノテーション（Annotation）が作成されたものと同等であるかどうか、リソースが検索するために認証を求めるかどうか、ウェブサーバーに送付するユーザーエージェントの文字列などを決定するために不変性もしくはチェックサム情報を含む。</p>
+<p>消費するクライアントは、与えられたセレクタ（Selector）やスタイル情報を処理する前に供給された状態（State）を処理しなければならない（Must）。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:State</td><td>Class</td><td>アノテーション（Annotation）に適したソースリソースの表現を取得する方法について説明したリソース。このクラスはアノテーション（Annotation）で直接使用されない。このクラスのサブクラスだけが使用される。</td></tr>
+<tr><td>oa:hasState</td><td>Relationship</td><td>oa:SpecificResourceクラスのリソース とoa:Stateクラスリソースとの関係。<br />0個もしくは1個のoa:hasState関係が各SpecificResourceにあってもよい（MAY）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/state.png" width="600px" />
+<br /><span class="caption">図3.3.</span><span class="caption">状態（State）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasState &lt;state1&gt; ;
+    oa:hasSource &lt;source1&gt; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>コメントリソースの表現がさらに指定されている全てのアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasBody ?body . ?body a oa:SpecificResource . 
+    ?body oa:hasState ?state }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#State">さらなる例はこちらを参照すること。</a></p>
+<div class="subsubsection">
+<a name="TimeState"></a>
+<h3>時間状態（Time State）</h3>
+<p>時間状態（Time State）指定子は、リソースがアノテーション（Annotation）にとって適切な時間、一般的にはアノテーション（Annotation）が作成された時間を記録する。例えば、<a href="http://www.mementoweb.org/">Memento</a>プロトコルを使用するように、消費するアプリケーションはその時間からリソースの適切な表現を発見するために情報を使用することができる。この状態（State）は適切なキャッシュもしくはその時間のリソースの表現のアーカイブされたコピーへの直接リンクも持つことがあるかもしれない。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:TimeState</td><td>Class</td><td>アノテーション（Annotation）に時間的に適切であるソース（Source）リソースの表現を取得する方法を記述したリソース。</td></tr>
+<tr><td>oa:when</td><td>Property</td><td>ソースリソースがアノテーション（Annotation）のために解釈されるべきでタイムスタンプ。タイムスタンプはxsd:dateTime形式で表現されなければならない（MUST）。指定されたタイムゾーンを持つべきである（SHOULD）。 <br />1個のTimeStateクラスごとにoa:whenプロパティが0個以降あってもよい（MAY）。しかし、少なくともoa:whenプロパティとoa:cachedSource関係のうち少なくとも１個はなければならない（MUST）。.1個以上ある場合は、それぞれに代替のタイムスタンプを付与する。ソース（Source）がそのタイムスタンプによって判断されるかもしれない。</td></tr>
+<tr><td>oa:cachedSource</td><td>Relationship</td><td>アノテーション（Annotation）に適切なソース（Source）リソースの表現のコピーへのリンク。<br />
+1個のTimeStateクラスごとに0個以上 oa:cachedSource関係があってもよい（MAY）。、少なくともoa:cachedSource関係とoa:whenプロパティのうち少なくとも１つはなければならない（MUST）。1個以上ある場合は、それぞれに表現の代替となるコピーをつける。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/timestate.png" width="600px" />
+<br /><span class="caption">図3.3.1. 時間状態（Time State）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasState &lt;state1&gt; ;
+    oa:hasSource &lt;source1&gt; .
+    
+  &lt;state1&gt; a oa:TimeState ;
+    oa:cachedSource &lt;copy1&gt; ;
+    oa:when &quot;2012-07-20T13:30:00Z&quot; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>ターゲット（Target）リソースの表現がどこかにキャッシュされている全てのアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:SpecificResource . 
+    ?target oa:hasState ?state . ?state a oa:TimeState . ?state oa:cachedSource ?copy }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#TimeState">さらなる例はこちらを参照すること。</a></p>
+</div>
+<div class="subsubsection">
+<a name="HttpRequestState"></a>
+<h3>リクエストヘッダ状態（Request Header State）</h3>
+<p>単一のURIを持つリソースから送信されることがありうる多くの表現が存在することがありえるため、正しい表現を取得するために送信される必要があるHTTPリクエストヘッダを記録できることが重要である。HttpRequestStateクラスのリソースは、表現を取得したときに再現するためのヘッダのコピーを保持する。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:HttpRequestState</td><td>Class</td><td>サーバーに送付するためのHTTPリクエストヘッダをもとにアノテーション（Annotation）のためのソース（Source）リソースの適切な表現を取得する方法を記述したリソース。</td></tr>
+<tr><td>rdf:value</td><td>Property</td><td>まさにHTTPリクエスで出てくる単一かつ、完全な文字列のHTTPリクエスヘッダ。<br />1個のHTTPRequestStateクラスごとに1個のrdf:valueプロパティがなくてはならない（MUST）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/httpstate.png" width="600px" />
+<br /><span class="caption">図3.3.2 HTTPリクエストの状態</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasState &lt;state1&gt; ;
+    oa:hasSource &lt;source1&gt; .
+    
+  &lt;state1&gt; a oa:HttpRequestState ;
+    rdf:value &quot;Accept: text/plain&quot; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>ターゲット（Target）リソースの表現が特定のHTTPリクエストヘッダの送付によって取得される全てのアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:SpecificResource . 
+    ?target oa:hasState ?state . ?state a oa:HttpRequestState ; rdf:value ?headers }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#HttpRequestState">さらなる例はこちらを参照すること。</a></p>
+</div>
+</div>
+<div class="subsection">
+<a name="Style"></a>
+<h3>スタイル（Style）</h3>
+<p>特定のアノテーション（Annotation）の解釈は、クライアント間の一貫性したスタイルのレンダリングに依存するかもしれない。例えば、本体（Body）が黄色にハイライトされたイメージの一部を、赤くハイライトされた箇所と比較しながら参照する場合、これらの色は維持される必要がある。同様に、アノテーション（Annotation）を作成する者は、おそらく自分自身だけにスタイリングを通して情報を伝達するかもしれない。システム間でこの黙示的な情報が失われることがないように、スタイリングは、一貫して表現する必要がある。例えば、アノテーション（Annotation）を作成する者は、緑のハイライトが戻って参照されることを意図したものであることを知っているかも知れないし、それらが赤くハイライトされたセクションと一致しないことを知っているかもしれない。</p>
+<p>スタイル（Style）リソースは、アノテーション（Annotation）そのものに関係づけられている。リソースのコンテンツは、アノテーション（Annotation）の構成要素リソースに関するレンダリングのヒントを提供する。スタイル（Style）は、処理のためにアノテーション（Annotation）グラフに追加されるための追加情報を必要とするかもしれない。アノテーション（Annotation）に関係づけられていなければならない複数のスタイル（Style）リソースがある場合は、<a href="multiplicity.html">多重構造物</a>の使用が推奨される（RECOMMENDED）。</p>
+<p>消費するアプリケーションは、これらの命令を処理してもよい（MAY）。発行システムは、それらが処理されることを前提としてはならない（MUST NOT）。それらは、要件としてではなく、ヒントとしてのみ提供されています。クライアントがスタイルを理解できなかったり、スタイルに作用することができない場合は、クライアントはかまわず選択したものやリソースのレンダリングを続けてもよい（MAY）。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:Style</td><td>Class</td><td>選択もしくはリソースがレンダリングされるべきスタイルを記述するリソース。このクラスはアノテーション（Annotation）で直接使用されていない。このクラスのサブクラスだけが使用される。</td></tr>
+<tr><td>oa:styledBy</td><td>Relationship</td><td>アノテーション（Annotation）とoa:Styleクラスの関係。 <br />各アノテーション（Annotation）ごとに0個もしくは1個のstyledBy関係があってもよい（MAY）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/style.png" width="600px" />
+<br /><span class="caption">図3.4.</span><span class="caption">スタイル（Style）</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;target1&gt; ;
+    oa:styledBy &lt;style1&gt; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>スタイル情報が提供されている全てのアノテーションを検索します。<pre>
+ SELECT ?anno WHERE { ?anno oa:styledBy ?style }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#Style">さらなる例はこちらを参照すること。</a></p>
+<div class="subsubsection">
+<a name="CssStyle"></a>
+<h3>CSSスタイル（CSS Style）</h3>
+<p>ウェブのための標準的なスタイル言語はW3Cの<a href="http://www.w3.org/TR/CSS2/">Cascading Style Sheets</a>（CSS）である。これは、HTMLやXMLの構造化ドキュメントのプレゼンテーションレイヤーとコンテンツレイヤーの分離を促進するものである。</p>
+<p>CSS はOpen Annotationモデルでは、oa:Styleクラスのサブクラスであるoa:CssStyleクラスを通して使用される。それはクラスセレクタの共通のアプローチを使用し、クラスラベルは<code>oa:styleClass</code>プロパティを使用した特定リソース（Specific Resource）に付属される。このクラスラベルは、ソース（Source）リソースがそのクラスを持っていることが普遍的真実というわけではないため、特定リソース（Specific Resource）に付属されるのみでなければならない。
+</p>
+<p>CSSのリソース内の各ブロックは、以下のような形式になっている。<pre>
+ .classname { css-value } </pre>したがって、クラス &quot;red&quot;を持つ特定リソース（Specific Resource） に赤色を関係付けるには、CSSで以下のようにする。<pre>
+ .red { color: red } </pre>そして、スタイル付けされた 特定リソース（Specific Resource） (spres1) は、アノテーション（Annotation）のRDFで以下のようなプロパティを持つだろう。<pre>
+&lt;spres1&gt; oa:styleClass &quot;red&quot; .</pre>
+</p>
+<p>特定リソース（Specific Resource）,をレンダリングする際に、消費するアプリケーションは、<code>oa:styleClass </code>プロパティを持っているかどうかの確認をするべきである（SHOULD）。それがある場合、アプリケーションはCSSドキュメント内に適切なセレクタ（Selector）を設置するよう試みるべきである（SHOULD）。そして、css-valueブロックを採用するべきである（SHOULD）。特定リソース（Specific Resource）がoa:styleClassプロパティを持っており、しかし、そのようなクラスが、アノテーション（Annotation）に付加された<code>oa:CssStyle</code>クラスによって記述されないのであるならば、<code>oa:styleClass</code>は静かに無視されなければならない（MUST）</p>
+<p>CSSリソースは、情報を提供するための独自のをデリファレンス可能なURIを持ってもよい（MAY）。例えば、下の図の &quot;Style1&quot; は実際には、&quot;http://www.example.com/styles/annotations.css&quot;というURIを持っているかもしれない。<a href="publishing.html#Embedding">「リソースの埋め込み」</a>で記述したインラインの構造物を使用してアノテーション（Annotation）内に埋め込んでもよい（MAY）。 </p>
+<p>特定本体（Specific Body） やターゲット（Target）の正確なレンダリングが最終的にはユーザーのクライアント次第であるということは何度繰り返し言ってもよいくらいである。これは、全ての消費するクライアントがCSSパーサを含んでいるわけではないということ、従って、それらはスタイリング情報を処理することができないと理解されている。たとえスタイル情報をパースできるとはいえ、実装はより困難になるかもしれないにが、Open Annotation におけるこのスタイル（Style）の使用は、非HTMLベースのクライアントを除外するものではない。このようなクライアントはCSSスタイル（CSS Style）リソース内で提供されるスタイリングのヒントの全て、もしくはその一部でさえ処理は行わないに違いない。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:CssStyle</td><td>Class</td><td>[oa:Styleのサブクラス] CSSを使用したアノテーション（Annotation）に関与するリソースのためのスタイルを記述したリソース。</td></tr>
+<tr><td>oa:styleClass</td><td>Property</td><td>CSSの記述に使用される特定リソース（Specific Resource）に適用されるべきクラスの文字列の名前。<br />1個の特定リソース（Specific Resource）に0個以上のoa:styleClassプロパティがあってもよい（MAY）。</td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/cssstyle.png" width="600px" />
+<br /><span class="caption">図3.4.1 CSSスタイル</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; ;
+    oa:styledBy &lt;style1&gt; .
+
+  &lt;style1&gt; a oa:CssStyle .
+
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasSource &lt;source1&gt; ;
+    oa:styleClass &quot;red&quot; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>CSSを使用したターゲット（Target）のためにスタイル情報が提供されている全てのアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:styledBy ?style . ?style a oa:CssStyle . 
+	?anno oa:hasTarget ?target . ?target a oa:SpecificResource . 
+	?target oa:styleClass ?styleclass
+}
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#CssStyle">さらなる例はこちらを参照すること。</a></p>
+</div>
+</div>
+<div class="subsection">
+<a id="Scope" name="Scope"></a>
+<h3>リソースのスコープ（Scope）</h3>
+<p>アノテーション（Annotation）の作成者がその時見た、もしくは使用したリソースという点から、アノテーション（Annotation）が作成されたコンテキストをアノテーション（Annotation）に記録することが時々重要になる。例えば、特定の画像に対するアノテーションが他のウェブページではなく、あるウェブページのコンテキストの中で作成されたことを知っておくことは重要かも知れない。これはアノテーションがそのページのコンテキストにおける画像に対してのみ有効であるという主張を暗示しているわけではない。そのウェブページが閲覧されていたということを記録しただけである。これはまた、特定のコレクションのコンテキストでリソースにアノテーション（Annotation）を付けることにも有用かもしれない。</p>
+<p>このようなスコープ情報は、特定のアノテーション（Annotation）に対してのみ真であるため、ソース（Source）に対して直接ではなく、特定リソース（Specific Resource）に対して付加されなければならない。一方でソース（Source）を参照する他のアノテーション（Annotation）が誤ってこのアサーションを継承したためセレクタ（Selector）もしくは状態（State）がなくてもこれは真である。<code class="tech">oa:hasScope</code>関係のオブジェクトは、何らかの形でスコープするか、このアノテーション（Annotation）内のリソースにコンテキストを提供するリソースである。例えば、以下の図にあるように、&quot;scope1&quot;と名付けられたリソースは&quot;http://www.example.com/index.html&quot;というウェブページであることがありえる。ソース（Source）リソース&quot;source1&quot;は&quot;http://www.example.com/images/logo.jpg&quot;,という画像であることがありえる。その場合、本体（Body）はそのページにないコメントである。</p>
+<h4>モデル</h4>
+<blockquote>
+<table>
+<tr><th>語彙項目</th><th>タイプ</th><th>説明</th></tr>
+<tr><td>oa:hasScope</td><td>Relationship</td><td>特定リソース（Specific Resource）と、このアノテーション（Annotation）でのスコープもしくはコンテキストを提供するリソースの関係。<br />各 特定リソース（Specific Resource）に0個以上のoa:hasScope関係があってもよい（MAY）。 </td></tr>
+</table>
+</blockquote>
+<div class="diagramWrapper">
+<div class="diagram">
+<img src="http://www.openannotation.org/spec/core/images/scope.png" width="600px" />
+<br /><span class="caption">図3.5.</span><span class="caption">スコープ</span>
+</div>
+<pre>
+ &lt;anno1&gt; a oa:Annotation ;
+    oa:hasBody &lt;body1&gt; ;
+    oa:hasTarget &lt;sptarget1&gt; .
+    
+  &lt;sptarget1&gt; a oa:SpecificResource ;
+    oa:hasScope &lt;scope1&gt; ;
+    oa:hasSource &lt;source1&gt; .</pre>
+</div>
+<h4>使用</h4>
+<div>
+<b>クエリ：</b>ターゲット（Target）がリソースScope1によって範囲指定されたアノテーションを検索。<pre>
+ SELECT ?anno WHERE { ?anno oa:hasTarget ?target . ?target a oa:SpecificResource . 
+    ?target oa:hasScope &lt;Scope1&gt; }
+=&gt; &lt;anno1&gt;
+</pre>
+</div>
+<p><a href="http://www.openannotation.org/spec/core/examples.html#Scope">さらなる例はこちらを参照すること。</a></p>
+</div>
+<hr />
+<center>
+<a href="core.html">前のページ</a>&nbsp; &nbsp;<a href="index.html#contents">目次</a>&nbsp; &nbsp;<a href="multiplicity.html">次のページ</a>
+</center>
+<hr />
+</div>
+</div>
+</body>
+</html>
