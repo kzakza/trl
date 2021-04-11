@@ -1,4 +1,4 @@
-# 日本語翻訳仕様
+# 翻訳仕様
 ## Open Annotation Data Model
 
 - [Open Annotation Data Model（2013年2月8日付コミュニティドラフト）](https://kzakza.github.io/trl/open-annotation/cd/core/20130208/index.html)
